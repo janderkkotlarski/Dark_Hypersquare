@@ -4,6 +4,7 @@
 #include <chrono>
 #include <thread>
 #include <random>
+
 #include <SFML/Graphics.hpp>
 
 #include "Fiboinit.h"
@@ -18,11 +19,6 @@
 #include "Clear_Maze_PRNG.h"
 #include "Invis_Walls_PRNG.h"
 #include "Invis_Maze_PRNG.h"
-
-
-
-/// g++ -std=c++11 -o "%e" "%f" -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
-
 
 
 
