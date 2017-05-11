@@ -1,9 +1,13 @@
 # Files
-SOURCES += Dark_Hypersquare_v0-43.cpp
+SOURCES += \
+    Dark_Hypersquare_Refactor.cpp
 
 # C++14
 CONFIG += c++14
 QMAKE_CXXFLAGS += -std=c++14
+QMAKE_CXX = g++-6
+QMAKE_LINK = g++-6
+QMAKE_CC = gcc-6
 
 # High warnings levels
 # -Werror
