@@ -4,9 +4,9 @@ SOURCES += \
 
 # C++14
 
-# QMAKE_CXX = g++-6
-# QMAKE_LINK = g++-6
-# QMAKE_CC = gcc-6
+QMAKE_CXX = g++-6
+QMAKE_LINK = g++-6
+QMAKE_CC = gcc-6
 
 CONFIG += c++14
 QMAKE_CXXFLAGS += -std=c++14
@@ -29,8 +29,4 @@ CONFIG(release, debug|release) {
 }
 
 # SFML
-INCLUDEPATH += D:\SFML-2.4.0\include
-
-LIBS += -LD:/SFML-2.4.0/lib
-LIBS += -LD:\SFML-2.4.0\bin
 LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio

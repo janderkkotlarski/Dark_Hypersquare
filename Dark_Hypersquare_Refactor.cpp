@@ -5,7 +5,7 @@
 #include <thread>
 #include <random>
 
-#include <SFML/Graphics.hpp>
+#include "SFML/Graphics.hpp"
 
 #include "Fiboinit.h"
 #include "Fiborand.h"
@@ -26,7 +26,7 @@
 int main()
 {
 	
-	std::string amazad_var = "Dark Hypersquare V0.43";
+    std::string amazad_var = "Dark Hypersquare Refactor";
 	
 	int max_level = 100, max_side = 2*max_level + 1, square_matrix[201][201], temp_matrix[201][201];
 	
