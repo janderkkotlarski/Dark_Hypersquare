@@ -1,6 +1,7 @@
 # Files
-SOURCES += \
-    Dark_Hypersquare_Refactor.cpp
+SOURCES += Dark_Hypersquare_Refactor.cpp \
+    hypersquare.cpp \
+    key.cpp
 
 # C++14
 
@@ -34,3 +35,7 @@ INCLUDEPATH += D:\SFML-2.4.0\include
 LIBS += -LD:/SFML-2.4.0/lib
 LIBS += -LD:\SFML-2.4.0\bin
 LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+
+HEADERS += \
+    hypersquare.h \
+    key.h
