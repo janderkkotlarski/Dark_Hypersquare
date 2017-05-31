@@ -3,7 +3,12 @@
 
 #include <cassert>
 
-
 #include "SFML/Graphics.hpp"
+
+// square type
+
+// square color
+
+
 
 #endif // HYPERSQUARE_H
