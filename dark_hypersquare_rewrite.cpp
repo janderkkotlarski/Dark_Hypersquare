@@ -21,7 +21,7 @@
 #include "Invis_Maze_PRNG.h"
 
 
-
+/*
 
 int maim()
 {
@@ -7192,3 +7192,5 @@ int maim()
 	}
 	
 }
+
+*/
