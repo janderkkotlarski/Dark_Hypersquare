@@ -5,10 +5,18 @@
 
 #include "SFML/Graphics.hpp"
 
-// square type
 
-// square color
+class hypersquare
+{
+
+    sf::Sprite m_sprite;
+    sf::Texture m_texture;
+
+public:
+    hypersquare();
 
 
+
+};
 
 #endif // HYPERSQUARE_H

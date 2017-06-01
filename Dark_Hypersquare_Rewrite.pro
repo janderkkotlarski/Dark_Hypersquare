@@ -1,6 +1,9 @@
 # Files
 SOURCES += \
-    Dark_Hypersquare_Refactor.cpp
+    dark_hypersquare_rewrite.cpp \
+    main.cpp \
+    hypersquare.cpp \
+    functions.cpp
 
 # C++14
 
@@ -35,4 +38,18 @@ LIBS += -LD:/SFML-2.4.0/lib
 LIBS += -LD:\SFML-2.4.0\bin
 LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
-HEADERS +=
+HEADERS += \
+    Background_Blinker.h \
+    Blinker.h \
+    Clear_Maze_PRNG.h \
+    Color_Picker.h \
+    Colorize.h \
+    Dark_Maze_PRNG.h \
+    Exit_Multicolor.h \
+    Fiboinit.h \
+    Fiborand.h \
+    Invis_Maze_PRNG.h \
+    Invis_Walls_PRNG.h \
+    Square_Draw.h \
+    hypersquare.h \
+    functions.h
