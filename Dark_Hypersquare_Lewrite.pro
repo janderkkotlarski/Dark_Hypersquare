@@ -4,7 +4,8 @@ SOURCES += \
     main.cpp \
     hypersquare.cpp \
     functions.cpp \
-    selection.cpp
+    starting.cpp \
+    game.cpp
 
 # C++14
 
@@ -54,4 +55,5 @@ HEADERS += \
     Square_Draw.h \
     hypersquare.h \
     functions.h \
-    selection.h
+    starting.h \
+    game.h
