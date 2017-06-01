@@ -3,7 +3,8 @@ SOURCES += \
     dark_hypersquare_rewrite.cpp \
     main.cpp \
     hypersquare.cpp \
-    functions.cpp
+    functions.cpp \
+    selection.cpp
 
 # C++14
 
@@ -52,4 +53,5 @@ HEADERS += \
     Invis_Walls_PRNG.h \
     Square_Draw.h \
     hypersquare.h \
-    functions.h
+    functions.h \
+    selection.h
