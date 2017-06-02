@@ -7,6 +7,8 @@
 
 #include "SFML/Graphics.hpp"
 
+/*
+
 #include "Fiboinit.h"
 #include "Fiborand.h"
 #include "Colorize.h"
@@ -20,8 +22,6 @@
 #include "Invis_Walls_PRNG.h"
 #include "Invis_Maze_PRNG.h"
 
-
-/*
 
 int maim()
 {
