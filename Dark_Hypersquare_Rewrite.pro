@@ -5,7 +5,8 @@ SOURCES += \
     hypersquare.cpp \
     functions.cpp \
     game.cpp \
-    starting.cpp
+    starting.cpp \
+    enum_classes.cpp
 
 # C++14
 
@@ -56,4 +57,5 @@ HEADERS += \
     hypersquare.h \
     functions.h \
     game.h \
-    starting.h
+    starting.h \
+    enum_classes.h

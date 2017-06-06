@@ -1,9 +1,11 @@
 #include <cassert>
 #include <iostream>
 #include <chrono>
+#include <vector>
 
 #include "starting.h"
 #include "game.h"
+#include "enum_classes.h"
 
 
 int main()
@@ -27,7 +29,27 @@ int main()
     // game_state current_state;
     // game_state previous_state;
 
-    while(!quit_game)
+    const auto max_loop
+    { 1000000 };
+
+    auto loop
+    { 0 };
+
+    auto hyperkey
+    { hypertype::none };
+
+    const auto hyperlock
+    { hypertype::level_up };
+
+    std::vector <hypertype> hyperduo;
+
+    hyperduo.push_back(hyperkey);
+    hyperduo.push_back(hyperlock);
+
+    const auto hyperduck
+    { hyperduo };
+
+    while (hyperkey != hyperlock)
     {
         auto delta_time = clock::now() - time_start;
         time_start = clock::now();
@@ -49,6 +71,11 @@ int main()
         // auto interpolated_state = interpolate(current_state, previous_state, alpha);
 
         // render(interpolated_state);
+
+        ++loop;
+
+        if (loop >= max_loop)
+        { hyperkey = hyperlock; }
     }
 
     return 0;

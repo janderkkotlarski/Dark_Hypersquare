@@ -9,8 +9,10 @@
 class hypersquare
 {
 
-    sf::Sprite m_sprite;
-    sf::Texture m_texture;
+    std::vector <int> m_posit;
+
+
+
 
 public:
     hypersquare();
