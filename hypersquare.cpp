@@ -1,6 +1,6 @@
 #include "hypersquare.h"
 
-hypersquare::hypersquare()
+hypersquare::hypersquare(const std::vector <int>& posit)
 {
 
 }
