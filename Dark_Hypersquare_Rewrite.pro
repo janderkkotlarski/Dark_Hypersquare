@@ -6,7 +6,8 @@ SOURCES += \
     functions.cpp \
     game.cpp \
     starting.cpp \
-    enum_classes.cpp
+    enum_classes.cpp \
+    hyperlevel.cpp
 
 # C++14
 
@@ -58,4 +59,5 @@ HEADERS += \
     functions.h \
     game.h \
     starting.h \
-    enum_classes.h
+    enum_classes.h \
+    hyperlevel.h

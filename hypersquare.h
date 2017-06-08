@@ -2,28 +2,19 @@
 #define HYPERSQUARE_H
 
 #include <cassert>
-
-#include "SFML/Graphics.hpp"
+#include <vector>
 
 #include "enum_classes.h"
 
 
 class hypersquare
 {
-
     std::vector <int> m_posit;
-
     hypertype m_type;
-
     hypercolor m_color;
-
-
-
 
 public:
     hypersquare(const std::vector<int> &posit);
-
-
 
 };
 
