@@ -11,7 +11,7 @@ class hyperlevel
 {
     const int m_level;
     const int m_size;
-    std::vector <std::vector <int>> m_squares;
+    std::vector <std::vector <hypersquare>> m_squares;
 
 public:
     hyperlevel(const int level);

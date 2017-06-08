@@ -16,6 +16,8 @@ class hypersquare
 public:
     hypersquare(const std::vector<int> &posit);
 
+
+
 };
 
 #endif // HYPERSQUARE_H
