@@ -16,8 +16,14 @@ class hypersquare
 public:
     hypersquare(const std::vector<int> &posit);
 
+    std::vector <int> get_posit() noexcept
+    { return m_posit; }
 
+    hypertype get_type() noexcept
+    { return m_type; }
 
+    hypercolor get_color() noexcept
+    { return m_color; }
 };
 
 #endif // HYPERSQUARE_H

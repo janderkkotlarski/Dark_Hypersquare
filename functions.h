@@ -4,22 +4,16 @@
 #include <cassert>
 #include <iostream>
 #include <string>
+#include <vector>
 
-#include "SFML/Graphics.hpp"
+void print_posit(const std::vector <int> posit)
+{
+    assert(posit.size() == 2);
 
-void load_init_image(const std::string &image_name,
-                sf::Sprite &sprite,
-                sf::Texture &texture);
-
-void origin_sprite(sf::Sprite &sprite);
-
-void posit_sprite(sf::Sprite &sprite,
-                  const sf::Vector2f &posit);
-
-void color_sprite(sf::Sprite &sprite,
-                  sf::Color &color);
-
-void display_sprite(sf::Sprite &sprite,
-                    sf::RenderWindow &window) noexcept;
+    if (posit.size() == 2)
+    {
+        std::cout << "[" << posit[0] << ":" << posit[1] << "]\n";
+    }
+}
 
 #endif // FUNCTIONS_H
