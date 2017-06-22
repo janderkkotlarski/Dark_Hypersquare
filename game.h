@@ -10,8 +10,11 @@ class game
 
 public:
     game();
+    ~game();
 
     void run();
 };
+
+void doing();
 
 #endif // GAME_H

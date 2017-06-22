@@ -1,14 +1,11 @@
 #include "functions.h"
 
-void load_image(const std::string &image_name,
-                     sf::Sprite &sprite,
-                     sf::Texture &texture)
+void print_posit(const std::vector <int> posit)
 {
-    assert(image_name != "");
+    assert(posit.size() == 2);
 
-    if (!texture.loadFromFile(image_name))
-    { std::cout << image_name << " not found!\n"; }
-
-    sprite.setTexture(texture);    
+    if (posit.size() == 2)
+    {
+        std::cout << "[" << posit[0] << ":" << posit[1] << "]\n";
+    }
 }
-

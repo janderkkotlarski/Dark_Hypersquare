@@ -4,6 +4,7 @@
 #include <cassert>
 #include <vector>
 
+#include "hyperplayer.h"
 #include "hypersquare.h"
 
 
@@ -11,7 +12,8 @@ class hyperlevel
 {
     const int m_level;
     const int m_size;
-    std::vector <std::vector <hypersquare>> m_squares;
+    hyperplayer m_player;
+    std::vector <std::vector <hypersquare>> m_squares;    
 
 public:
     hyperlevel(const int level);
