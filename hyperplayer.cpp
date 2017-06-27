@@ -2,6 +2,7 @@
 
 hyperplayer::hyperplayer(const std::vector<int> &posit)
     : m_posit(),
+      m_orient({1, -1}),
       m_innersquare({-1, -1})
 {
     assert(posit.size() == 2);

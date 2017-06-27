@@ -7,7 +7,9 @@ SOURCES += \
     game.cpp \
     starting.cpp \
     enum_classes.cpp \
-    hyperlevel.cpp
+    hyperlevel.cpp \
+    hyperplayer.cpp \
+    wektor.cpp
 
 # C++14
 
@@ -60,4 +62,6 @@ HEADERS += \
     game.h \
     starting.h \
     enum_classes.h \
-    hyperlevel.h
+    hyperlevel.h \
+    hyperplayer.h \
+    wektor.h
