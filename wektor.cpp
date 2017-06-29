@@ -11,7 +11,7 @@ wektor::wektor(const int x,
       m_y(y)
 { }
 
-wektor::wektor(wektor &wek)
+wektor::wektor(const wektor &wek)
     : m_x(wek.get_x()),
       m_y(wek.get_y())
 { }
@@ -26,28 +26,18 @@ void wektor::set_xy(const int x,
     m_y = y;
 }
 
-wektor wektor::operator+ (wektor &wek) noexcept
+wektor operator+ (const wektor &lhs, const wektor& rhs) noexcept
 {
-    const int x_add
-    { get_x() + wek.get_x() };
+    return wektor(lhs.get_x() + rhs.get_x(),
+                  lhs.get_y() + rhs.get_y());
 
-    const int y_add
-    { get_y() + wek.get_y() };
-
-    wektor wek_temp(x_add, y_add);
-    return wek_temp;
 }
 
-wektor wektor::operator- (wektor &wek) noexcept
+wektor operator- (const wektor &lhs, const wektor& rhs) noexcept
 {
-    const int x_min
-    { get_x() - wek.get_x() };
+    return wektor(lhs.get_x() - rhs.get_x(),
+                  lhs.get_y() - rhs.get_y());
 
-    const int y_min
-    { get_y() - wek.get_y() };
-
-    wektor wek_temp(x_min, y_min);
-    return wek_temp;
 }
 
 void wektor::operator+= (wektor &wek) noexcept

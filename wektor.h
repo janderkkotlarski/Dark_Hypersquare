@@ -17,22 +17,19 @@ public:
     wektor(const int x,
            const int y);
 
-    wektor(wektor &wek);
+    wektor(const wektor &wek);
 
     ~wektor();
 
-    int get_x() noexcept
+    int get_x() const noexcept
     { return m_x; }
 
-    int get_y() noexcept
+    int get_y() const noexcept
     { return m_y; }
 
     void set_xy(const int x,
                 const int y) noexcept;
 
-    wektor operator+ (wektor &wek) noexcept;
-
-    wektor operator- (wektor &wek) noexcept;
 
     void operator+= (wektor &wek) noexcept;
 
@@ -41,5 +38,9 @@ public:
     void out() noexcept
     { std::cout << "[" << m_x << ":" << m_y << "]\n"; }
 };
+
+wektor operator+(const wektor &lhs, const wektor& rhs) noexcept;
+wektor operator-(const wektor &lhs, const wektor& rhs) noexcept;
+
 
 #endif // WEKTOR_H
