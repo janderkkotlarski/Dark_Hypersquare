@@ -8,7 +8,8 @@ SOURCES += \
     game.cpp \
     hyperlevel.cpp \
     enum_classes.cpp \
-    hyperplayer.cpp
+    hyperplayer.cpp \
+    wektor.cpp
 
 # C++14
 
@@ -62,7 +63,8 @@ HEADERS += \
     game.h \
     hyperlevel.h \
     enum_classes.h \
-    hyperplayer.h
+    hyperplayer.h \
+    wektor.h
 
 OTHER_FILES += \
     Dark_Hypersquare_Lewrite.pro.user

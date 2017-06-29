@@ -23,9 +23,14 @@ public:
     int get_y() noexcept
     { return m_y; }
 
+    void set_xy(const int x,
+                const int y) noexcept;
+
     wektor operator+ (wektor &wek) noexcept;
 
     wektor operator- (wektor &wek) noexcept;
+
+    void operator+= (wektor &wek) noexcept;
 };
 
 #endif // WEKTOR_H
