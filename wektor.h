@@ -2,6 +2,8 @@
 #define WEKTOR_H
 
 #include <cassert>
+#include <iostream>
+#include <string>
 
 class wektor
 {
@@ -9,6 +11,8 @@ class wektor
     int m_y;
 
 public:
+
+    wektor();
 
     wektor(const int x,
            const int y);
@@ -31,6 +35,11 @@ public:
     wektor operator- (wektor &wek) noexcept;
 
     void operator+= (wektor &wek) noexcept;
+
+    void operator-= (wektor &wek) noexcept;
+
+    void out() noexcept
+    { std::cout << "[" << m_x << ":" << m_y << "]\n"; }
 };
 
 #endif // WEKTOR_H

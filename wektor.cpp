@@ -1,5 +1,10 @@
 #include "wektor.h"
 
+wektor::wektor()
+    : m_x(0),
+      m_y(0)
+{ }
+
 wektor::wektor(const int x,
                const int y)
     : m_x(x),
@@ -54,4 +59,15 @@ void wektor::operator+= (wektor &wek) noexcept
     { get_y() + wek.get_y() };
 
     set_xy(x_add, y_add);
+}
+
+void wektor::operator-= (wektor &wek) noexcept
+{
+    const int x_min
+    { get_x() - wek.get_x() };
+
+    const int y_min
+    { get_y() - wek.get_y() };
+
+    set_xy(x_min, y_min);
 }

@@ -6,6 +6,7 @@
 #include "starting.h"
 #include "game.h"
 #include "enum_classes.h"
+#include "wektor.h"
 
 
 int main()
@@ -77,6 +78,25 @@ int main()
         if (loop >= max_loop)
         { hyperkey = hyperlock; }
     }
+
+    wektor wek(31, 42);
+
+    wek.out();
+
+    wektor wak(60, 50);
+
+    wak.out();
+
+    wektor wok;
+
+    wok = wek - wak;
+
+
+    wok.out();
+
+    wek += wok;
+
+    wek.out();
 
     return 0;
 }
