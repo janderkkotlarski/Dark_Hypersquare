@@ -30,7 +30,6 @@ public:
     void set_xy(const int x,
                 const int y) noexcept;
 
-
     void operator+= (wektor &wek) noexcept;
 
     void operator-= (wektor &wek) noexcept;
@@ -41,6 +40,9 @@ public:
 
 wektor operator+(const wektor &lhs, const wektor& rhs) noexcept;
 wektor operator-(const wektor &lhs, const wektor& rhs) noexcept;
+
+int abs_sqr(const wektor &wek)
+{ return  wek.get_x()*wek.get_x() + wek.get_y()*wek.get_y(); }
 
 
 #endif // WEKTOR_H
