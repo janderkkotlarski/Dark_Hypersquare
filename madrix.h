@@ -14,6 +14,8 @@ class madrix
 
 public:
 
+    madrix();
+
     int get_a() noexcept
     { return m_a; }
 
@@ -25,6 +27,8 @@ public:
 
     int get_d() noexcept
     { return m_d; }
+
+
 };
 
 #endif // MADRIX_H
