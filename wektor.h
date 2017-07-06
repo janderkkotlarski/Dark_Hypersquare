@@ -45,4 +45,5 @@ int abs_sqr(const wektor &wek)
 { return  wek.get_x()*wek.get_x() + wek.get_y()*wek.get_y(); }
 
 
+
 #endif // WEKTOR_H

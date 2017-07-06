@@ -9,7 +9,8 @@ SOURCES += \
     enum_classes.cpp \
     hyperlevel.cpp \
     hyperplayer.cpp \
-    wektor.cpp
+    wektor.cpp \
+    madrix.cpp
 
 # C++14
 
@@ -64,4 +65,5 @@ HEADERS += \
     enum_classes.h \
     hyperlevel.h \
     hyperplayer.h \
-    wektor.h
+    wektor.h \
+    madrix.h
