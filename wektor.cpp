@@ -26,20 +26,6 @@ void wektor::set_xy(const int x,
     m_y = y;
 }
 
-wektor operator+ (const wektor &lhs, const wektor& rhs) noexcept
-{
-    return wektor(lhs.get_x() + rhs.get_x(),
-                  lhs.get_y() + rhs.get_y());
-
-}
-
-wektor operator- (const wektor &lhs, const wektor& rhs) noexcept
-{
-    return wektor(lhs.get_x() - rhs.get_x(),
-                  lhs.get_y() - rhs.get_y());
-
-}
-
 void wektor::operator+= (wektor &wek) noexcept
 {
     const int x_add
@@ -61,3 +47,18 @@ void wektor::operator-= (wektor &wek) noexcept
 
     set_xy(x_min, y_min);
 }
+
+wektor operator+ (const wektor &lhs, const wektor& rhs) noexcept
+{
+    return wektor(lhs.get_x() + rhs.get_x(),
+                  lhs.get_y() + rhs.get_y());
+}
+
+wektor operator- (const wektor &lhs, const wektor& rhs) noexcept
+{
+    return wektor(lhs.get_x() - rhs.get_x(),
+                  lhs.get_y() - rhs.get_y());
+}
+
+int abs_sqr(const wektor &wek) noexcept
+{ return  wek.get_x()*wek.get_x() + wek.get_y()*wek.get_y(); }

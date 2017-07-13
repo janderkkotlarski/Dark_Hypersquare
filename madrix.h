@@ -16,19 +16,29 @@ public:
 
     madrix();
 
-    int get_a() noexcept
+    madrix(const int a, const int b,
+           const int c, const int d);
+
+    int get_a() const noexcept
     { return m_a; }
 
-    int get_b() noexcept
+    int get_b() const noexcept
     { return m_b; }
 
-    int get_c() noexcept
+    int get_c() const noexcept
     { return m_c; }
 
-    int get_d() noexcept
+    int get_d() const noexcept
     { return m_d; }
 
+    void set_abcd(const int a, const int b,
+                  const int c, const int d) noexcept;
+
+    void operator+= (wektor &wek) noexcept;
+    void operator-= (wektor &wek) noexcept;
 
 };
+
+
 
 #endif // MADRIX_H
