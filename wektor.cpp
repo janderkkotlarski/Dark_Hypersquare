@@ -26,7 +26,7 @@ void wektor::set_xy(const int x,
     m_y = y;
 }
 
-void wektor::operator+= (wektor &wek) noexcept
+void wektor::operator+= (const wektor &wek) noexcept
 {
     const int x_add
     { get_x() + wek.get_x() };
@@ -37,7 +37,7 @@ void wektor::operator+= (wektor &wek) noexcept
     set_xy(x_add, y_add);
 }
 
-void wektor::operator-= (wektor &wek) noexcept
+void wektor::operator-= (const wektor &wek) noexcept
 {
     const int x_min
     { get_x() - wek.get_x() };

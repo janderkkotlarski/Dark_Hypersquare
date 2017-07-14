@@ -34,11 +34,12 @@ public:
     void set_abcd(const int a, const int b,
                   const int c, const int d) noexcept;
 
-    void operator+= (wektor &wek) noexcept;
-    void operator-= (wektor &wek) noexcept;
+    void operator+= (const madrix &wek) noexcept;
+    void operator-= (const madrix &wek) noexcept;
 
 };
 
-
+madrix operator+(const madrix &lhs, const madrix &rhs) noexcept;
+madrix operator-(const madrix &lhs, const madrix &rhs) noexcept;
 
 #endif // MADRIX_H

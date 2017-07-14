@@ -30,8 +30,8 @@ public:
     void set_xy(const int x,
                 const int y) noexcept;
 
-    void operator+= (wektor &wek) noexcept;
-    void operator-= (wektor &wek) noexcept;
+    void operator+= (const wektor &wek) noexcept;
+    void operator-= (const wektor &wek) noexcept;
 
     void out() noexcept
     { std::cout << "[" << m_x << ":" << m_y << "]\n"; }
