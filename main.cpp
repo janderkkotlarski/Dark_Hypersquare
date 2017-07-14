@@ -94,7 +94,7 @@ int main()
 
     wok.out();
 
-    wek += wok;
+    wek -= -wok;
 
     wek.out();
 

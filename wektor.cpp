@@ -26,47 +26,64 @@ void wektor::set_xy(const int x,
     m_y = y;
 }
 
-void wektor::operator+= (const wektor &wek) noexcept
+void wektor::operator+=(const wektor &rhs) noexcept
 {
-    const int x_add
-    { get_x() + wek.get_x() };
+    const int x_new
+    { get_x() + rhs.get_x() };
 
-    const int y_add
-    { get_y() + wek.get_y() };
+    const int y_new
+    { get_y() + rhs.get_y() };
 
-    set_xy(x_add, y_add);
+    set_xy(x_new, y_new);
 }
 
-void wektor::operator-= (const wektor &wek) noexcept
+void wektor::operator-=(const wektor &rhs) noexcept
 {
-    const int x_min
-    { get_x() - wek.get_x() };
+    const int x_new
+    { get_x() - rhs.get_x() };
 
-    const int y_min
-    { get_y() - wek.get_y() };
+    const int y_new
+    { get_y() - rhs.get_y() };
 
-    set_xy(x_min, y_min);
+    set_xy(x_new, y_new);
 }
 
-wektor operator+ (const wektor &lhs, const wektor& rhs) noexcept
+void wektor::operator*=(const int rhs) noexcept
+{
+
+}
+
+wektor operator+(const wektor &lhs, const wektor& rhs) noexcept
 {
     return wektor(lhs.get_x() + rhs.get_x(),
                   lhs.get_y() + rhs.get_y());
 }
 
-wektor operator- (const wektor &lhs, const wektor& rhs) noexcept
+wektor operator+(const wektor& rhs) noexcept
+{
+    return wektor(rhs.get_x(),
+                  rhs.get_y());
+}
+
+wektor operator-(const wektor &lhs, const wektor& rhs) noexcept
 {
     return wektor(lhs.get_x() - rhs.get_x(),
                   lhs.get_y() - rhs.get_y());
 }
 
-wektor operator* (const wektor &lhs, const int rhs) noexcept
+wektor operator-(const wektor& rhs) noexcept
+{
+    return wektor(-rhs.get_x(),
+                  -rhs.get_y());
+}
+
+wektor operator*(const wektor &lhs, const int rhs) noexcept
 {
     return wektor(lhs.get_x()*rhs,
                   lhs.get_y()*rhs);
 }
 
-wektor operator* (const int lhs, const wektor &rhs) noexcept
+wektor operator*(const int lhs, const wektor &rhs) noexcept
 {
     return wektor(lhs*rhs.get_x(),
                   lhs*rhs.get_y());

@@ -30,18 +30,23 @@ public:
     void set_xy(const int x,
                 const int y) noexcept;
 
-    void operator+= (const wektor &wek) noexcept;
-    void operator-= (const wektor &wek) noexcept;
+    void operator+=(const wektor &rhs) noexcept;
+    void operator-=(const wektor &rhs) noexcept;
+
+    void operator*=(const int rhs) noexcept;
 
     void out() noexcept
     { std::cout << "[" << m_x << ":" << m_y << "]\n"; }
 };
 
 wektor operator+(const wektor &lhs, const wektor& rhs) noexcept;
-wektor operator-(const wektor &lhs, const wektor& rhs) noexcept;
+wektor operator+(const wektor& rhs) noexcept;
 
-wektor operator* (const wektor &lhs, const int rhs) noexcept;
-wektor operator* (const int lhs, const wektor &rhs) noexcept;
+wektor operator-(const wektor &lhs, const wektor& rhs) noexcept;
+wektor operator-(const wektor& rhs) noexcept;
+
+wektor operator*(const wektor &lhs, const int rhs) noexcept;
+wektor operator*(const int lhs, const wektor &rhs) noexcept;
 
 int abs_sqr(const wektor &wek) noexcept;
 

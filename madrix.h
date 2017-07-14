@@ -42,4 +42,7 @@ public:
 madrix operator+(const madrix &lhs, const madrix &rhs) noexcept;
 madrix operator-(const madrix &lhs, const madrix &rhs) noexcept;
 
+madrix operator*(const madrix &lhs, const int rhs) noexcept;
+madrix operator*(const int lhs, const madrix &rhs) noexcept;
+
 #endif // MADRIX_H
