@@ -40,6 +40,9 @@ public:
 wektor operator+(const wektor &lhs, const wektor& rhs) noexcept;
 wektor operator-(const wektor &lhs, const wektor& rhs) noexcept;
 
+wektor operator* (const wektor &lhs, const int rhs) noexcept;
+wektor operator* (const int lhs, const wektor &rhs) noexcept;
+
 int abs_sqr(const wektor &wek) noexcept;
 
 

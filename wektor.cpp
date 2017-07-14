@@ -60,5 +60,17 @@ wektor operator- (const wektor &lhs, const wektor& rhs) noexcept
                   lhs.get_y() - rhs.get_y());
 }
 
+wektor operator* (const wektor &lhs, const int rhs) noexcept
+{
+    return wektor(lhs.get_x()*rhs,
+                  lhs.get_y()*rhs);
+}
+
+wektor operator* (const int lhs, const wektor &rhs) noexcept
+{
+    return wektor(lhs*rhs.get_x(),
+                  lhs*rhs.get_y());
+}
+
 int abs_sqr(const wektor &wek) noexcept
 { return  wek.get_x()*wek.get_x() + wek.get_y()*wek.get_y(); }
