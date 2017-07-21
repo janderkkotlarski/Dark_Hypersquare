@@ -11,9 +11,9 @@ wektor::wektor(const int x,
       m_y(y)
 { }
 
-wektor::wektor(const wektor &wek)
-    : m_x(wek.get_x()),
-      m_y(wek.get_y())
+wektor::wektor(const wektor &rhs)
+    : m_x(rhs.get_x()),
+      m_y(rhs.get_y())
 { }
 
 wektor::~wektor()
@@ -50,7 +50,13 @@ void wektor::operator-=(const wektor &rhs) noexcept
 
 void wektor::operator*=(const int rhs) noexcept
 {
+    const int x_new
+    { get_x()*rhs };
 
+    const int y_new
+    { get_y()*rhs };
+
+    set_xy(x_new, y_new);
 }
 
 wektor operator+(const wektor &lhs, const wektor& rhs) noexcept
@@ -89,5 +95,5 @@ wektor operator*(const int lhs, const wektor &rhs) noexcept
                   lhs*rhs.get_y());
 }
 
-int abs_sqr(const wektor &wek) noexcept
-{ return  wek.get_x()*wek.get_x() + wek.get_y()*wek.get_y(); }
+int in_product(const wektor &lhs, const wektor &rhs) noexcept
+{ return lhs.get_x()*rhs.get_x() + lhs.get_y()*rhs.get_y(); }

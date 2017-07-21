@@ -19,6 +19,8 @@ public:
     madrix(const int a, const int b,
            const int c, const int d);
 
+    madrix(const madrix &rhs);
+
     int get_a() const noexcept
     { return m_a; }
 
@@ -34,8 +36,9 @@ public:
     void set_abcd(const int a, const int b,
                   const int c, const int d) noexcept;
 
-    void operator+= (const madrix &wek) noexcept;
-    void operator-= (const madrix &wek) noexcept;
+    void operator+= (const madrix &rhs) noexcept;
+    void operator-= (const madrix &rhs) noexcept;
+    void operator*= (const int rhs) noexcept;
 
 };
 
@@ -44,5 +47,7 @@ madrix operator-(const madrix &lhs, const madrix &rhs) noexcept;
 
 madrix operator*(const madrix &lhs, const int rhs) noexcept;
 madrix operator*(const int lhs, const madrix &rhs) noexcept;
+
+madrix multiply(const madrix &lhs, const madrix &rhs) noexcept;
 
 #endif // MADRIX_H

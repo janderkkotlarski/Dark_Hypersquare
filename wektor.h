@@ -5,6 +5,8 @@
 #include <iostream>
 #include <string>
 
+
+
 class wektor
 {
     int m_x;
@@ -17,7 +19,7 @@ public:
     wektor(const int x,
            const int y);
 
-    wektor(const wektor &wek);
+    wektor(const wektor &rhs);
 
     ~wektor();
 
@@ -48,8 +50,7 @@ wektor operator-(const wektor& rhs) noexcept;
 wektor operator*(const wektor &lhs, const int rhs) noexcept;
 wektor operator*(const int lhs, const wektor &rhs) noexcept;
 
-int abs_sqr(const wektor &wek) noexcept;
 
-
+int in_product(const wektor &lhs, const wektor &rhs) noexcept;
 
 #endif // WEKTOR_H
