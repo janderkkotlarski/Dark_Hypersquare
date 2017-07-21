@@ -50,7 +50,6 @@ wektor operator-(const wektor& rhs) noexcept;
 wektor operator*(const wektor &lhs, const int rhs) noexcept;
 wektor operator*(const int lhs, const wektor &rhs) noexcept;
 
-
 int in_product(const wektor &lhs, const wektor &rhs) noexcept;
 
 #endif // WEKTOR_H

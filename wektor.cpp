@@ -60,40 +60,22 @@ void wektor::operator*=(const int rhs) noexcept
 }
 
 wektor operator+(const wektor &lhs, const wektor& rhs) noexcept
-{
-    return wektor(lhs.get_x() + rhs.get_x(),
-                  lhs.get_y() + rhs.get_y());
-}
+{ return wektor(lhs.get_x() + rhs.get_x(), lhs.get_y() + rhs.get_y()); }
 
 wektor operator+(const wektor& rhs) noexcept
-{
-    return wektor(rhs.get_x(),
-                  rhs.get_y());
-}
+{ return wektor(rhs.get_x(), rhs.get_y()); }
 
 wektor operator-(const wektor &lhs, const wektor& rhs) noexcept
-{
-    return wektor(lhs.get_x() - rhs.get_x(),
-                  lhs.get_y() - rhs.get_y());
-}
+{ return wektor(lhs.get_x() - rhs.get_x(), lhs.get_y() - rhs.get_y()); }
 
 wektor operator-(const wektor& rhs) noexcept
-{
-    return wektor(-rhs.get_x(),
-                  -rhs.get_y());
-}
+{ return wektor(-rhs.get_x(), -rhs.get_y()); }
 
 wektor operator*(const wektor &lhs, const int rhs) noexcept
-{
-    return wektor(lhs.get_x()*rhs,
-                  lhs.get_y()*rhs);
-}
+{ return wektor(lhs.get_x()*rhs, lhs.get_y()*rhs); }
 
 wektor operator*(const int lhs, const wektor &rhs) noexcept
-{
-    return wektor(lhs*rhs.get_x(),
-                  lhs*rhs.get_y());
-}
+{ return wektor(lhs*rhs.get_x(), lhs*rhs.get_y()); }
 
 int in_product(const wektor &lhs, const wektor &rhs) noexcept
 { return lhs.get_x()*rhs.get_x() + lhs.get_y()*rhs.get_y(); }

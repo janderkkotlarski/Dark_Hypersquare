@@ -5,6 +5,8 @@
 #include <iostream>
 #include <string>
 
+#include "wektor.h"
+
 class madrix
 {
     int m_a;
@@ -49,5 +51,7 @@ madrix operator*(const madrix &lhs, const int rhs) noexcept;
 madrix operator*(const int lhs, const madrix &rhs) noexcept;
 
 madrix multiply(const madrix &lhs, const madrix &rhs) noexcept;
+
+wektor multiply(const madrix &lhs, const wektor &rhs) noexcept;
 
 #endif // MADRIX_H

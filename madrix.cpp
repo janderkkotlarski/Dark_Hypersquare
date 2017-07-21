@@ -109,3 +109,9 @@ madrix multiply(const madrix &lhs, const madrix &rhs) noexcept
                   lhs.get_c()*rhs.get_a() + lhs.get_d()*rhs.get_c(),
                   lhs.get_c()*rhs.get_b() + lhs.get_d()*rhs.get_d());
 }
+
+wektor multiply(const madrix &lhs, const wektor &rhs) noexcept
+{
+    return wektor(lhs.get_a()*rhs.get_x() + lhs.get_b()*rhs.get_y(),
+                  lhs.get_c()*rhs.get_x() + lhs.get_d()*rhs.get_y());
+}
