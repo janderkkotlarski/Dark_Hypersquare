@@ -1,6 +1,12 @@
 #ifndef ENUM_CLASSES_H
 #define ENUM_CLASSES_H
 
+#include <cassert>
+#include <iostream>
+#include <string>
+#include <random>
+
+
 enum class hypertype
 {
     none,
@@ -12,8 +18,11 @@ enum class hypertype
     yellow_points,
     green_points,
     blue_points,
-    dark_trap
+    dark_trap,
+    SIZE
 };
+
+hypertype rand_type();
 
 enum class hypercolor
 {
@@ -26,7 +35,8 @@ enum class hypercolor
     red,
     yellow,
     green,
-    blue
+    blue,
+    SIZE
 };
 
 #endif // ENUM_CLASSES_H

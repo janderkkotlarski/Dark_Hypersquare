@@ -98,5 +98,8 @@ int main()
 
     wek.out();
 
+    const hypertype randy
+    { rand_type() };
+
     return 0;
 }
