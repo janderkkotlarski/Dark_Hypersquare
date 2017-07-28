@@ -7,6 +7,7 @@
 #include "game.h"
 #include "enum_classes.h"
 #include "hypersquare.h"
+#include "hyperlevel.h"
 #include "wektor.h"
 #include "textout.h"
 
@@ -110,6 +111,13 @@ int main()
     { rand_type() };
 
     textout(type_to_color(hype));
+
+    std::cout << '\n';
+
+    hyperlevel rever
+    { 10, true };
+
+    rever.display();
 
     return 0;
 }

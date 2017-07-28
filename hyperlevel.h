@@ -17,6 +17,18 @@ class hyperlevel
 
 public:
     hyperlevel(const int level);
+
+    hyperlevel(const int level,
+               const bool luck);
+
+    int get_level() noexcept
+    { return m_level; }
+
+    int get_size() noexcept
+    { return m_size; }
+
+    void display();
+
 };
 
 #endif // HYPERLEVEL_H

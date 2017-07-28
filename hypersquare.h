@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "enum_classes.h"
+#include "textout.h"
 
 
 class hypersquare

@@ -10,7 +10,8 @@ SOURCES += \
     enum_classes.cpp \
     hyperplayer.cpp \
     wektor.cpp \
-    madrix.cpp
+    madrix.cpp \
+    textout.cpp
 
 # C++14
 
@@ -66,7 +67,8 @@ HEADERS += \
     enum_classes.h \
     hyperplayer.h \
     wektor.h \
-    madrix.h
+    madrix.h \
+    textout.h
 
 OTHER_FILES += \
     Dark_Hypersquare_Lewrite.pro.user

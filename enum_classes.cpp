@@ -7,32 +7,42 @@ hypertype rand_type() noexcept
 
     std::random_device rand;
 
-    const unsigned part
-    { rand.max()/size };
-
     const unsigned roll
-    { rand() };
+    { rand()%size };
 
-    if (roll < 1*part)
-    { return hypertype::none; }
-    else if (roll < 2*part)
-    { return hypertype::alabaster; }
-    else if (roll < 3*part)
-    { return hypertype::concrete; }
-    else if (roll < 4*part)
-    { return hypertype::level_up; }
-    else if (roll < 5*part)
-    { return hypertype::level_down; }
-    else if (roll < 6*part)
-    { return hypertype::dark_trap; }
-    else if (roll < 7*part)
-    { return hypertype::red_points; }
-    else if (roll < 8*part)
-    { return hypertype::yellow_points; }
-    else if (roll < 9*part)
-    { return hypertype::green_points; }
-    else if (roll < 10*part)
-    { return hypertype::blue_points; }
+    switch (roll)
+    {
+        case 0:
+            return hypertype::none;
+            break;
+        case 1:
+            return hypertype::alabaster;
+            break;
+        case 2:
+            return hypertype::concrete;
+            break;
+        case 3:
+            return hypertype::level_up;
+            break;
+        case 4:
+            return hypertype::level_down;
+            break;
+        case 5:
+            return hypertype::dark_trap;
+            break;
+        case 6:
+            return hypertype::red_points;
+            break;
+        case 7:
+            return hypertype::yellow_points;
+            break;
+        case 8:
+            return hypertype::green_points;
+            break;
+        case 9:
+            return hypertype::blue_points;
+            break;
+    }
 
     return hypertype::none;
 }

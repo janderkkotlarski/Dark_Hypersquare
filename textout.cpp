@@ -5,7 +5,7 @@ void textout(const hypercolor &col) noexcept
     switch (col)
     {
         case hypercolor::clear:
-            std::cout << ' ';
+            std::cout << '*';
             break;
         case hypercolor::white:
             std::cout << 'W';

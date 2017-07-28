@@ -9,21 +9,63 @@ hyperlevel::hyperlevel(const int level)
     assert(m_level > 0);
     assert(m_size > 0);
 
-    for (int x_pos { 0 }; x_pos < m_size; ++x_pos)
+    for (int y_pos { 0 }; y_pos < m_size; ++y_pos)
     {
-        std::vector <hypersquare> square_column;
+        std::vector <hypersquare> square_row;
 
-        for (int y_pos { 0 }; y_pos < m_size; ++y_pos)
+        for (int x_pos { 0 }; x_pos < m_size; ++x_pos)
         {
-            square_column.push_back(hypersquare({x_pos, y_pos}));
+            square_row.push_back(hypersquare({x_pos, y_pos}));
         }
 
-        assert(static_cast<int>(square_column.size()) == m_size);
+        assert(static_cast<int>(square_row.size()) == m_size);
 
-        m_squares.push_back(square_column);
+        m_squares.push_back(square_row);
 
-        assert(static_cast<int>(m_squares[x_pos].size()) == m_size);
+        assert(static_cast<int>(m_squares[y_pos].size()) == m_size);
     }
 
     assert(static_cast<int>(m_squares.size()) == m_size);
+}
+
+hyperlevel::hyperlevel(const int level,
+           const bool luck)
+    : m_level(level),
+      m_size(2*m_level + 1),
+      m_player({m_level, m_level}),
+      m_squares()
+{
+    assert(m_level > 0);
+    assert(m_size > 0);
+
+    for (int y_pos { 0 }; y_pos < m_size; ++y_pos)
+    {
+        std::vector <hypersquare> square_row;
+
+        for (int x_pos { 0 }; x_pos < m_size; ++x_pos)
+        {
+            square_row.push_back(hypersquare({x_pos, y_pos}, luck));
+        }
+
+        assert(static_cast<int>(square_row.size()) == m_size);
+
+        m_squares.push_back(square_row);
+
+        assert(static_cast<int>(m_squares[y_pos].size()) == m_size);
+    }
+
+    assert(static_cast<int>(m_squares.size()) == m_size);
+}
+
+void hyperlevel::display()
+{
+    for( std::vector <hypersquare> square_row: m_squares )
+    {
+        for ( hypersquare square: square_row )
+        {
+            textout(square.get_color());
+        }
+
+        std::cout << '\n';
+    }
 }
