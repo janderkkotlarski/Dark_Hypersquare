@@ -17,6 +17,9 @@ public:
     hypersquare(const std::vector<int> &posit);
 
     hypersquare(const std::vector<int> &posit,
+                const bool luck);
+
+    hypersquare(const std::vector<int> &posit,
                 const hypertype &type,
                 const hypercolor &color);
 

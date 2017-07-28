@@ -6,8 +6,9 @@
 #include "starting.h"
 #include "game.h"
 #include "enum_classes.h"
+#include "hypersquare.h"
 #include "wektor.h"
-
+#include "textout.h"
 
 int main()
 {
@@ -100,6 +101,15 @@ int main()
 
     const hypertype randy
     { rand_type() };
+
+    hypersquare quart({3, 5}, true);
+
+    textout(quart.get_color());
+
+    const hypertype hype
+    { rand_type() };
+
+    textout(type_to_color(hype));
 
     return 0;
 }

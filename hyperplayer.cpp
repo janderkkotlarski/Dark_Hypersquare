@@ -9,6 +9,5 @@ hyperplayer::hyperplayer(const std::vector<int> &posit)
     m_posit = posit;
 }
 
-
 hyperplayer::~hyperplayer()
 { }

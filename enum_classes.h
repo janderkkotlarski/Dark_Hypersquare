@@ -22,7 +22,7 @@ enum class hypertype
     SIZE
 };
 
-hypertype rand_type();
+hypertype rand_type() noexcept;
 
 enum class hypercolor
 {
@@ -38,5 +38,8 @@ enum class hypercolor
     blue,
     SIZE
 };
+
+hypercolor type_to_color(const hypertype &type);
+
 
 #endif // ENUM_CLASSES_H

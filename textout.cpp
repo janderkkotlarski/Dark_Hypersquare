@@ -23,16 +23,18 @@ void textout(const hypercolor &col) noexcept
             std::cout << 'P';
             break;
         case hypercolor::red:
-            std::cout << 'R';
+            std::cout << 'r';
             break;
         case hypercolor::yellow:
-            std::cout << 'Y';
+            std::cout << 'y';
             break;
         case hypercolor::green:
-            std::cout << 'G';
+            std::cout << 'g';
             break;
         case hypercolor::blue:
-            std::cout << 'B';
+            std::cout << 'b';
+            break;
+        case hypercolor::SIZE:
             break;
     }
 }
