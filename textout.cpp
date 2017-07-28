@@ -34,7 +34,8 @@ void textout(const hypercolor &col) noexcept
         case hypercolor::blue:
             std::cout << 'b';
             break;
-        case hypercolor::SIZE:
+        case hypercolor::chroma:
+            std::cout << '@';
             break;
     }
 }

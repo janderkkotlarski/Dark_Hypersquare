@@ -5,11 +5,13 @@
 #include <vector>
 
 #include "hypersquare.h"
+#include "enum_classes.h"
 
 class hyperplayer
 {
     std::vector <int> m_posit;
     std::vector <int> m_orient;
+    hypercolor m_color;
     hypersquare m_innersquare;
 
 public:
@@ -19,6 +21,9 @@ public:
 
     std::vector <int> get_posit() noexcept
     { return m_posit; }
+
+    hypercolor get_color() noexcept
+    { return m_color; }
 
     hypertype get_innertype() noexcept
     { return m_innersquare.get_type(); }

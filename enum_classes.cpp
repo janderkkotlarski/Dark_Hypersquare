@@ -3,7 +3,7 @@
 hypertype rand_type() noexcept
 {
     const unsigned size
-    { (unsigned)hypertype::SIZE };
+    { (unsigned)hypertype::player };
 
     std::random_device rand;
 
@@ -41,7 +41,7 @@ hypertype rand_type() noexcept
             break;
         case 9:
             return hypertype::blue_points;
-            break;
+            break;        
     }
 
     return hypertype::none;
@@ -81,7 +81,8 @@ hypercolor type_to_color(const hypertype &typ)
         case hypertype::blue_points:
             return hypercolor::blue;
             break;
-        case hypertype::SIZE:
+        case hypertype::player:
+            return hypercolor::chroma;
             break;
     }
 

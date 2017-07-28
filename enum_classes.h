@@ -19,7 +19,7 @@ enum class hypertype
     green_points,
     blue_points,
     dark_trap,
-    SIZE
+    player
 };
 
 hypertype rand_type() noexcept;
@@ -36,7 +36,7 @@ enum class hypercolor
     yellow,
     green,
     blue,
-    SIZE
+    chroma
 };
 
 hypercolor type_to_color(const hypertype &type);

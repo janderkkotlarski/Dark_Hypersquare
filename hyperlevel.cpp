@@ -63,7 +63,10 @@ void hyperlevel::display()
     {
         for ( hypersquare square: square_row )
         {
-            textout(square.get_color());
+            if (square.get_posit() == m_player.get_posit())
+            { textout(m_player.get_color()); }
+            else
+            { textout(square.get_color()); }
         }
 
         std::cout << '\n';
