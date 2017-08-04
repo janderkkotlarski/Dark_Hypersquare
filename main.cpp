@@ -10,9 +10,12 @@
 #include "hyperlevel.h"
 #include "wektor.h"
 #include "textout.h"
+#include "functions.h"
 
 int main()
 {
+    std::cout << time_out() << '\n';
+
     starting starter;
 
     starter.run();

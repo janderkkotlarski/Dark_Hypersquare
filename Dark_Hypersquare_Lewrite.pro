@@ -11,7 +11,8 @@ SOURCES += \
     hyperplayer.cpp \
     wektor.cpp \
     madrix.cpp \
-    textout.cpp
+    textout.cpp \
+    fibran.cpp
 
 # C++14
 
@@ -68,7 +69,8 @@ HEADERS += \
     hyperplayer.h \
     wektor.h \
     madrix.h \
-    textout.h
+    textout.h \
+    fibran.h
 
 OTHER_FILES += \
     Dark_Hypersquare_Lewrite.pro.user
