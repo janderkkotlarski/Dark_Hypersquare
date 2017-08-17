@@ -8,7 +8,7 @@ void print_posit(const std::vector <int> posit)
     { std::cout << "[" << posit[0] << ":" << posit[1] << "]\n"; }
 }
 
-int time_out()
+unsigned time_out()
 {
     std::chrono::time_point<std::chrono::system_clock> now
     { std::chrono::system_clock::now() };
@@ -16,5 +16,5 @@ int time_out()
     auto duration
     { now.time_since_epoch() };
 
-    return static_cast<int>(std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count());
+    return static_cast<unsigned>(std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count());
 }

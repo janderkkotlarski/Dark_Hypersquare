@@ -11,10 +11,31 @@
 #include "wektor.h"
 #include "textout.h"
 #include "functions.h"
+#include "fibran.h"
 
 int main()
 {
-    std::cout << time_out() << '\n';
+    const unsigned seed
+    { time_out() };
+
+    std::cout << seed << '\n';
+
+    fibran ranfib(seed, seed*seed);
+
+    ranfib.display();
+
+    const int limit
+    { 100 };
+
+    int count
+    { 0 };
+
+    while (count < limit)
+    {
+        ranfib.step();
+        ranfib.display();
+        ++count;
+    }
 
     starting starter;
 
@@ -84,6 +105,8 @@ int main()
         { hyperkey = hyperlock; }
     }
 
+    /*
+
     wektor wek(31, 42);
 
     wek.out();
@@ -121,6 +144,8 @@ int main()
     { 10, true };
 
     rever.display();
+
+    */
 
     return 0;
 }

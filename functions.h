@@ -9,7 +9,7 @@
 
 void print_posit(const std::vector <int> posit);
 
-int time_out();
+unsigned time_out();
 
 
 #endif // FUNCTIONS_H

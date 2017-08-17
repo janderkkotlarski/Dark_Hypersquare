@@ -3,22 +3,29 @@
 
 #include <cassert>
 #include <cmath>
+#include <iostream>
 
 class fibran
 {
-    const int m_max;
-    int m_1;
-    int m_2;
+    const unsigned m_max;
+    unsigned m_1;
+    unsigned m_2;
 
 public:
 
-    fibran(const int s_1,
-           const int s_2);
+    fibran(const unsigned s_1,
+           const unsigned s_2);
 
     ~fibran();
 
-    int ran_out() const noexcept
+    unsigned out() const noexcept
     { return m_1; }
+
+    unsigned alt() const noexcept
+    { return m_2; }
+
+    void display() const noexcept
+    { std::cout << out() << " : " << alt() << '\n'; }
 
     void step() noexcept;
 

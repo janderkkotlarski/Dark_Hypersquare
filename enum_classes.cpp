@@ -2,10 +2,35 @@
 
 hypertype rand_type() noexcept
 {
+    typedef std::chrono::high_resolution_clock myclock;
+    myclock::time_point beginning
+    { myclock::now() };
+
+
     const unsigned size
     { (unsigned)hypertype::player };
 
-    std::random_device rand;
+    // std::cout << size;
+
+    // std::random_device rand;
+
+    unsigned count
+    { 0 };
+
+    while (count < 1000000)
+    { ++count; }
+
+    myclock::duration dura
+    { myclock::now() - beginning };
+
+    const unsigned seed
+    { dura.count() };
+
+
+
+    std::minstd_rand0 rand (seed);
+
+
 
     const unsigned roll
     { rand()%size };
