@@ -29,6 +29,8 @@ public:
 
     void step() noexcept;
 
+    void step(const unsigned minim);
+
 };
 
 #endif // FIBRAN_H

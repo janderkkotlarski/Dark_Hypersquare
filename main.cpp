@@ -27,21 +27,7 @@ int main()
     const unsigned minim
     { 1000 };
 
-    const unsigned addit
-    { seed % minim };
-
-    const int limit
-    { static_cast<int>(minim + addit) };
-
-    int count
-    { 0 };
-
-    while (count < limit)
-    {
-        ranfib.step();
-        // ranfib.display();
-        ++count;
-    }
+    ranfib.step(minim);
 
     ranfib.display();
 
@@ -151,7 +137,7 @@ int main()
     */
 
     hyperlevel rever
-    { 10, true, ranfib };
+    { 49, true, ranfib };
 
     rever.display();
 

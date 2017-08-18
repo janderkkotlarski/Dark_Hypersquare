@@ -6,21 +6,10 @@ hypertype rand_type(fibran &ranfib) noexcept
     const unsigned size
     { (unsigned)hypertype::player };
 
-    ranfib.step();
+    ranfib.step(size);
 
     unsigned roll
-    { ranfib.out()%10 + 5};
-
-    unsigned count
-    { 0 };
-
-    while (count < roll)
-    {
-        ranfib.step();
-        ++count;
-    }
-
-    roll = ranfib.out()%size;
+    { ranfib.out()%size };
 
     switch (roll)
     {
