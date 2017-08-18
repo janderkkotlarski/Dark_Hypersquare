@@ -28,7 +28,7 @@ public:
     int get_size() noexcept
     { return m_size; }
 
-    void display();
+    void textdisp();
 
 };
 

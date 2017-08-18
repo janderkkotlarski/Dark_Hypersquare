@@ -139,7 +139,7 @@ int main()
     hyperlevel rever
     { 49, true, ranfib };
 
-    rever.display();
+    rever.textdisp();
 
     return 0;
 }

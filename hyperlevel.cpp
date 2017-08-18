@@ -58,7 +58,7 @@ hyperlevel::hyperlevel(const int level,
     assert(static_cast<int>(m_squares.size()) == m_size);
 }
 
-void hyperlevel::display()
+void hyperlevel::textdisp()
 {
     for( std::vector <hypersquare> square_row: m_squares )
     {

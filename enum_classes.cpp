@@ -4,13 +4,38 @@
 hypertype rand_type(fibran &ranfib) noexcept
 {
     const unsigned size
-    { (unsigned)hypertype::player };
+    { (unsigned)hypertype::player + 1 };
 
     ranfib.step(size);
 
-    unsigned roll
-    { ranfib.out()%size };
+    const unsigned part
+    { ranfib.max()/size };
 
+    const unsigned roll
+    { ranfib.out() };
+
+    if (roll < 2*part)
+    { return hypertype::none; }
+    else if (roll < 3*part)
+    { return hypertype::alabaster; }
+    else if (roll < 4*part)
+    { return hypertype::concrete; }
+    else if (roll < 5*part)
+    { return hypertype::level_up; }
+    else if (roll < 6*part)
+    { return hypertype::level_down; }
+    else if (roll < 7*part)
+    { return hypertype::dark_trap; }
+    else if (roll < 8*part)
+    { return hypertype::red_points; }
+    else if (roll < 9*part)
+    { return hypertype::yellow_points; }
+    else if (roll < 10*part)
+    { return hypertype::green_points; }
+    else if (roll < 11*part)
+    { return hypertype::blue_points; }
+
+    /*
     switch (roll)
     {
         case 0:
@@ -44,6 +69,8 @@ hypertype rand_type(fibran &ranfib) noexcept
             return hypertype::blue_points;
             break;        
     }
+
+    */
 
     return hypertype::none;
 }

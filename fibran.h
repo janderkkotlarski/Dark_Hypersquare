@@ -18,6 +18,9 @@ public:
 
     ~fibran();
 
+    unsigned max() const noexcept
+    { return m_max; }
+
     unsigned out() const noexcept
     { return m_1; }
 
