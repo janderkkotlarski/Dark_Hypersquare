@@ -42,6 +42,8 @@ int main()
 
     dark_hypersquare.run();
 
+    /*
+
     constexpr std::chrono::nanoseconds timestep(16000000);
 
     using clock = std::chrono::high_resolution_clock;
