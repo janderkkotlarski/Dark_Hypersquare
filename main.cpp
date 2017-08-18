@@ -144,5 +144,7 @@ int main()
 
     rever.textdisp();
 
+    std::cout << (unsigned)hypertype::player << '\n';
+
     return 0;
 }

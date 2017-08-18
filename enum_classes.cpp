@@ -1,6 +1,5 @@
 #include "enum_classes.h"
 
-
 hypertype rand_type(fibran &ranfib) noexcept
 {
     const unsigned size
