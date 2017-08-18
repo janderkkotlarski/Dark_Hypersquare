@@ -45,7 +45,17 @@ hyperlevel::hyperlevel(const int level,
 
         for (int x_pos { 0 }; x_pos < m_size; ++x_pos)
         {
-            square_row.push_back(hypersquare({x_pos, y_pos}, luck, ranfib));
+            if ((abs(x_pos - level) > 3) || (abs(y_pos - level) > 3))
+            {
+                if ((abs(x_pos - level) % 2 == 0) && (abs(y_pos - level) % 2 == 0))
+                { square_row.push_back(hypersquare({x_pos, y_pos}, hypertype::concrete, hypercolor::gray)); }
+                else if (((abs(x_pos - level) + abs(y_pos - level)) % 2) == 1)
+                { square_row.push_back(hypersquare({x_pos, y_pos}, luck, ranfib)); }
+                else
+                { square_row.push_back(hypersquare({x_pos, y_pos}, hypertype::none, hypercolor::clear)); }
+            }
+            else
+            { square_row.push_back(hypersquare({x_pos, y_pos}, hypertype::none, hypercolor::clear)); }
         }
 
         assert(static_cast<int>(square_row.size()) == m_size);

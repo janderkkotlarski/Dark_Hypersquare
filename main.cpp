@@ -15,6 +15,9 @@
 
 int main()
 {
+    const int start_level
+    { 15 };
+
     const unsigned seed
     { time_out() };
 
@@ -137,7 +140,7 @@ int main()
     */
 
     hyperlevel rever
-    { 49, true, ranfib };
+    { start_level, false, ranfib };
 
     rever.textdisp();
 
