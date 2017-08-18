@@ -6,7 +6,7 @@
 
 #include "enum_classes.h"
 #include "textout.h"
-
+#include "fibran.h"
 
 class hypersquare
 {
@@ -18,7 +18,8 @@ public:
     hypersquare(const std::vector<int> &posit);
 
     hypersquare(const std::vector<int> &posit,
-                const bool luck);
+                const bool luck,
+                fibran &ranfib);
 
     hypersquare(const std::vector<int> &posit,
                 const hypertype &type,

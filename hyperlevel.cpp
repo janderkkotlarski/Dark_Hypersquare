@@ -29,7 +29,8 @@ hyperlevel::hyperlevel(const int level)
 }
 
 hyperlevel::hyperlevel(const int level,
-           const bool luck)
+                       const bool luck,
+                       fibran &ranfib)
     : m_level(level),
       m_size(2*m_level + 1),
       m_player({m_level, m_level}),
@@ -44,7 +45,7 @@ hyperlevel::hyperlevel(const int level,
 
         for (int x_pos { 0 }; x_pos < m_size; ++x_pos)
         {
-            square_row.push_back(hypersquare({x_pos, y_pos}, luck));
+            square_row.push_back(hypersquare({x_pos, y_pos}, luck, ranfib));
         }
 
         assert(static_cast<int>(square_row.size()) == m_size);

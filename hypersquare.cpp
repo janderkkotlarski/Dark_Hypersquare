@@ -10,9 +10,10 @@ hypersquare::hypersquare(const std::vector <int> &posit)
 }
 
 hypersquare::hypersquare(const std::vector<int> &posit,
-            const bool luck)
+                         const bool luck,
+                         fibran &ranfib)
     : m_posit(),
-      m_type(rand_type()),
+      m_type(rand_type(ranfib)),
       m_color(type_to_color(m_type))
 {
     assert(posit.size() == 2);

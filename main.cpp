@@ -24,8 +24,14 @@ int main()
 
     ranfib.display();
 
+    const unsigned minim
+    { 1000 };
+
+    const unsigned addit
+    { seed % minim };
+
     const int limit
-    { 100 };
+    { static_cast<int>(minim + addit) };
 
     int count
     { 0 };
@@ -33,9 +39,11 @@ int main()
     while (count < limit)
     {
         ranfib.step();
-        ranfib.display();
+        // ranfib.display();
         ++count;
     }
+
+    ranfib.display();
 
     starting starter;
 
@@ -140,12 +148,12 @@ int main()
 
     std::cout << '\n';
 
+    */
+
     hyperlevel rever
-    { 10, true };
+    { 10, true, ranfib };
 
     rever.display();
-
-    */
 
     return 0;
 }

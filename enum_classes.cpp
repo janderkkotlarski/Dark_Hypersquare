@@ -1,39 +1,26 @@
 #include "enum_classes.h"
 
-hypertype rand_type() noexcept
+
+hypertype rand_type(fibran &ranfib) noexcept
 {
-    typedef std::chrono::high_resolution_clock myclock;
-    myclock::time_point beginning
-    { myclock::now() };
-
-
     const unsigned size
     { (unsigned)hypertype::player };
 
-    // std::cout << size;
+    ranfib.step();
 
-    // std::random_device rand;
+    unsigned roll
+    { ranfib.out()%10 + 5};
 
     unsigned count
     { 0 };
 
-    while (count < 1000000)
-    { ++count; }
+    while (count < roll)
+    {
+        ranfib.step();
+        ++count;
+    }
 
-    myclock::duration dura
-    { myclock::now() - beginning };
-
-    const unsigned seed
-    { dura.count() };
-
-
-
-    std::minstd_rand0 rand (seed);
-
-
-
-    const unsigned roll
-    { rand()%size };
+    roll = ranfib.out()%size;
 
     switch (roll)
     {

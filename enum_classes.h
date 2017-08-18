@@ -7,6 +7,8 @@
 #include <random>
 #include <chrono>
 
+#include "fibran.h"
+
 enum class hypertype
 {
     none,
@@ -22,7 +24,7 @@ enum class hypertype
     player
 };
 
-hypertype rand_type() noexcept;
+hypertype rand_type(fibran &ranfib) noexcept;
 
 enum class hypercolor
 {

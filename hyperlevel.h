@@ -6,7 +6,7 @@
 
 #include "hyperplayer.h"
 #include "hypersquare.h"
-
+#include "fibran.h"
 
 class hyperlevel
 {
@@ -19,7 +19,8 @@ public:
     hyperlevel(const int level);
 
     hyperlevel(const int level,
-               const bool luck);
+               const bool luck,
+               fibran &ranfib);
 
     int get_level() noexcept
     { return m_level; }
