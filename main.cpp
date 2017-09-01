@@ -104,8 +104,6 @@ int main()
         { hyperkey = hyperlock; }
     }
 
-    /*
-
     wektor wek(31, 42);
 
     wek.out();
