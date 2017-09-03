@@ -4,11 +4,19 @@ unsigned type_select(std::vector<hyperchoice> &choices) noexcept
 {
     if (choices.size() > 0)
     {
+        const unsigned points
+        { 4 };
+
         for (hyperchoice choice : choices)
         {
             if (choice == hyperchoice::none)
             {
+                return 0;
+            }
 
+            if (choice == hyperchoice::points)
+            {
+                return 2;
             }
 
         }
