@@ -2,43 +2,49 @@
 
 unsigned type_select(std::vector<hyperchoice> &choices) noexcept
 {
+    const unsigned minim;
+
+    unsigned cumul;
+
     if (choices.size() > 0)
     {
         for (hyperchoice choice : choices)
         {
             if (choice == hyperchoice::none)
             {
-                return 100;
+
             }
 
             if (choice == hyperchoice::alab)
             {
-                return 100;
+
             }
 
             if (choice == hyperchoice::conc)
             {
-                return 100;
+
             }
 
             if (choice == hyperchoice::points)
             {
-                return 100;
+
             }
 
             if (choice == hyperchoice::trap)
             {
-                return 100;
+
             }
 
             if (choice == hyperchoice::up)
             {
-                return 100;
+
             }
+
+            cumul += minim;
 
         }
 
-        return 0;
+        return cumul;
     }
 
     return 0;
