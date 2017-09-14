@@ -20,7 +20,8 @@ enum class hyperchoice
     up
 };
 
-unsigned type_select(std::vector<hyperchoice> &choice) noexcept;
+unsigned type_select(std::vector<hyperchoice> &choices,
+                     std::vector<unsigned> &weights);
 
 enum class hypertype
 {

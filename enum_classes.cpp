@@ -1,47 +1,41 @@
 #include "enum_classes.h"
 
-unsigned type_select(std::vector<hyperchoice> &choices) noexcept
+unsigned type_select(std::vector<hyperchoice> &choices,
+                     std::vector<unsigned> &weights)
 {
-    const unsigned minim;
+    const unsigned minim
+    { 1000 };
 
-    unsigned cumul;
+    unsigned cumul
+    { 0 };
+
+    assert(weights.size() == 0);
+    for (int count {0}; count < 6; ++count)
+    { weights.push_back(0); }
 
     if (choices.size() > 0)
     {
         for (hyperchoice choice : choices)
         {
             if (choice == hyperchoice::none)
-            {
-
-            }
+            { weights[0] += minim; }
 
             if (choice == hyperchoice::alab)
-            {
-
-            }
+            { weights[1] += minim; }
 
             if (choice == hyperchoice::conc)
-            {
-
-            }
+            { weights[2] += minim; }
 
             if (choice == hyperchoice::points)
-            {
-
-            }
+            { weights[3] += minim; }
 
             if (choice == hyperchoice::trap)
-            {
-
-            }
+            { weights[4] += minim; }
 
             if (choice == hyperchoice::up)
-            {
-
-            }
+            { weights[5] += minim; }
 
             cumul += minim;
-
         }
 
         return cumul;
