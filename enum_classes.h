@@ -20,6 +20,23 @@ enum class hyperchoice
     up
 };
 
+class choiceweight
+{
+    hyperchoice m_choice;
+    unsigned m_weight;
+
+    choiceweight(const hyperchoice &choice,
+                const unsigned weight);
+
+public:
+
+    hyperchoice get_choice() const noexcept
+    { return m_choice; }
+
+    unsigned get_weight() const noexcept
+    { return m_weight; }
+};
+
 unsigned type_select(std::vector<hyperchoice> &choices,
                      std::vector<unsigned> &weights);
 

@@ -70,7 +70,9 @@ HEADERS += \
     wektor.h \
     madrix.h \
     textout.h \
-    fibran.h
+    fibran.h \
+    choiceweight.h \
+    typeselect.h
 
 OTHER_FILES += \
     Dark_Hypersquare_Lewrite.pro.user

@@ -44,6 +44,14 @@ unsigned type_select(std::vector<hyperchoice> &choices,
     return 0;
 }
 
+hypertype cumul_type(fibran &ranfib)
+{
+    const unsigned size_types
+    { 6 };
+
+
+}
+
 hypertype rand_type(fibran &ranfib) noexcept
 {
     const unsigned size

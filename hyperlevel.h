@@ -29,7 +29,6 @@ public:
     { return m_size; }
 
     void textdisp();
-
 };
 
 #endif // HYPERLEVEL_H

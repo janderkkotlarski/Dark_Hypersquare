@@ -1,0 +1,6 @@
+#ifndef CHOICEWEIGHT_H
+#define CHOICEWEIGHT_H
+
+
+
+#endif // CHOICEWEIGHT_H
