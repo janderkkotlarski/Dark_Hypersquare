@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "enum_classes.h"
+#include "functions.h"
 #include "textout.h"
 #include "fibran.h"
 
