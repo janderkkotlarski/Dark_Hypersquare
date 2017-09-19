@@ -3,6 +3,7 @@
 #include <chrono>
 #include <vector>
 
+#include "choiceweight.h"
 #include "starting.h"
 #include "game.h"
 #include "enum_classes.h"
@@ -138,6 +139,33 @@ int main()
     std::cout << '\n';
 
     */
+
+    std::vector<hyperchoice> choices
+    { choice_vector() };
+
+    std::vector<unsigned> weights
+    {
+        minim,
+        minim,
+        minim,
+        minim,
+        minim
+    };
+
+
+
+    std::vector<choiceweight> choights;
+
+    int count
+    { 0 };
+
+    for (hyperchoice pick : choices)
+    {
+        choights.push_back(choiceweight(pick, weights[count]));
+        ++count;
+    }
+
+
 
     hyperlevel rever
     { start_level, false, ranfib };

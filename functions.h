@@ -14,6 +14,8 @@ void print_posit(const std::vector <int> posit);
 
 unsigned time_out();
 
+std::vector<hyperchoice> choice_vector();
+
 unsigned type_select(std::vector<hyperchoice> &choices,
                      std::vector<unsigned> &weights);
 

@@ -19,6 +19,20 @@ unsigned time_out()
     return static_cast<unsigned>(std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count());
 }
 
+std::vector<hyperchoice> choice_vector()
+{
+    std::vector<hyperchoice> choices;
+
+    choices.push_back(hyperchoice::none);
+    choices.push_back(hyperchoice::alab);
+    choices.push_back(hyperchoice::conc);
+    choices.push_back(hyperchoice::points);
+    choices.push_back(hyperchoice::trap);
+    choices.push_back(hyperchoice::up);
+
+    return choices;
+}
+
 unsigned type_select(std::vector<hyperchoice> &choices,
                      std::vector<unsigned> &weights)
 {
