@@ -154,18 +154,8 @@ int main()
 
 
 
-    std::vector<choiceweight> choights;
-
-    int count
-    { 0 };
-
-    for (hyperchoice pick : choices)
-    {
-        choights.push_back(choiceweight(pick, weights[count]));
-        ++count;
-    }
-
-
+    std::vector<choiceweight> choights
+    (select_weights(choices, weights));
 
     hyperlevel rever
     { start_level, false, ranfib };

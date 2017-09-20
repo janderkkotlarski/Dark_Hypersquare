@@ -1,6 +1,9 @@
 #ifndef CHOICEWEIGHT_H
 #define CHOICEWEIGHT_H
 
+#include <cassert>
+#include <vector>
+
 #include "enum_classes.h"
 
 class choiceweight
@@ -21,5 +24,8 @@ public:
     unsigned get_weight() const noexcept
     { return m_weight; }
 };
+
+std::vector<choiceweight> select_weights(std::vector<hyperchoice> &choices,
+                                         std::vector<unsigned> &weights);
 
 #endif // CHOICEWEIGHT_H
