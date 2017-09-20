@@ -107,6 +107,26 @@ hypertype cumul_type(fibran &ranfib,
         }
     }
 
+    assert(limits.size() == types.size());
+
+    assert(ranfib.max() >= cumul_weight);
+
+    ranfib.step(types.size());
+
+    const unsigned roll
+    { ranfib.out() % cumul_weight };
+
+    unsigned count
+    { 0 };
+
+    for (const unsigned limit : limits)
+    {
+        if (roll < limit)
+        { return types[count]; }
+
+        ++count;
+    }
+
     return hypertype::none;
 }
 
