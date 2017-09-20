@@ -145,16 +145,6 @@ int main()
     // 70
     // 30
 
-    const unsigned nimin
-    { minim/100 };
-
-    const std::vector<unsigned> points
-    {
-        70*nimin,
-        20*nimin,
-        7*nimin,
-        2*nimin
-    };
 
     const std::vector<hyperchoice> choices
     { choice_vector() };

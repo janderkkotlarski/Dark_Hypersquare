@@ -64,10 +64,11 @@ unsigned type_select(std::vector<hyperchoice> &choices,
 }
 
 hypertype cumul_type(fibran &ranfib,
-                     const std::vector<choiceweight> &choights,
-                     const std::vector<unsigned> &points)
+                     const unsigned minim,
+                     const std::vector<choiceweight> &choights)
 {
-
+    std::vector<unsigned> pointz
+    { points(minim) };
 
     unsigned cumul_weight
     { 0 };
@@ -87,7 +88,7 @@ hypertype cumul_type(fibran &ranfib,
                 unsigned index
                 { 0 };
 
-                for (const unsigned point : points)
+                for (const unsigned point : pointz)
                 {
                     cumul_weight += point;
 

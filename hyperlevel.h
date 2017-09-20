@@ -19,6 +19,9 @@ public:
     hyperlevel(const int level);
 
     hyperlevel(const int level,
+               fibran &ranfib);
+
+    hyperlevel(const int level,
                const bool luck,
                fibran &ranfib);
 

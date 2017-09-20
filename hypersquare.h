@@ -19,6 +19,10 @@ public:
     hypersquare(const std::vector<int> &posit);
 
     hypersquare(const std::vector<int> &posit,
+                const unsigned minim,
+                fibran &ranfib);
+
+    hypersquare(const std::vector<int> &posit,
                 const bool luck,
                 fibran &ranfib);
 

@@ -59,6 +59,9 @@ hypertype choose_type(const hyperchoice &choice) noexcept
         case hyperchoice::up:
             return hypertype::level_up;
             break;
+        case hyperchoice::points:
+            return hypertype::none;
+            break;
     }
 
     return hypertype::none;

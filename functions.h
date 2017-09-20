@@ -20,9 +20,8 @@ unsigned time_out();
 unsigned type_select(std::vector<hyperchoice> &choices,
                      std::vector<unsigned> &weights);
 
-hypertype cumul_type(fibran &ranfib,
-                     const std::vector<choiceweight> &choights,
-                     const std::vector<unsigned> &points);
+hypertype cumul_type(fibran &ranfib, const unsigned minim,
+                     const std::vector<choiceweight> &choights);
 
 hypertype rand_type(fibran &ranfib) noexcept;
 
