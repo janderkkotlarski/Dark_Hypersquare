@@ -1,6 +1,6 @@
 #include "enum_classes.h"
 
-std::vector<hyperchoice> choice_vector()
+std::vector<hyperchoice> choice_vector() noexcept
 {
     std::vector<hyperchoice> choices;
 
@@ -12,6 +12,32 @@ std::vector<hyperchoice> choice_vector()
     choices.push_back(hyperchoice::up);
 
     return choices;
+}
+
+std::vector<hypertype> point_types() noexcept
+{
+    std::vector<hypertype> types;
+
+    types.push_back(hypertype::red_points);
+    types.push_back(hypertype::yellow_points);
+    types.push_back(hypertype::green_points);
+    types.push_back(hypertype::blue_points);
+
+    return types;
+}
+
+std::vector<unsigned> points(const unsigned minim) noexcept
+{
+    const unsigned nimin
+    { minim/100 };
+
+    return std::vector<unsigned>
+    {
+        70*nimin,
+        20*nimin,
+        7*nimin,
+        2*nimin
+    };
 }
 
 hypertype choose_type(const hyperchoice &choice) noexcept

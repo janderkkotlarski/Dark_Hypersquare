@@ -73,24 +73,37 @@ hypertype cumul_type(fibran &ranfib,
     { 0 };
 
     std::vector<unsigned> limits;
+    std::vector<hypertype> types;
 
     for (const choiceweight &choi : choights)
     {
-
-        if (choi.get_choice() == hyperchoice::points)
+        if (choi.get_weight() > 0)
         {
-            for (const unsigned point : points)
+            if (choi.get_choice() == hyperchoice::points)
             {
-                cumul_weight += point;
+                const std::vector<hypertype> pointypes
+                { point_types() };
+
+                unsigned index
+                { 0 };
+
+                for (const unsigned point : points)
+                {
+                    cumul_weight += point;
+
+                    limits.push_back(cumul_weight);
+                    types.push_back(pointypes[index]);
+
+                    ++index;
+                }
+            }
+            else
+            {
+                cumul_weight += choi.get_weight();
 
                 limits.push_back(cumul_weight);
+                types.push_back(choose_type(choi.get_choice()));
             }
-        }
-        else
-        {
-            cumul_weight += choi.get_weight();
-
-            limits.push_back(cumul_weight);
         }
     }
 

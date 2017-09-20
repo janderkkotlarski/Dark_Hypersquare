@@ -50,7 +50,11 @@ enum class hypercolor
     chroma
 };
 
-std::vector<hyperchoice> choice_vector();
+std::vector<hyperchoice> choice_vector() noexcept;
+
+std::vector<hypertype> point_types() noexcept;
+
+std::vector<unsigned> points(const unsigned minim) noexcept;
 
 hypertype choose_type(const hyperchoice &choice) noexcept;
 
