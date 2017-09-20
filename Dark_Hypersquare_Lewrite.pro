@@ -12,7 +12,8 @@ SOURCES += \
     wektor.cpp \
     madrix.cpp \
     textout.cpp \
-    fibran.cpp
+    fibran.cpp \
+    choiceweight.cpp
 
 # C++14
 

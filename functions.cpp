@@ -79,14 +79,32 @@ unsigned type_select(std::vector<hyperchoice> &choices,
 
 
 hypertype cumul_type(fibran &ranfib,
-                     const std::vector<choiceweight> &choights)
+                     const std::vector<choiceweight> &choights,
+                     const std::vector<unsigned> &points)
 {
-    unsigned cumul_type
+    unsigned cumul_weight
     { 0 };
+
+    std::vector<unsigned> limits;
 
     for (const choiceweight &choi : choights)
     {
-        cumul_type += choi.get_weight();
+
+        if (choi.get_choice() == hyperchoice::points)
+        {
+            for (const unsigned point : points)
+            {
+                cumul_weight += point;
+
+                limits.push_back(cumul_weight);
+            }
+        }
+        else
+        {
+            cumul_weight += choi.get_weight();
+
+            limits.push_back(cumul_weight);
+        }
     }
 
     return hypertype::none;
