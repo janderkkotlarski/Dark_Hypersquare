@@ -19,10 +19,12 @@ public:
     hyperlevel(const int level);
 
     hyperlevel(const int level,
+               const bool luck,
                fibran &ranfib);
 
     hyperlevel(const int level,
-               const bool luck,
+               const unsigned minim,
+               const std::vector<hyperchoice> &choights,
                fibran &ranfib);
 
     int get_level() noexcept

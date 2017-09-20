@@ -157,6 +157,9 @@ int main()
     std::vector<choiceweight> choights
     (select_weights(choices, weights));
 
+    hyperlevel verev
+    (start_level, minim, choights, ranfib);
+
     hyperlevel rever
     { start_level, false, ranfib };
 

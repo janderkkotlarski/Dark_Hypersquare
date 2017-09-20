@@ -20,6 +20,7 @@ public:
 
     hypersquare(const std::vector<int> &posit,
                 const unsigned minim,
+                const std::vector<hyperchoice> &choights,
                 fibran &ranfib);
 
     hypersquare(const std::vector<int> &posit,

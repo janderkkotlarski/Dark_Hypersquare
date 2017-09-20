@@ -11,13 +11,16 @@ hypersquare::hypersquare(const std::vector <int> &posit)
 
 hypersquare::hypersquare(const std::vector<int> &posit,
                          const unsigned minim,
+                         const std::vector<hyperchoice> &choights,
                          fibran &ranfib)
     : m_posit(),
-      m_type(rand_type(ranfib)),
+      m_type(hypertype::none),
       m_color(type_to_color(m_type))
 {
     assert(posit.size() == 2);
     m_posit = posit;
+
+
 }
 
 hypersquare::hypersquare(const std::vector<int> &posit,
