@@ -78,12 +78,18 @@ unsigned type_select(std::vector<hyperchoice> &choices,
 }
 
 
-hypertype cumul_type(fibran &ranfib)
+hypertype cumul_type(fibran &ranfib,
+                     const std::vector<choiceweight> &choights)
 {
-    const unsigned size_types
-    { 6 };
+    unsigned cumul_type
+    { 0 };
 
+    for (const choiceweight &choi : choights)
+    {
+        cumul_type += choi.get_weight();
+    }
 
+    return hypertype::none;
 }
 
 hypertype rand_type(fibran &ranfib) noexcept

@@ -9,6 +9,7 @@
 
 #include "fibran.h"
 #include "enum_classes.h"
+#include "choiceweight.h"
 
 void print_posit(const std::vector <int> posit);
 
@@ -19,7 +20,8 @@ std::vector<hyperchoice> choice_vector();
 unsigned type_select(std::vector<hyperchoice> &choices,
                      std::vector<unsigned> &weights);
 
-hypertype cumul_type(fibran &ranfib);
+hypertype cumul_type(fibran &ranfib,
+                     const std::vector<choiceweight> &choights);
 
 hypertype rand_type(fibran &ranfib) noexcept;
 

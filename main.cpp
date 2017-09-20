@@ -143,16 +143,10 @@ int main()
     std::vector<hyperchoice> choices
     { choice_vector() };
 
-    std::vector<unsigned> weights
-    {
-        minim,
-        minim,
-        minim,
-        minim,
-        minim
-    };
+    std::vector<unsigned> weights;
 
-
+    for (const hyperchoice pick : choices)
+    { weights.push_back(minim); }
 
     std::vector<choiceweight> choights
     (select_weights(choices, weights));

@@ -1,9 +1,5 @@
 #include "enum_classes.h"
 
-
-
-
-
 hypercolor type_to_color(const hypertype &typ)
 {
     switch (typ)

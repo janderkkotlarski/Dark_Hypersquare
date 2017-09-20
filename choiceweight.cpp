@@ -9,15 +9,17 @@ choiceweight::choiceweight(const hyperchoice &choice,
 choiceweight::~choiceweight()
 { }
 
-std::vector<choiceweight> select_weights(std::vector<hyperchoice> &choices,
-                                         std::vector<unsigned> &weights)
+std::vector<choiceweight> select_weights(const std::vector<hyperchoice> &choices,
+                                         const std::vector<unsigned> &weights)
 {
+    assert(choices.size() == weights.size());
+
     std::vector<choiceweight> choights;
 
     int count
     { 0 };
 
-    for (hyperchoice pick : choices)
+    for (const hyperchoice &pick : choices)
     {
         choights.push_back(choiceweight(pick, weights[count]));
         ++count;

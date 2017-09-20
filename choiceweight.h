@@ -25,7 +25,7 @@ public:
     { return m_weight; }
 };
 
-std::vector<choiceweight> select_weights(std::vector<hyperchoice> &choices,
-                                         std::vector<unsigned> &weights);
+std::vector<choiceweight> select_weights(const std::vector<hyperchoice> &choices,
+                                         const std::vector<unsigned> &weights);
 
 #endif // CHOICEWEIGHT_H
