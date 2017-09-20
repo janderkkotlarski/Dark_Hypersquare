@@ -1,6 +1,44 @@
 #include "enum_classes.h"
 
-hypercolor type_to_color(const hypertype &typ)
+std::vector<hyperchoice> choice_vector()
+{
+    std::vector<hyperchoice> choices;
+
+    choices.push_back(hyperchoice::none);
+    choices.push_back(hyperchoice::alab);
+    choices.push_back(hyperchoice::conc);
+    choices.push_back(hyperchoice::points);
+    choices.push_back(hyperchoice::trap);
+    choices.push_back(hyperchoice::up);
+
+    return choices;
+}
+
+hypertype choose_type(const hyperchoice &choice) noexcept
+{
+    switch (choice)
+    {
+        case hyperchoice::none:
+            return hypertype::none;
+            break;
+        case hyperchoice::alab:
+            return hypertype::alabaster;
+            break;
+        case hyperchoice::conc:
+            return hypertype::concrete;
+            break;
+        case hyperchoice::trap:
+            return hypertype::dark_trap;
+            break;
+        case hyperchoice::up:
+            return hypertype::level_up;
+            break;
+    }
+
+    return hypertype::none;
+}
+
+hypercolor type_to_color(const hypertype &typ) noexcept
 {
     switch (typ)
     {

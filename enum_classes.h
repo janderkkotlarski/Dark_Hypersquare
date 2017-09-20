@@ -50,7 +50,10 @@ enum class hypercolor
     chroma
 };
 
-hypercolor type_to_color(const hypertype &type);
+std::vector<hyperchoice> choice_vector();
 
+hypertype choose_type(const hyperchoice &choice) noexcept;
+
+hypercolor type_to_color(const hypertype &type) noexcept;
 
 #endif // ENUM_CLASSES_H

@@ -15,13 +15,14 @@ void print_posit(const std::vector <int> posit);
 
 unsigned time_out();
 
-std::vector<hyperchoice> choice_vector();
+
 
 unsigned type_select(std::vector<hyperchoice> &choices,
                      std::vector<unsigned> &weights);
 
 hypertype cumul_type(fibran &ranfib,
-                     const std::vector<choiceweight> &choights);
+                     const std::vector<choiceweight> &choights,
+                     const std::vector<unsigned> &points);
 
 hypertype rand_type(fibran &ranfib) noexcept;
 
