@@ -30,10 +30,88 @@ std::vector<hypertype> point_types() noexcept
     return types;
 }
 
-std::vector<unsigned> weighing_types(const std::vector &type_vector,
-                                     const std::vector &types_chosen) noexcept
+void weighing_types(const std::vector<hypertype> &type_vector,
+                    const std::vector<unsigned> &type_pick)
 {
+    const std::vector<unsigned> chances
+    {
+        2000,
+        2000,
+        4500,
+        840,
+        240,
+        84,
+        36,
+        240,
+        60
+    }
 
+    unsigned total_chance
+    { 10000 };
+
+    unsigned wall_chance
+    { 4000 };
+
+    unsigned wall_div
+    { 0 };
+
+    if (type_pick)
+
+    unsigned none_chance
+    { 0 };
+
+    const unsigned red_chance
+    { 840 };
+
+    const unsigned yellow_chance
+    { 240 };
+
+    const unsigned green_chance
+    { 84 };
+
+    const unsigned blue_chance
+    { 36 };
+
+    const unsigned dark_chance
+    { 240 };
+
+    const unsigned up_chance
+    { 60 };
+
+    unsigned index
+    { 0 };
+
+    for (const hypertype type : type_vector)
+    {
+        if (type_pick[index])
+        {
+            if (type == hypertype::alabaster ||
+                type == hypertype::concrete)
+            { ++wall_div; }
+            else if (type == hypertype::none)
+            { none_chance += chances[index]; }
+            else
+            { type_pick[index] = chances[index]; }
+        }
+        else
+        { none_chance += chances[index]; }
+
+        if (type == hypertype::concrete &&
+            wall_div)
+        {
+            wall_chance /= wall_div;
+
+            for (int count {0}; count <= index; ++count)
+            {
+                if (type_pick[index])
+                { type_pick[index] = wall_chance; }
+            }
+        }
+
+
+
+        ++index;
+    }
 }
 
 std::vector<unsigned> points(const unsigned minim) noexcept
