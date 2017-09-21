@@ -50,7 +50,10 @@ enum class hypercolor
     chroma
 };
 
-std::vector<hyperchoice> choice_vector() noexcept;
+std::vector<hypertype> type_vector() noexcept;
+
+std::vector<unsigned> weighing_types(const std::vector &type_vector,
+                                     const std::vector &types_chosen) noexcept;
 
 std::vector<hypertype> point_types() noexcept;
 

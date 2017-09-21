@@ -17,7 +17,7 @@
 int main()
 {
     const int start_level
-    { 15 };
+    { 25 };
 
     const unsigned seed
     { time_out() };
@@ -146,19 +146,30 @@ int main()
     // 30
 
 
-    const std::vector<hyperchoice> choices
+    const std::vector<hypertype> chosen
     { choice_vector() };
 
     std::vector<unsigned> weights;
+    {
+        weights.push_back(2000);
+        weights.push_back(2000);
+        weights.push_back(4500);
+        weights.push_back(840);
+        weights.push_back(240);
+        weights.push_back(84);
+        weights.push_back(36);
+        weights.push_back(240);
+        weights.push_back(60);
+    }
 
-    for (const hyperchoice pick : choices)
-    { weights.push_back(minim); }
+    // for (int count {2}; count < 6; ++count)
+    // { weights[count] = 0; }
 
-    std::vector<choiceweight> choights
-    (select_weights(choices, weights));
+    // std::vector<choiceweight> choights
+    // (select_weights(choices, weights));
 
     hyperlevel verev
-    (start_level, minim, choights, ranfib);
+    (start_level, weights[3], choights, ranfib);
 
     hyperlevel rever
     { start_level, false, ranfib };

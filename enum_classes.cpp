@@ -1,17 +1,21 @@
 #include "enum_classes.h"
 
-std::vector<hyperchoice> choice_vector() noexcept
+std::vector<hypertype> type_vector() noexcept
 {
-    std::vector<hyperchoice> choices;
+    std::vector<hypertype> types;
 
-    choices.push_back(hyperchoice::none);
-    choices.push_back(hyperchoice::alab);
-    choices.push_back(hyperchoice::conc);
-    choices.push_back(hyperchoice::points);
-    choices.push_back(hyperchoice::trap);
-    choices.push_back(hyperchoice::up);
 
-    return choices;
+    choices.push_back(hypertype::alabaster);
+    choices.push_back(hypertype::concrete);
+    choices.push_back(hypertype::none);
+    choices.push_back(hypertype::red_points);
+    choices.push_back(hypertype::yellow_points);
+    choices.push_back(hypertype::green_points);
+    choices.push_back(hypertype::blue_points);
+    choices.push_back(hypertype::dark_trap);
+    choices.push_back(hypertype::level_up);
+
+    return types;
 }
 
 std::vector<hypertype> point_types() noexcept
@@ -26,6 +30,12 @@ std::vector<hypertype> point_types() noexcept
     return types;
 }
 
+std::vector<unsigned> weighing_types(const std::vector &type_vector,
+                                     const std::vector &types_chosen) noexcept
+{
+
+}
+
 std::vector<unsigned> points(const unsigned minim) noexcept
 {
     const unsigned nimin
@@ -36,7 +46,7 @@ std::vector<unsigned> points(const unsigned minim) noexcept
         70*nimin,
         20*nimin,
         7*nimin,
-        2*nimin
+        3*nimin
     };
 }
 
