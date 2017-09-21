@@ -108,6 +108,9 @@ hypertype cumul_type(fibran &ranfib,
         }
     }
 
+    if (cumul_weight == 0)
+    { return hypertype::none; }
+
     assert(limits.size() == types.size());
 
     assert(ranfib.max() >= cumul_weight);

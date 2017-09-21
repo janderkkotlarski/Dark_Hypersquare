@@ -72,7 +72,7 @@ hyperlevel::hyperlevel(const int level,
 
 hyperlevel::hyperlevel(const int level,
                        const unsigned minim,
-                       const std::vector<hyperchoice> &choights,
+                       const std::vector<choiceweight> &choights,
                        fibran &ranfib)
     : m_level(level),
       m_size(2*m_level + 1),
@@ -93,7 +93,7 @@ hyperlevel::hyperlevel(const int level,
                 if ((abs(x_pos - level) % 2 == 0) && (abs(y_pos - level) % 2 == 0))
                 { square_row.push_back(hypersquare({x_pos, y_pos}, hypertype::concrete, hypercolor::gray)); }
                 else if (((abs(x_pos - level) + abs(y_pos - level)) % 2) == 1)
-                { square_row.push_back(hypersquare({x_pos, y_pos}, minim, ranfib)); }
+                { square_row.push_back(hypersquare({x_pos, y_pos}, minim, choights, ranfib)); }
                 else
                 { square_row.push_back(hypersquare({x_pos, y_pos}, hypertype::none, hypercolor::clear)); }
             }

@@ -167,5 +167,7 @@ int main()
 
     std::cout << (unsigned)hypertype::player << '\n';
 
+    verev.textdisp();
+
     return 0;
 }

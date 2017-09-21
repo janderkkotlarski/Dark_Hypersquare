@@ -24,7 +24,7 @@ public:
 
     hyperlevel(const int level,
                const unsigned minim,
-               const std::vector<hyperchoice> &choights,
+               const std::vector<choiceweight> &choights,
                fibran &ranfib);
 
     int get_level() noexcept
