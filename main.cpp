@@ -15,8 +15,13 @@
 
 int main()
 {
+
+    std::cout << "Works!\n";
+
+
+
     const int start_level
-    { 25 };
+    { 15 };
 
     const unsigned seed
     { time_out() };
@@ -104,76 +109,24 @@ int main()
         { hyperkey = hyperlock; }
     }
 
-    wektor wek(31, 42);
-
-    wek.out();
-
-    wektor wak(60, 50);
-
-    wak.out();
-
-    wektor wok;
-
-    wok = wek - wak;
-
-
-    wok.out();
-
-    wek -= -wok;
-
-    wek.out();
-
-    const hypertype randy
-    { rand_type() };
-
-    hypersquare quart({3, 5}, true);
-
-    textout(quart.get_color());
-
-    const hypertype hype
-    { rand_type() };
-
-    textout(type_to_color(hype));
-
-    std::cout << '\n';
-
     */
-
-    // 700
-    // 200
-    // 70
-    // 30
-
-
 
     std::vector<unsigned> type_chances;
 
-    type_chances.push_back(1);
-    type_chances.push_back(1);
-    type_chances.push_back(1);
-    type_chances.push_back(1);
-    type_chances.push_back(1);
-    type_chances.push_back(1);
-    type_chances.push_back(1);
-    type_chances.push_back(1);
-    type_chances.push_back(1);
+    type_chances.push_back(0); // alabaster
+    type_chances.push_back(0); // concrete
+    type_chances.push_back(0); // none
+    type_chances.push_back(0); // red_points
+    type_chances.push_back(0); // yellow_points
+    type_chances.push_back(0); // green_points
+    type_chances.push_back(1); // blue points
+    type_chances.push_back(0); // dark_trap
+    type_chances.push_back(1); // level_up
 
-
-    // for (int count {2}; count < 6; ++count)
-    // { weights[count] = 0; }
-
-    // std::vector<choiceweight> choights
-    // (select_weights(choices, weights));
+    weighing_types(type_chances);
 
     hyperlevel verev
     (start_level, type_chances, ranfib);
-
-    hyperlevel rever
-    { start_level, false, ranfib };
-
-    rever.textdisp();
-
-    std::cout << (unsigned)hypertype::player << '\n';
 
     verev.textdisp();
 

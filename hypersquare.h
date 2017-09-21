@@ -23,10 +23,6 @@ public:
                 fibran &ranfib);
 
     hypersquare(const std::vector<int> &posit,
-                const bool luck,
-                fibran &ranfib);
-
-    hypersquare(const std::vector<int> &posit,
                 const hypertype &type,
                 const hypercolor &color);
 

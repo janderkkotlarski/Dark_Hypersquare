@@ -21,15 +21,15 @@ std::vector<unsigned> chance_vectoring() noexcept
 {
     return std::vector<unsigned>
     {
-        2000,
-        2000,
-        4500,
-        840,
-        240,
-        84,
-        36,
-        240,
-        60
+        2500,
+        2500,
+        3750,
+        700,
+        200,
+        70,
+        30,
+        200,
+        50
     };
 }
 
@@ -77,10 +77,10 @@ void weighing_types(std::vector<unsigned> &type_chances)
         {
             wall_chance /= wall_div;
 
-            for (unsigned count {0}; count <= index; ++count)
+            for (unsigned count {0}; count <= 1; ++count)
             {
-                if (type_chances[index])
-                { type_chances[index] = wall_chance; }
+                if (type_chances[count])
+                { type_chances[count] = wall_chance; }
             }
         }
 

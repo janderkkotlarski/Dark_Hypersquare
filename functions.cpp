@@ -32,16 +32,10 @@ hypertype chance_type(fibran &ranfib,
     unsigned cumul_weight
     { 0 };
 
-    unsigned count
-    { 0 };
-
     for (const unsigned chance : type_chances)
     {
         cumul_weight += chance;
-
-        limits[count] = cumul_weight;
-
-        ++count;
+        limits.push_back(cumul_weight);
     }
 
     if (cumul_weight == 0)
@@ -54,11 +48,13 @@ hypertype chance_type(fibran &ranfib,
     const unsigned roll
     { ranfib.out() % cumul_weight };
 
-    count = 0;
+    unsigned count
+    { 0 };
 
     for (const unsigned limit : limits)
     {
-        if (roll < limit)
+        if (roll < limit &&
+            type_chances[count] > 0)
         { return type_vector[count]; }
 
         ++count;

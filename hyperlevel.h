@@ -19,10 +19,6 @@ public:
     hyperlevel(const int level);
 
     hyperlevel(const int level,
-               const bool luck,
-               fibran &ranfib);
-
-    hyperlevel(const int level,
                const std::vector<unsigned> &type_chances,
                fibran &ranfib);
 
