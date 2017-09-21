@@ -19,8 +19,7 @@ public:
     hypersquare(const std::vector<int> &posit);
 
     hypersquare(const std::vector<int> &posit,
-                const unsigned minim,
-                const std::vector<choiceweight> &choights,
+                const std::vector<unsigned> &type_chances,
                 fibran &ranfib);
 
     hypersquare(const std::vector<int> &posit,

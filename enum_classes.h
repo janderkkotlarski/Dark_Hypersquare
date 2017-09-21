@@ -10,16 +10,6 @@
 
 #include "fibran.h"
 
-enum class hyperchoice
-{
-    none,
-    points,
-    alab,
-    conc,
-    trap,
-    up
-};
-
 enum class hypertype
 {
     none,
@@ -50,16 +40,9 @@ enum class hypercolor
     chroma
 };
 
-std::vector<hypertype> type_vector() noexcept;
+std::vector<hypertype> type_vectoring() noexcept;
 
-void weighing_types(const std::vector<hypertype> &type_vector,
-                    const std::vector<unsigned> &type_pick);
-
-std::vector<hypertype> point_types() noexcept;
-
-std::vector<unsigned> points(const unsigned minim) noexcept;
-
-hypertype choose_type(const hyperchoice &choice) noexcept;
+void weighing_types(std::vector<unsigned> &type_chances);
 
 hypercolor type_to_color(const hypertype &type) noexcept;
 

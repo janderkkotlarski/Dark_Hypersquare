@@ -23,8 +23,7 @@ public:
                fibran &ranfib);
 
     hyperlevel(const int level,
-               const unsigned minim,
-               const std::vector<choiceweight> &choights,
+               const std::vector<unsigned> &type_chances,
                fibran &ranfib);
 
     int get_level() noexcept

@@ -19,114 +19,47 @@ unsigned time_out()
     return static_cast<unsigned>(std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count());
 }
 
-unsigned type_select(std::vector<hyperchoice> &choices,
-                     std::vector<unsigned> &weights)
+hypertype chance_type(fibran &ranfib,
+                      const std::vector<unsigned> &type_chances)
 {
-    const unsigned minim
-    { 1000 };
+    const std::vector<hypertype> type_vector
+    { type_vectoring() };
 
-    unsigned cumul
-    { 0 };
+    assert(type_vector.size() == type_chances.size());
 
-    assert(weights.size() == 0);
-    for (int count {0}; count < 6; ++count)
-    { weights.push_back(0); }
-
-    if (choices.size() > 0)
-    {
-        for (hyperchoice choice : choices)
-        {
-            if (choice == hyperchoice::none)
-            { weights[0] += minim; }
-
-            if (choice == hyperchoice::alab)
-            { weights[1] += minim; }
-
-            if (choice == hyperchoice::conc)
-            { weights[2] += minim; }
-
-            if (choice == hyperchoice::points)
-            { weights[3] += minim; }
-
-            if (choice == hyperchoice::trap)
-            { weights[4] += minim; }
-
-            if (choice == hyperchoice::up)
-            { weights[5] += minim; }
-
-            cumul += minim;
-        }
-
-        return cumul;
-    }
-
-    return 0;
-}
-
-hypertype cumul_type(fibran &ranfib,
-                     const unsigned minim,
-                     const std::vector<choiceweight> &choights)
-{
-    std::vector<unsigned> pointz
-    { points(minim) };
+    std::vector<unsigned> limits;
 
     unsigned cumul_weight
     { 0 };
 
-    std::vector<unsigned> limits;
-    std::vector<hypertype> types;
+    unsigned count
+    { 0 };
 
-    for (const choiceweight &choi : choights)
+    for (const unsigned chance : type_chances)
     {
-        if (choi.get_weight() > 0)
-        {
-            if (choi.get_choice() == hyperchoice::points)
-            {
-                const std::vector<hypertype> pointypes
-                { point_types() };
+        cumul_weight += chance;
 
-                unsigned index
-                { 0 };
+        limits[count] = cumul_weight;
 
-                for (const unsigned point : pointz)
-                {
-                    cumul_weight += point;
-
-                    limits.push_back(cumul_weight);
-                    types.push_back(pointypes[index]);
-
-                    ++index;
-                }
-            }
-            else
-            {
-                cumul_weight += choi.get_weight();
-
-                limits.push_back(cumul_weight);
-                types.push_back(choose_type(choi.get_choice()));
-            }
-        }
+        ++count;
     }
 
     if (cumul_weight == 0)
     { return hypertype::none; }
 
-    assert(limits.size() == types.size());
-
     assert(ranfib.max() >= cumul_weight);
 
-    ranfib.step(types.size());
+    ranfib.step(type_chances.size());
 
     const unsigned roll
     { ranfib.out() % cumul_weight };
 
-    unsigned count
-    { 0 };
+    count = 0;
 
     for (const unsigned limit : limits)
     {
         if (roll < limit)
-        { return types[count]; }
+        { return type_vector[count]; }
 
         ++count;
     }

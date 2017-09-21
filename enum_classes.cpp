@@ -1,39 +1,25 @@
 #include "enum_classes.h"
 
-std::vector<hypertype> type_vector() noexcept
+std::vector<hypertype> type_vectoring() noexcept
 {
     std::vector<hypertype> types;
 
-
-    choices.push_back(hypertype::alabaster);
-    choices.push_back(hypertype::concrete);
-    choices.push_back(hypertype::none);
-    choices.push_back(hypertype::red_points);
-    choices.push_back(hypertype::yellow_points);
-    choices.push_back(hypertype::green_points);
-    choices.push_back(hypertype::blue_points);
-    choices.push_back(hypertype::dark_trap);
-    choices.push_back(hypertype::level_up);
-
-    return types;
-}
-
-std::vector<hypertype> point_types() noexcept
-{
-    std::vector<hypertype> types;
-
+    types.push_back(hypertype::alabaster);
+    types.push_back(hypertype::concrete);
+    types.push_back(hypertype::none);
     types.push_back(hypertype::red_points);
     types.push_back(hypertype::yellow_points);
     types.push_back(hypertype::green_points);
     types.push_back(hypertype::blue_points);
+    types.push_back(hypertype::dark_trap);
+    types.push_back(hypertype::level_up);
 
     return types;
 }
 
-void weighing_types(const std::vector<hypertype> &type_vector,
-                    const std::vector<unsigned> &type_pick)
+std::vector<unsigned> chance_vectoring() noexcept
 {
-    const std::vector<unsigned> chances
+    return std::vector<unsigned>
     {
         2000,
         2000,
@@ -44,10 +30,20 @@ void weighing_types(const std::vector<hypertype> &type_vector,
         36,
         240,
         60
-    }
+    };
+}
 
-    unsigned total_chance
-    { 10000 };
+void weighing_types(std::vector<unsigned> &type_chances)
+{
+    const std::vector<hypertype> type_vector
+    { type_vectoring() };
+
+    assert(type_vector.size() == type_chances.size());
+
+    const std::vector<unsigned> chances
+    { chance_vectoring() };
+
+    assert(chances.size() == type_chances.size());
 
     unsigned wall_chance
     { 4000 };
@@ -55,35 +51,15 @@ void weighing_types(const std::vector<hypertype> &type_vector,
     unsigned wall_div
     { 0 };
 
-    if (type_pick)
-
     unsigned none_chance
     { 0 };
-
-    const unsigned red_chance
-    { 840 };
-
-    const unsigned yellow_chance
-    { 240 };
-
-    const unsigned green_chance
-    { 84 };
-
-    const unsigned blue_chance
-    { 36 };
-
-    const unsigned dark_chance
-    { 240 };
-
-    const unsigned up_chance
-    { 60 };
 
     unsigned index
     { 0 };
 
     for (const hypertype type : type_vector)
     {
-        if (type_pick[index])
+        if (type_chances[index])
         {
             if (type == hypertype::alabaster ||
                 type == hypertype::concrete)
@@ -91,7 +67,7 @@ void weighing_types(const std::vector<hypertype> &type_vector,
             else if (type == hypertype::none)
             { none_chance += chances[index]; }
             else
-            { type_pick[index] = chances[index]; }
+            { type_chances[index] = chances[index]; }
         }
         else
         { none_chance += chances[index]; }
@@ -101,58 +77,17 @@ void weighing_types(const std::vector<hypertype> &type_vector,
         {
             wall_chance /= wall_div;
 
-            for (int count {0}; count <= index; ++count)
+            for (unsigned count {0}; count <= index; ++count)
             {
-                if (type_pick[index])
-                { type_pick[index] = wall_chance; }
+                if (type_chances[index])
+                { type_chances[index] = wall_chance; }
             }
         }
 
-
-
         ++index;
     }
-}
 
-std::vector<unsigned> points(const unsigned minim) noexcept
-{
-    const unsigned nimin
-    { minim/100 };
-
-    return std::vector<unsigned>
-    {
-        70*nimin,
-        20*nimin,
-        7*nimin,
-        3*nimin
-    };
-}
-
-hypertype choose_type(const hyperchoice &choice) noexcept
-{
-    switch (choice)
-    {
-        case hyperchoice::none:
-            return hypertype::none;
-            break;
-        case hyperchoice::alab:
-            return hypertype::alabaster;
-            break;
-        case hyperchoice::conc:
-            return hypertype::concrete;
-            break;
-        case hyperchoice::trap:
-            return hypertype::dark_trap;
-            break;
-        case hyperchoice::up:
-            return hypertype::level_up;
-            break;
-        case hyperchoice::points:
-            return hypertype::none;
-            break;
-    }
-
-    return hypertype::none;
+    type_chances[2] = none_chance;
 }
 
 hypercolor type_to_color(const hypertype &typ) noexcept
