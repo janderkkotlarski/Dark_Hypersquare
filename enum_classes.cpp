@@ -21,15 +21,15 @@ std::vector<unsigned> chance_vectoring() noexcept
 {
     return std::vector<unsigned>
     {
-        2500,
-        2500,
-        3750,
-        700,
-        200,
-        70,
-        30,
-        200,
-        50
+        3000,
+        3000,
+        3000,
+        560,
+        160,
+        56,
+        24,
+        160,
+        40
     };
 }
 

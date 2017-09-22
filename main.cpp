@@ -2,6 +2,7 @@
 #include <iostream>
 #include <chrono>
 #include <vector>
+#include <conio.h>
 
 #include "starting.h"
 #include "game.h"
@@ -20,8 +21,7 @@ int main()
 
 
 
-    const int start_level
-    { 15 };
+
 
     const unsigned seed
     { time_out() };
@@ -113,17 +113,20 @@ int main()
 
     std::vector<unsigned> type_chances;
 
-    type_chances.push_back(0); // alabaster
-    type_chances.push_back(0); // concrete
+    type_chances.push_back(1); // alabaster
+    type_chances.push_back(1); // concrete
     type_chances.push_back(0); // none
     type_chances.push_back(0); // red_points
     type_chances.push_back(0); // yellow_points
     type_chances.push_back(0); // green_points
-    type_chances.push_back(1); // blue points
+    type_chances.push_back(0); // blue points
     type_chances.push_back(0); // dark_trap
-    type_chances.push_back(1); // level_up
+    type_chances.push_back(0); // level_up
 
     weighing_types(type_chances);
+
+    const int start_level
+    { 25 };
 
     hyperlevel verev
     (start_level, type_chances, ranfib);
