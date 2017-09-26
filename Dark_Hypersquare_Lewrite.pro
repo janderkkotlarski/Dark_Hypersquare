@@ -13,7 +13,7 @@ SOURCES += \
     madrix.cpp \
     textout.cpp \
     fibran.cpp \
-    choiceweight.cpp
+    controls.cpp
 
 # C++14
 
@@ -72,8 +72,8 @@ HEADERS += \
     madrix.h \
     textout.h \
     fibran.h \
-    choiceweight.h \
-    typeselect.h
+    typeselect.h \
+    controls.h
 
 OTHER_FILES += \
     Dark_Hypersquare_Lewrite.pro.user

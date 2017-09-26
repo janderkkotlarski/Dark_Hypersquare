@@ -2,7 +2,6 @@
 #include <iostream>
 #include <chrono>
 #include <vector>
-#include <conio.h>
 
 #include "starting.h"
 #include "game.h"
