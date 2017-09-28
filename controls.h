@@ -25,6 +25,18 @@ public:
 
     void reset();
 
+    bool get_up()
+    { return m_up; }
+
+    bool get_down()
+    { return m_down; }
+
+    bool get_right()
+    { return m_right; }
+
+    bool get_left()
+    { return m_left; }
+
 };
 
 #endif // CONTROLS_H

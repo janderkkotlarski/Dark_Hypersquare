@@ -12,7 +12,8 @@ SOURCES += \
     wektor.cpp \
     madrix.cpp \
     textout.cpp \
-    fibran.cpp
+    fibran.cpp \
+    controls.cpp
 
 # C++14
 
@@ -71,4 +72,5 @@ HEADERS += \
     madrix.h \
     textout.h \
     prng.h \
-    fibran.h
+    fibran.h \
+    controls.h

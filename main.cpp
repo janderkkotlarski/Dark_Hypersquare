@@ -12,6 +12,7 @@
 #include "textout.h"
 #include "functions.h"
 #include "fibran.h"
+#include "controls.h"
 
 int main()
 {
@@ -46,24 +47,15 @@ int main()
 
     dark_hypersquare.run();
 
-    /*
 
-    constexpr std::chrono::nanoseconds timestep(16000000);
+
+    constexpr std::chrono::nanoseconds timestep(160000000);
 
     using clock = std::chrono::high_resolution_clock;
 
     std::chrono::nanoseconds lag(0);
     auto time_start = clock::now();
-    bool quit_game = false;
 
-    // game_state current_state;
-    // game_state previous_state;
-
-    const auto max_loop
-    { 1000000 };
-
-    auto loop
-    { 0 };
 
     auto hyperkey
     { hypertype::none };
@@ -79,8 +71,17 @@ int main()
     const auto hyperduck
     { hyperduo };
 
-    while (hyperkey != hyperlock)
+    controls keyput;
+
+    long iter
+    { 0 };
+
+    while (!keyput.get_up())
     {
+        keyput.reset();
+
+
+
         auto delta_time = clock::now() - time_start;
         time_start = clock::now();
         lag += std::chrono::duration_cast<std::chrono::nanoseconds>(delta_time);
@@ -88,9 +89,16 @@ int main()
         // quit_game = handle_events();
 
         // update game logic as lag permits
+
+        long count
+        { 0 };
         while(lag >= timestep)
         {
             lag -= timestep;
+
+            keyput.check();
+
+            ++count;
 
             // previous_state = current_state;
             // update(&current_state); // update at a fixed rate each time
@@ -102,13 +110,18 @@ int main()
 
         // render(interpolated_state);
 
-        ++loop;
+        //++loop;
 
-        if (loop >= max_loop)
-        { hyperkey = hyperlock; }
+        // if (loop >= max_loop)
+        // { hyperkey = hyperlock; }
+
+        std::cout << "Iteration: " << iter << " : " << count << '\n';
+
+        ++iter;
+
+
     }
 
-    */
 
     std::vector<unsigned> type_chances;
 
