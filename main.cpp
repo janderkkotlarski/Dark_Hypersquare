@@ -49,7 +49,7 @@ int main()
 
 
 
-    constexpr std::chrono::nanoseconds timestep(160000000);
+    constexpr std::chrono::nanoseconds timestep(10000000);
 
     using clock = std::chrono::high_resolution_clock;
 
@@ -92,7 +92,8 @@ int main()
 
         long count
         { 0 };
-        while(lag >= timestep)
+        while(lag >= timestep &&
+              !keyput.get_up())
         {
             lag -= timestep;
 
