@@ -12,3 +12,4 @@ hyperplayer::hyperplayer(const std::vector<int> &posit)
 
 hyperplayer::~hyperplayer()
 { }
+

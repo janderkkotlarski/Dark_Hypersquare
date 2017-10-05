@@ -49,7 +49,7 @@ int main()
 
 
 
-    constexpr std::chrono::nanoseconds timestep(10000000);
+    constexpr std::chrono::nanoseconds timestep(100000000);
 
     using clock = std::chrono::high_resolution_clock;
 
