@@ -28,6 +28,12 @@ public:
     int get_size() noexcept
     { return m_size; }
 
+    std::vector<int> get_player_pos() noexcept
+    { return m_player.get_posit(); }
+
+    void move_up()
+    { return m_player.move_up(); }
+
     void textdisp();
 };
 

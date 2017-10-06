@@ -79,7 +79,7 @@ int main()
     while (!keyput.get_up())
     {
         keyput.reset();
-
+        keyput.check();
 
 
         auto delta_time = clock::now() - time_start;
@@ -92,11 +92,12 @@ int main()
 
         long count
         { 0 };
+
         while(lag >= timestep)
         {
             lag -= timestep;
 
-            keyput.check();
+
 
             ++count;
 
@@ -142,6 +143,10 @@ int main()
 
     hyperlevel verev
     (start_level, type_chances, ranfib);
+
+    verev.textdisp();
+
+    verev.move_up();
 
     verev.textdisp();
 
