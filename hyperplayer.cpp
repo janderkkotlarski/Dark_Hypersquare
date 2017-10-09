@@ -17,8 +17,11 @@ hyperplayer::hyperplayer(const std::vector<int> &posit)
 hyperplayer::~hyperplayer()
 { }
 
+<<<<<<< HEAD
 void hyperplayer::move_up()
 {
     m_posit[0] += m_up[0];
     m_posit[1] += m_up[1];
 }
+=======
+>>>>>>> 849222a31b6ec5b35424255a7e0a0015caed77e1
