@@ -92,19 +92,21 @@ int main()
 
         long count
         { 0 };
-<<<<<<< HEAD
 
-        while(lag >= timestep)
-=======
         while(lag >= timestep &&
               !keyput.get_up())
->>>>>>> 849222a31b6ec5b35424255a7e0a0015caed77e1
+
         {
+
+
             lag -= timestep;
 
+            keyput.check();
 
 
             ++count;
+
+
 
             // previous_state = current_state;
             // update(&current_state); // update at a fixed rate each time
