@@ -31,8 +31,8 @@ public:
     std::vector<int> get_player_pos() noexcept
     { return m_player.get_posit(); }
 
-    void move_up()
-    { return m_player.move_up(); }
+    void move_forward()
+    { return m_player.move_forward(); }
 
     void textdisp();
 };
