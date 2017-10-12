@@ -19,4 +19,11 @@ hypertype chance_type(fibran &ranfib,
 
 hypertype rand_type(fibran &ranfib) noexcept;
 
+void add_direct(std::vector<int> &posit,
+                const std::vector<int> &direct);
+
+void turn_right(std::vector<int> &direct);
+
+void turn_left(std::vector<int> &direct);
+
 #endif // FUNCTIONS_H

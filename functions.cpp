@@ -99,3 +99,27 @@ hypertype rand_type(fibran &ranfib) noexcept
 
     return hypertype::none;
 }
+
+void add_direct(std::vector<int> &posit,
+                const std::vector<int> &direct)
+{
+    assert(posit.size() == 2);
+    assert(direct.size() == 2);
+
+    posit[0] += direct[0];
+    posit[1] += direct[1];
+}
+
+void turn_right(std::vector<int> &direct)
+{
+    assert(direct.size() == 2);
+
+    direct = std::vector<int> { -direct[1], direct[0] };
+}
+
+void turn_left(std::vector<int> &direct)
+{
+    assert(direct.size() == 2);
+
+    direct = std::vector<int> { direct[1], -direct[0] };
+}

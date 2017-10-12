@@ -10,7 +10,6 @@
 class hyperplayer
 {
     std::vector <int> m_posit;
-    std::vector <int> m_orient;
     std::vector <int> m_forward;
     hypercolor m_color;
     hypersquare m_innersquare;
@@ -32,8 +31,8 @@ public:
     hypercolor get_innercolor() noexcept
     { return m_innersquare.get_color(); }
 
-    void move_forward();
-
+    void move_forward()
+    { add_direct(m_posit, m_forward); }
 
 };
 

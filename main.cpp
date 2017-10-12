@@ -17,11 +17,7 @@
 int main()
 {
 
-    std::cout << "Works!\n";
-
-
-
-
+    // std::cout << "Works!\n";
 
     const unsigned seed
     { time_out() };
@@ -153,7 +149,24 @@ int main()
 
     verev.textdisp();
 
-    verev.move_up();
+    verev.move_forward();
+
+    const std::vector<int> up
+    { 0 , -1};
+
+    const std::vector<int> right
+    { 1, 0 };
+
+    const std::vector<int> down
+    { 0, 1 };
+
+    const std::vector<int> left
+    { -1, 0 };
+
+    std::vector<int> direction
+    { right };
+
+    assert(direction == left);
 
     verev.textdisp();
 

@@ -2,7 +2,6 @@
 
 hyperplayer::hyperplayer(const std::vector<int> &posit)
     : m_posit(),
-      m_orient({1, -1}),
       m_forward({0, -1}),
       m_color(hypercolor::chroma),
       m_innersquare({-1, -1})
@@ -10,15 +9,8 @@ hyperplayer::hyperplayer(const std::vector<int> &posit)
     assert(posit.size() == 2);
     m_posit = posit;
 
-    assert(m_orient.size() == 2);
-    assert(m_up.size() == 2);
+    assert(m_forward.size() == 2);
 }
 
 hyperplayer::~hyperplayer()
 { }
-
-void hyperplayer::move_forward()
-{
-    m_posit[0] += m_forward[0];
-    m_posit[1] += m_forward[1];
-}
