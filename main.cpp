@@ -166,7 +166,7 @@ int main()
     std::vector<int> direction
     { right };
 
-    assert(direction == left);
+    assert(direction == right);
 
     verev.textdisp();
 

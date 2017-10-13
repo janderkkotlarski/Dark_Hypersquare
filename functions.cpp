@@ -110,14 +110,14 @@ void add_direct(std::vector<int> &posit,
     posit[1] += direct[1];
 }
 
-void turn_right(std::vector<int> &direct)
+void rotate_right(std::vector<int> &direct)
 {
     assert(direct.size() == 2);
 
     direct = std::vector<int> { -direct[1], direct[0] };
 }
 
-void turn_left(std::vector<int> &direct)
+void rotate_left(std::vector<int> &direct)
 {
     assert(direct.size() == 2);
 
