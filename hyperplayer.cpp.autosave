@@ -3,9 +3,9 @@
 hyperplayer::hyperplayer(const std::vector<int> &posit)
     : m_posit(),
       m_forward({0, -1}),
-      m_rightward({0, -1}),
-      m_backward({0, -1}),
-      m_leftward({0, -1}),
+      m_rightward({1, 0}),
+      m_backward({0, 1}),
+      m_leftward({-1, 0}),
       m_color(hypercolor::chroma),
       m_innersquare({-1, -1})
 {
