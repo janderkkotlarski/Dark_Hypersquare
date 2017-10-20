@@ -75,7 +75,7 @@ int main()
     while (!keyput.get_up())
     {
         keyput.reset();
-        keyput.check();
+
 
 
         auto delta_time = clock::now() - time_start;
@@ -123,6 +123,7 @@ int main()
 
         ++iter;
 
+        keyput.check();
 
     }
 

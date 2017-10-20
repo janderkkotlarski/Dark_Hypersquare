@@ -1,0 +1,17 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\controls.o
+./release\starting.o
+./release\textout.o
+./release\wektor.o
+./release\enum_classes.o
+./release\fibran.o
+./release\functions.o
+./release\game.o
+./release\hyperlevel.o
+./release\hyperplayer.o
+./release\hypersquare.o
+./release\madrix.o
+./release\moc_mainwindow.o
+);

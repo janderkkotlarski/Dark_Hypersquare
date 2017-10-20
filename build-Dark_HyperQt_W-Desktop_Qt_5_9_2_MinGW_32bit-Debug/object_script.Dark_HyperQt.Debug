@@ -1,0 +1,17 @@
+INPUT(
+./debug\main.o
+./debug\mainwindow.o
+./debug\controls.o
+./debug\starting.o
+./debug\textout.o
+./debug\wektor.o
+./debug\enum_classes.o
+./debug\fibran.o
+./debug\functions.o
+./debug\game.o
+./debug\hyperlevel.o
+./debug\hyperplayer.o
+./debug\hypersquare.o
+./debug\madrix.o
+./debug\moc_mainwindow.o
+);

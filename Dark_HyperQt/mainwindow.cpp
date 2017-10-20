@@ -13,7 +13,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-MainWindow::push_key()
+void MainWindow::push_key()
 {
 
 }
