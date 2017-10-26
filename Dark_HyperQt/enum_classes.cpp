@@ -17,9 +17,14 @@ std::vector<hypertype> type_vectoring() noexcept
     return types;
 }
 
-std::vector<unsigned> chance_vectoring() noexcept
+void weighing_types(std::vector<int> &type_chances)
 {
-    return std::vector<unsigned>
+    const std::vector<hypertype> type_vector
+    { type_vectoring() };
+
+    assert(type_vector.size() == type_chances.size());
+
+    const std::vector<int> chances
     {
         3000,
         3000,
@@ -31,30 +36,19 @@ std::vector<unsigned> chance_vectoring() noexcept
         160,
         40
     };
-}
-
-void weighing_types(std::vector<unsigned> &type_chances)
-{
-    const std::vector<hypertype> type_vector
-    { type_vectoring() };
-
-    assert(type_vector.size() == type_chances.size());
-
-    const std::vector<unsigned> chances
-    { chance_vectoring() };
 
     assert(chances.size() == type_chances.size());
 
-    unsigned wall_chance
+    int wall_chance
     { 4000 };
 
-    unsigned wall_div
+    int wall_div
     { 0 };
 
-    unsigned none_chance
+    int none_chance
     { 0 };
 
-    unsigned index
+    int index
     { 0 };
 
     for (const hypertype type : type_vector)
@@ -77,7 +71,7 @@ void weighing_types(std::vector<unsigned> &type_chances)
         {
             wall_chance /= wall_div;
 
-            for (unsigned count {0}; count <= 1; ++count)
+            for (int count {0}; count <= 1; ++count)
             {
                 if (type_chances[count])
                 { type_chances[count] = wall_chance; }

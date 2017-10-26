@@ -8,7 +8,7 @@ void print_posit(const std::vector <int> posit)
     { std::cout << "[" << posit[0] << ":" << posit[1] << "]\n"; }
 }
 
-unsigned time_out()
+int time_out()
 {
     std::chrono::time_point<std::chrono::system_clock> now
     { std::chrono::system_clock::now() };
@@ -16,23 +16,23 @@ unsigned time_out()
     auto duration
     { now.time_since_epoch() };
 
-    return static_cast<unsigned>(std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count());
+    return static_cast<int>(std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count());
 }
 
 hypertype chance_type(fibran &ranfib,
-                      const std::vector<unsigned> &type_chances)
+                      const std::vector<int> &type_chances)
 {
     const std::vector<hypertype> type_vector
     { type_vectoring() };
 
     assert(type_vector.size() == type_chances.size());
 
-    std::vector<unsigned> limits;
+    std::vector<int> limits;
 
-    unsigned cumul_weight
+    int cumul_weight
     { 0 };
 
-    for (const unsigned chance : type_chances)
+    for (const int chance : type_chances)
     {
         cumul_weight += chance;
         limits.push_back(cumul_weight);
@@ -45,13 +45,13 @@ hypertype chance_type(fibran &ranfib,
 
     ranfib.step(type_chances.size());
 
-    const unsigned roll
+    const int roll
     { ranfib.out() % cumul_weight };
 
-    unsigned count
+    int count
     { 0 };
 
-    for (const unsigned limit : limits)
+    for (const int limit : limits)
     {
         if (roll < limit &&
             type_chances[count] > 0)
@@ -65,15 +65,15 @@ hypertype chance_type(fibran &ranfib,
 
 hypertype rand_type(fibran &ranfib) noexcept
 {
-    const unsigned size
-    { (unsigned)hypertype::player + 1 };
+    const int size
+    { (int)hypertype::player + 1 };
 
     ranfib.step(size);
 
-    const unsigned part
+    const int part
     { ranfib.max()/size };
 
-    const unsigned roll
+    const int roll
     { ranfib.out() };
 
     if (roll < 2*part)

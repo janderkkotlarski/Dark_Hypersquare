@@ -10,7 +10,7 @@ hypersquare::hypersquare(const std::vector <int> &posit)
 }
 
 hypersquare::hypersquare(const std::vector<int> &posit,
-                         const std::vector<unsigned> &type_chances,
+                         const std::vector<int> &type_chances,
                          fibran &ranfib)
     : m_posit(),
       m_type(chance_type(ranfib, type_chances)),

@@ -7,24 +7,24 @@
 
 class fibran
 {
-    const unsigned m_max;
-    unsigned m_1;
-    unsigned m_2;
+    const int m_max;
+    int m_1;
+    int m_2;
 
 public:
 
-    fibran(const unsigned s_1,
-           const unsigned s_2);
+    fibran(const int s_1,
+           const int s_2);
 
     ~fibran();
 
-    unsigned max() const noexcept
+    int max() const noexcept
     { return m_max; }
 
-    unsigned out() const noexcept
+    int out() const noexcept
     { return m_1; }
 
-    unsigned alt() const noexcept
+    int alt() const noexcept
     { return m_2; }
 
     void display() const noexcept
@@ -32,7 +32,7 @@ public:
 
     void step() noexcept;
 
-    void step(const unsigned minim);
+    void step(const int minim);
 
 };
 

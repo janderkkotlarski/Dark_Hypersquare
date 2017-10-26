@@ -1,7 +1,7 @@
 #include "fibran.h"
 
-fibran::fibran(const unsigned s_1,
-               const unsigned s_2)
+fibran::fibran(const int s_1,
+               const int s_2)
     : m_max(1000000000),
       m_1(s_1 % m_max),
       m_2(s_2 % m_max)
@@ -12,7 +12,7 @@ fibran::~fibran()
 
 void fibran::step() noexcept
 {
-    unsigned temp
+    int temp
     { m_1 + m_2 };
 
     if (temp > m_max)
@@ -25,14 +25,14 @@ void fibran::step() noexcept
     m_2 = temp;
 }
 
-void fibran::step(const unsigned minim)
+void fibran::step(const int minim)
 {
     step();
 
-    const unsigned limit
+    const int limit
     { minim + (out() % minim) };
 
-    unsigned count
+    int count
     { 0 };
 
     while (count < limit)

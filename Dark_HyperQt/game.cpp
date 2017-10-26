@@ -10,7 +10,7 @@ void game::run()
 {
     std::cout << "game looping\n";
 
-    const unsigned seed
+    const int seed
     { time_out() };
 
     std::cout << seed << '\n';
@@ -19,7 +19,7 @@ void game::run()
 
     ranfib.display();
 
-    const unsigned minim
+    const int minim
     { 1000 };
 
     ranfib.step(minim);
@@ -100,7 +100,7 @@ void game::run()
         auto alpha = (float) lag.count() / timestep.count();
         // auto interpolated_state = interpolate(current_state, previous_state, alpha);
 
-        // render(interpolated_state);
+        // render(interpolated_stateunsigned);
 
         //++loop;
 
@@ -115,7 +115,7 @@ void game::run()
     }
 
 
-    std::vector<unsigned> type_chances;
+    std::vector<int> type_chances;
 
     type_chances.push_back(1); // alabaster
     type_chances.push_back(1); // concrete

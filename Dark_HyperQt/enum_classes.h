@@ -42,7 +42,7 @@ enum class hypercolor
 
 std::vector<hypertype> type_vectoring() noexcept;
 
-void weighing_types(std::vector<unsigned> &type_chances);
+void weighing_types(std::vector<int> &type_chances);
 
 hypercolor type_to_color(const hypertype &type) noexcept;
 

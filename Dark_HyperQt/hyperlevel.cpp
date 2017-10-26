@@ -29,7 +29,7 @@ hyperlevel::hyperlevel(const int level)
 }
 
 hyperlevel::hyperlevel(const int level,
-                       const std::vector<unsigned> &type_chances,
+                       const std::vector<int> &type_chances,
                        fibran &ranfib)
     : m_level(level),
       m_size(2*m_level + 1),

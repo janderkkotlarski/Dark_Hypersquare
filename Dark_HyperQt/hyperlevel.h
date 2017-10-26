@@ -19,7 +19,7 @@ public:
     hyperlevel(const int level);
 
     hyperlevel(const int level,
-               const std::vector<unsigned> &type_chances,
+               const std::vector<int> &type_chances,
                fibran &ranfib);
 
     int get_level() noexcept

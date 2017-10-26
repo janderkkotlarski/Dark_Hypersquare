@@ -19,7 +19,7 @@ public:
     hypersquare(const std::vector<int> &posit);
 
     hypersquare(const std::vector<int> &posit,
-                const std::vector<unsigned> &type_chances,
+                const std::vector<int> &type_chances,
                 fibran &ranfib);
 
     hypersquare(const std::vector<int> &posit,
