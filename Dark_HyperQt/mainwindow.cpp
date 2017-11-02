@@ -6,6 +6,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    connect(ui->pushButton, SIGNAL(pressed()),
+            ui->dial, SLOT(ui->dial->));
 }
 
 MainWindow::~MainWindow()
