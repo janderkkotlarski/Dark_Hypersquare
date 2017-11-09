@@ -17,6 +17,9 @@ public:
 
     void push_key();
 
+private slots:
+    void keyPressEvent(QKeyEvent *);
+
 private:
     Ui::MainWindow *ui;
 };

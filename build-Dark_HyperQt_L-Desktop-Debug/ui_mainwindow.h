@@ -46,7 +46,7 @@ public:
         pushButton->setGeometry(QRect(80, 50, 75, 23));
         dial = new QDial(centralWidget);
         dial->setObjectName(QStringLiteral("dial"));
-        dial->setGeometry(QRect(240, 40, 50, 64));
+        dial->setGeometry(QRect(270, 30, 50, 64));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
