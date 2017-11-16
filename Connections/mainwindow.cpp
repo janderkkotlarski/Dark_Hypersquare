@@ -7,24 +7,25 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(
-        ui->horizontalSlider,
-        SIGNAL(valueChanged(int)),
-        ui->dial,
-        SLOT(setValue(int)));
+            ui->horizontalSlider,
+            SIGNAL(valueChanged(int)),
+            ui->dial,
+            SLOT(setValue(int))
+            );
 
     connect(
-      ui->pushButton,
-      SIGNAL(clicked()),
-      this,
-      SLOT(OnMousePressed())
-   );
+            ui->pushButton,
+            SIGNAL(clicked()),
+            this,
+            SLOT(OnMousePressed())
+            );
 
     connect(
-      this,
-      SIGNAL(do_it_now()),
-      this,
-      SLOT(OnMousePressed())
-   );
+            this,
+            SIGNAL(do_it_now()),
+            this,
+            SLOT(OnMousePressed())
+            );
 }
 
 MainWindow::~MainWindow()
@@ -34,7 +35,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::mousePressEvent(QMouseEvent * m)
 {
-
   emit do_it_now();
 }
 

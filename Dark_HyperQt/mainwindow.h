@@ -17,8 +17,13 @@ public:
 
     void push_key();
 
+signals:
+    void do_it_now();
+
 private slots:
+    void mousePressEvent(QMouseEvent * m);
     void keyPressEvent(QKeyEvent *);
+    void OnMousePressed();
 
 private:
     Ui::MainWindow *ui;

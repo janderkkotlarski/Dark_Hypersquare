@@ -7,15 +7,23 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    connect(ui->pushButton,
-            SIGNAL(clicked()),
-            ui->dial,
-            SLOT(ui->dial->setValue(100);));
+
+    connect(
+            this,
+            SIGNAL(do_it_now()),
+            this,
+            SLOT(OnMousePressed())
+            );
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::mousePressEvent(QMouseEvent * m)
+{
+   emit do_it_now();
 }
 
 void MainWindow::keyPressEvent(QKeyEvent * e)
@@ -29,4 +37,9 @@ void MainWindow::keyPressEvent(QKeyEvent * e)
       this->close();
       break;
   }
+}
+
+void MainWindow::OnMousePressed()
+{
+  ui->dial->setValue(ui->dial->value() + 1);
 }
