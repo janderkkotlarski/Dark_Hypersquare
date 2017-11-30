@@ -60,7 +60,8 @@ void game::run()
     long iter
     { 0 };
 
-    while (!keyput.get_up())
+    while (!keyput.get_up() &&
+           iter < 1000)
     {
         keyput.reset();
         keyput.check();
@@ -110,7 +111,6 @@ void game::run()
         std::cout << "Iteration: " << iter << " : " << count << '\n';
 
         ++iter;
-
 
     }
 
