@@ -66,11 +66,16 @@ void MainWindow::keyPressEvent(QKeyEvent * e)
   }
 }
 
+void MainWindow::update()
+{
+    emit go_right();
+}
+
 void MainWindow::DialUp()
-{ ui->dial->setValue(ui->dial->value() + 1); }
+{ ui->dial->move(ui->dial->x(), ui->dial->y() - 5); }
 
 void MainWindow::DialDown()
-{ ui->dial->setValue(ui->dial->value() - 1); }
+{ ui->dial->move(ui->dial->x(), ui->dial->y() + 5); }
 
 void MainWindow::DialMin()
 { ui->dial->move(ui->dial->x() - 5, ui->dial->y()); }

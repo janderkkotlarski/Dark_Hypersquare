@@ -26,6 +26,7 @@ signals:
 private slots:
     void mousePressEvent(QMouseEvent * m);
     void keyPressEvent(QKeyEvent *);
+    void update();
     void DialUp();
     void DialDown();
     void DialMin();
