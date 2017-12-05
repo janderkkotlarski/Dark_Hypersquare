@@ -73,8 +73,9 @@ void MainWindow::DialDown()
 { ui->dial->setValue(ui->dial->value() - 1); }
 
 void MainWindow::DialMin()
-{ ui->dial->setValue(ui->dial->minimum()); }
+{ ui->dial->move(ui->dial->x() - 5, ui->dial->y()); }
 
 void MainWindow::DialMax()
-{ ui->dial->setValue(ui->dial->maximum()); }
+{ ui->dial->move(ui->dial->x() + 5, ui->dial->y()); }
+
 
