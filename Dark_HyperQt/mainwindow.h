@@ -18,12 +18,18 @@ public:
     void push_key();
 
 signals:
-    void do_it_now();
+    void go_up();
+    void go_down();
+    void go_left();
+    void go_right();
 
 private slots:
     void mousePressEvent(QMouseEvent * m);
     void keyPressEvent(QKeyEvent *);
-    void OnMousePressed();
+    void DialUp();
+    void DialDown();
+    void DialMin();
+    void DialMax();
 
 private:
     Ui::MainWindow *ui;

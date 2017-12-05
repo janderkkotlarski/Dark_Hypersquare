@@ -16,22 +16,16 @@ void game::run()
     std::cout << seed << '\n';
 
     fibran ranfib(seed, seed*seed);
-
     ranfib.display();
 
     const int minim
     { 1000 };
 
     ranfib.step(minim);
-
     ranfib.display();
 
     starting starter;
-
     starter.run();
-
-
-
 
     constexpr std::chrono::nanoseconds timestep(100000000);
 
@@ -39,7 +33,6 @@ void game::run()
 
     std::chrono::nanoseconds lag(0);
     auto time_start = clock::now();
-
 
     auto hyperkey
     { hypertype::none };
@@ -52,8 +45,8 @@ void game::run()
     hyperduo.push_back(hyperkey);
     hyperduo.push_back(hyperlock);
 
-    const auto hyperduck
-    { hyperduo };
+    // const auto hyperduck
+    // { hyperduo };
 
     controls keyput;
 
@@ -61,11 +54,10 @@ void game::run()
     { 0 };
 
     while (!keyput.get_up() &&
-           iter < 1000)
+           iter < 100)
     {
         keyput.reset();
         keyput.check();
-
 
         auto delta_time = clock::now() - time_start;
         time_start = clock::now();
@@ -80,18 +72,12 @@ void game::run()
 
         while(lag >= timestep &&
               !keyput.get_up())
-
         {
-
-
             lag -= timestep;
 
             keyput.check();
 
-
             ++count;
-
-
 
             // previous_state = current_state;
             // update(&current_state); // update at a fixed rate each time
