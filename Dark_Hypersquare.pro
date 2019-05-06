@@ -1,6 +1,7 @@
 # Files
 SOURCES += \
-    Dark_Hypersquare_v1-0.cpp
+    Dark_Hypersquare_v1-0.cpp \
+    dhs_functions.cpp
 
 # C++14
 
@@ -35,4 +36,5 @@ LIBS += -LC:/Qt/sfml/lib
 LIBS += -LC:\Qt\sfml\bin
 LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
-HEADERS +=
+HEADERS += \
+    dhs_functions.h

@@ -19,6 +19,7 @@
 #include "Invis_Walls_PRNG.h"
 #include "Invis_Maze_PRNG.h"
 
+#include "dhs_functions.h"
 
 
 /// g++ -std=c++11 -o "%e" "%f" -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
@@ -225,24 +226,15 @@ int main()
 	
 	
 	sf::Texture start_screen_tex;
-	
-	if (!start_screen_tex.loadFromFile(start_screen_img))
-	{
-			
-    std::cout << start_screen_img << " not found!\n";
-			
-	}
+
+  load_texture(start_screen_tex, start_screen_img);
 	
 	sf::Sprite start_screen_sprite;
-	start_screen_sprite.setTexture(start_screen_tex);
-	
-	start_screen_sprite.setOrigin(sf::Vector2f(half_wind, half_wind));
-	
-	start_screen_sprite.setPosition(sf::Vector2f(0, -squarep));
-	
-	start_screen_sprite.setColor(sf::Color(full_intensity, full_intensity, full_intensity, max_transp));
-	
-	
+
+  init_sprite(start_screen_sprite, start_screen_tex,
+              sf::Vector2f(half_wind, half_wind), sf::Vector2f(0, -squarep),
+              sf::Color(full_intensity, full_intensity, full_intensity, max_transp));
+
 	int shadow_blink = 0;
 	
 	bool shadow_blink_up = true;
