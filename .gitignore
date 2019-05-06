@@ -4,3 +4,4 @@ Makefile.*
 *.pro.user
 .qmake.stash
 Dark_Hypersquare
+build-*/
