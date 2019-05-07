@@ -29,6 +29,8 @@ int main()
 	
   const int delaz{ 10 };
 
+  const std::chrono::milliseconds delay(delaz);
+
   int delay_flip{ 0 }, coord_a_sub, coord_b_sub;
 
   bool delay_flipping{ false };
@@ -185,16 +187,14 @@ int main()
 
   const std::string bitmask_dollar_file{ "Number_Dollar_Icon.png" };
 
+  const sf::Vector2f full_windows{ window_x, window_y };
 
-
-  const sf::Vector2f half_windows{ 0.5f*window_x, 0.5f*window_y};
+  const sf::Vector2f half_windows{ 0.5f*window_x, 0.5f*window_y };
 
   const sf::Vector2f full_square{ squarep, squarep};
   const sf::Vector2f right_square{ squarep, 0.0f };
   const sf::Vector2f down_square{ 0.0f, squarep };
   const sf::Vector2f no_square{ 0.0f, 0.0f };
-
-
 
 	sf::Texture start_screen_tex;
   load_texture(start_screen_tex, start_screen_file);
@@ -570,26 +570,15 @@ int main()
 	sf::Sprite dosh_sprite[number_max][max_pow + 1];
 	
 	for (int a_sub = 0; a_sub < number_max; a_sub++)
-	{
-	
+  {
 		for (int b_sub = 0; b_sub <= max_pow; b_sub++)
-		{
-
-		
-			dosh_sprite[a_sub][b_sub].setTexture(bitmask_number[a_sub]);
-		
-			dosh_sprite[a_sub][b_sub].setOrigin(sf::Vector2f(-4.5*squarep + (b_sub - 2)*18, -1.5*squarep + 1));
-		
-			dosh_sprite[a_sub][b_sub].setPosition(sf::Vector2f(0, -squarep));
-			
-		}
-	
+    {
+      dosh_sprite[a_sub][b_sub].setTexture(bitmask_number[a_sub]);
+      dosh_sprite[a_sub][b_sub].setOrigin(sf::Vector2f(-4.5*squarep + (b_sub - 2)*18, -1.5*squarep + 1));
+      dosh_sprite[a_sub][b_sub].setPosition(sf::Vector2f(0, -squarep));
+    }
 	}
-	
-	
-  const std::chrono::milliseconds delay(delaz);
-	
-	
+
 	
 	sf::RectangleShape squaree(sf::Vector2f(2*squarrel, 2*squarrel));
 	
@@ -651,11 +640,7 @@ int main()
 	
 	sf::Font font;
 	if (!font.loadFromFile("Carlito-Regular.ttf"))
-	{
-		
-			// error...
-			
-	}
+  { // error...	}
 	
 	sf::Text text;
 		
@@ -663,47 +648,38 @@ int main()
 		
 	text.setCharacterSize(18);
 		
-	text.setColor(sf::Color::White);
-		
+  text.setFillColor(white);
+  text.setOutlineColor(white);
+
 	text.setPosition(50, 350);
 	
   sf::RenderWindow window(sf::VideoMode(static_cast<unsigned int>(window_x), static_cast<unsigned int>(window_y)),
                           version, sf::Style::Default);
 	
-	sf::View view(sf::Vector2f(0, -squarep), sf::Vector2f(window_x, window_x));
+  sf::View view(-down_square, full_windows);
 	
 	view.setViewport(sf::FloatRect(0, 0, 1, 1));
 	
-	window.setView(view);
-	
-	
+  window.setView(view);
 	
 	int outro = 255;
 
   while (window.isOpen())
   {
-		
 		key_s_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], 0));
 			
-		start_shadow_sprite.setColor(sf::Color(0, 0, 0, background_blink/4));
-		
+    start_shadow_sprite.setColor(sf::Color(0, 0, 0, background_blink/4));
 		start_screen_sprite.setColor(sf::Color(0, 0, 0, max_transp));
 
 		for (int b_sub = 1; b_sub <= 255; b_sub = b_sub + 2)
-		{
-			
+    {
       window.clear(black);
+
+      window.draw(start_shadow_sprite);
+      window.draw(start_screen_sprite);
 			
-			window.draw(start_shadow_sprite);
-			
-			window.draw(start_screen_sprite);
-			
-			
-			
-			// window.draw(key_esc_sprite);
-			
-			window.draw(key_s_sprite);
-			
+      window.draw(key_esc_sprite);
+      window.draw(key_s_sprite);
 			
 			window.display();
 			
@@ -747,8 +723,7 @@ int main()
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) ||
 				(mouse_pressed && (mouse_pos_x > 275) && (mouse_pos_x < 325) &&
 				(mouse_pos_y > 475) && (mouse_pos_y < 525)))
-			{
-						
+      {
 				start_screen = false;
 				
         sf::Mouse::setPosition(static_cast<sf::Vector2i>(half_windows), window);
@@ -760,6 +735,14 @@ int main()
 				b_sub = 255;
 						
 			}
+
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) ||
+        (mouse_pressed && (mouse_pos_x > 25) && (mouse_pos_x < 75) &&
+        (mouse_pos_y > 25) && (mouse_pos_y < 75)))
+      {
+        window.close();
+        return(0);
+      }
 			
 			std::this_thread::sleep_for(delay);
 			
@@ -779,7 +762,7 @@ int main()
 			
 			
 			
-			// window.draw(key_esc_sprite);
+      window.draw(key_esc_sprite);
 			
 			window.draw(key_s_sprite);
 			
@@ -835,6 +818,14 @@ int main()
 				mouse_pressed = false;
 						
 			}
+
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) ||
+        (mouse_pressed && (mouse_pos_x > 25) && (mouse_pos_x < 75) &&
+        (mouse_pos_y > 25) && (mouse_pos_y < 75)))
+      {
+        window.close();
+        return(0);
+      }
 			
 			std::this_thread::sleep_for(delay);
 			
@@ -3096,11 +3087,9 @@ int main()
             {
 							level_back = true;
 							two_turn_uplight = true;
-						}
+            }
 
-							
-						pacman = square_matrix[local_x + max_level][local_y + max_level];
-						
+            pacman = square_matrix[local_x + max_level][local_y + max_level];
 						Color_Picker(pacman, karasu, exit_colors);
 						
 						square_matrix[local_x + max_level][local_y + max_level] = 0;
@@ -3654,427 +3643,241 @@ int main()
 						window.draw(arrow_sprite);
 
 						if (moving && level_change && !(level_reset || level_recet))
-						{
-											
+            {
 							Color_Picker(0, karasu, exit_colors);
 							
 							if (actions % 2 == 1)
-							{
-							
-								Color_Picker(actions/2, karasu, exit_colors);
-								
-							}
+              { Color_Picker(actions/2, karasu, exit_colors); }
 										
-							exit_filler = Square_Draw(exit_filler, karasu, max_transp, local_x*squarep, local_y*squarep, 0, 0);
-											
-							if (actions % 2 != 1)
-							{
-								
-								// exit_filler = Square_Draw(exit_filler, key_colour, max_transp, local_x*squarep, local_y*squarep, 0, 0);
-									
-							}
-											
+              exit_filler = Square_Draw(exit_filler, karasu, max_transp, local_x*squarep, local_y*squarep, 0, 0);
 							window.draw(exit_filler);
 							
 							Color_Picker(2, karasu, exit_colors);
 							
-							pitmask_sprite.setPosition(local_x*squarep, local_y*squarep);
-																
-							pitmask_sprite.setColor(sf::Color(karasu[0], karasu[1], karasu[2], toransupu));
-											
-							window.draw(pitmask_sprite);
-									
-											
+              pitmask_sprite.setPosition(local_x*squarep, local_y*squarep);
+              pitmask_sprite.setColor(sf::Color(karasu[0], karasu[1], karasu[2], toransupu));
+              window.draw(pitmask_sprite);
 						}
 						
 						if (moving && level_back && !(level_reset || level_recet))
-						{
-											
+            {
 							Color_Picker(4, karasu, exit_colors);
 							
 							if (actions % 2 == 1)
-							{
-							
-								Color_Picker(9, karasu, exit_colors);
-								
-							}
-							
-											
-							exit_filler = Square_Draw(exit_filler, karasu, max_transp, local_x*squarep, local_y*squarep, 0, 0);
-											
-							window.draw(exit_filler);
-							
+              { Color_Picker(9, karasu, exit_colors); }
+
+              exit_filler = Square_Draw(exit_filler, karasu, max_transp, local_x*squarep, local_y*squarep, 0, 0);
+              window.draw(exit_filler);
 										
-							pitmask_sprite.setPosition(local_x*squarep, local_y*squarep);
-																
+              pitmask_sprite.setPosition(local_x*squarep, local_y*squarep);
               pitmask_sprite.setColor(black);
-											
-							window.draw(pitmask_sprite);
-		
-											
+              window.draw(pitmask_sprite);
 						}
 						
 						if (dark_setback && !(level_reset || level_recet))
-						{
-											
+            {
 							Color_Picker(0, karasu, exit_colors);
 							
 							if (actions % 2 == 1)
-							{
-							
-								Color_Picker(5, karasu, exit_colors);
-								
-							}
+              { Color_Picker(5, karasu, exit_colors); }
 										
-							exit_filler = Square_Draw(exit_filler, karasu, max_transp, local_x*squarep, local_y*squarep, 0, 0);
-											
-							window.draw(exit_filler);
-											
+              exit_filler = Square_Draw(exit_filler, karasu, max_transp, local_x*squarep, local_y*squarep, 0, 0);
+              window.draw(exit_filler);
 						}
 						
 						if (view_glitch && !(level_reset || level_recet))
-						{
-							
+            {
 							Color_Picker(2, karasu, exit_colors);
 							
 							intro_filler = Square_Draw(intro_filler, key_colour, toransupu, local_x*squarep, local_y*squarep, 0, 0);
 							
 							if (actions % 2 == 1)
-							{
-								
-								Color_Picker(actions/2, karasu, exit_colors);
-								
-								intro_filler = Square_Draw(intro_filler, karasu, toransupu, local_x*squarep, local_y*squarep, 0, 0);
-								
+              {
+                Color_Picker(actions/2, karasu, exit_colors);
+                intro_filler = Square_Draw(intro_filler, karasu, toransupu, local_x*squarep, local_y*squarep, 0, 0);
 							}
 											
-							window.draw(intro_filler);
-							
+              window.draw(intro_filler);
 						}
 						
 						if (level_reset || level_recet)
-						{
-							
+            {
 							Color_Picker(0, karasu, exit_colors);
 							
 							if ((actions % 2 == 1) && dark_flicker)
-							{
+              { Color_Picker(5, karasu, exit_colors); }
 							
-								Color_Picker(5, karasu, exit_colors);
-								
-							}
-							
-							intro_filler = Square_Draw(intro_filler, karasu, toransupu, local_x*squarep, local_y*squarep, 0, 0);
-							
-							window.draw(intro_filler);
-							
-						}
-						
-						
+              intro_filler = Square_Draw(intro_filler, karasu, toransupu, local_x*squarep, local_y*squarep, 0, 0);
+              window.draw(intro_filler);
+            }
 												
 						window.draw(infobox);
 											
 						if (one_turn_uplight || two_turn_uplight)
-						{
-							
+            {
 							if (key_up_uplight)
-							{
-									
-								key_up_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp));
-									
-							}
+              { key_up_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
 							
 							if (key_right_uplight)
-							{
-									
-								key_right_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp));
-									
-							}
+              { key_right_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
 							
 							if (key_down_uplight)
-							{
-									
-								key_down_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp));
-									
-							}
+              { key_down_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
 							
 							if (key_left_uplight)
-							{
-									
-								key_left_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp));
-									
-							}
+              { key_left_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
 							
 							if (key_down_uplight)
-							{
-									
-								key_down_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp));
-									
-							}
+              { key_down_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
 							
 							if (key_d_uplight)
-							{
-									
-								key_d_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp));
-									
-							}
+              { key_d_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
 							
 							if (key_a_uplight)
-							{
-									
-								key_a_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp));
-									
-							}
+              { key_a_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
 							
 							if (key_w_uplight)
-							{
-									
-								key_w_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp));
-									
-							}
+              { key_w_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
 
 							if (key_r_uplight)
-							{
-									
-								key_r_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp));
-									
-							}
-							
-							// std::cout << actions << " : " << uplight_transp << "\n";
-							
+              { key_r_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
+
 						}
 						else
-						{
-							
+            {
 							key_up_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
 							key_right_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
 							key_down_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
 							key_left_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
 									
 							key_d_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-							key_a_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-									
+              key_a_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
 							key_w_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-
-							key_r_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-							
+              key_r_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
 						}
 						
 						key_esc_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
 							
 						if (up_movement)
-						{
-							
-							window.draw(key_up_sprite);						
-							
-						}
+            { window.draw(key_up_sprite); }
 						
 						if (right_movement)
-						{
-							
-							window.draw(key_right_sprite);
-							
-						}
+            { window.draw(key_right_sprite); }
 						
 						if (down_movement)
-						{
-												
-							window.draw(key_down_sprite);
-							
-						}	
+            { window.draw(key_down_sprite); }
 							
 						if (left_movement)
-						{
-												
-							window.draw(key_left_sprite);
-							
-						}
+            { window.draw(key_left_sprite); }
 						
 						if (turning)
-						{
-						
+            {
 							window.draw(key_d_sprite);
 							window.draw(key_right_turn_sprite);
 							
 							window.draw(key_a_sprite);
-							window.draw(key_left_turn_sprite);
-						
+              window.draw(key_left_turn_sprite);
 						}
 						
 						if (exchange)
-						{
-						
+            {
 							window.draw(key_w_sprite);
-							window.draw(exchange_sprite);
-							
+              window.draw(exchange_sprite);
 						}							
 
 						window.draw(key_r_sprite);
-						window.draw(reset_sprite);
+            window.draw(reset_sprite);
+            window.draw(key_esc_sprite);
 						
-						window.draw(key_esc_sprite);
-						
-												
-						
-						crunchy_number = level;
-					
+            crunchy_number = level;
 						crunched = 0;
 						
 						while (abs(crunchy_number) > 0)
-						{
-						
-							window.draw(number_sprite[abs(crunchy_number) % 10][crunched]);
-							
-							crunchy_number = crunchy_number/10;
-							
-							crunched++;
-							
+            {
+							window.draw(number_sprite[abs(crunchy_number) % 10][crunched]);							
+              crunchy_number = crunchy_number/10;
+              ++crunched;
 						}
 						
 						window.draw(level_sprite[crunched]);
-						
-						
+												
 						for (int b_sub = 0; b_sub <= max_pow; b_sub++)
-						{
+            { dollar_sprite[b_sub].setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], blink)); }
 
-							dollar_sprite[b_sub].setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], blink));
-							
-						}
-						
-						
-						crunchy_number = dosh;
-						
+            crunchy_number = dosh;
 						crunched = 0;
 						
 						if (crunchy_number == 0)
-						{
-							
-							window.draw(dosh_sprite[crunchy_number][crunched]);
-							
-							crunched++;
-							
-						}
-						
+            {
+              window.draw(dosh_sprite[crunchy_number][crunched]);
+              ++crunched;
+            }
 						
 						while (abs(crunchy_number) > 0)
-						{
-						
-							window.draw(dosh_sprite[abs(crunchy_number) % 10][crunched]);
-							
-							crunchy_number = crunchy_number/10;
-							
-							crunched++;
-													
-						
+            {
+              window.draw(dosh_sprite[abs(crunchy_number) % 10][crunched]);
+              crunchy_number = crunchy_number/10;
+              ++crunched;
 						}
 						
 						if (dosh < 0)
-						{
-							
-							window.draw(dosh_sprite[10][crunched]);
-							
-						}
+            { window.draw(dosh_sprite[10][crunched]); }
 									
-						window.draw(dollar_sprite[crunched]);
-							
-						
-						
-						window.display();
-						
-						
-						
-						Color_Picker(level, kolours, exit_colors);
-				
+            window.draw(dollar_sprite[crunched]);
+
+            window.display();
+
+            Color_Picker(level, kolours, exit_colors);
 						Color_Picker(2, key_colour, exit_colors);
 						
 						for (int a_sub = 0; a_sub <= 2; a_sub++)
-						{
-							
-							key_colour[a_sub] = 128 + key_colour[a_sub]/2;
-							
-						}
+            { key_colour[a_sub] = 128 + key_colour[a_sub]/2; }
 
-								
-						
 						Exit_Multicolor(exit_colors);
 												
 						if (blink_on)
-						{
-							
+            {
 							if (blink < max_transp)
-							{
-								
-								blink = blink + blink_delta;
+              {
+                blink += blink_delta;
 								
 								if (blink > max_transp)
-								{
-									
-									 blink = max_transp;
-									
-								}
-								
+                { blink = max_transp; }
 							}
 							else
-							{
-								
-								blink_on = false;
-								
-							}		
-							
+              { blink_on = false; }
 						}
 						
 						if (!blink_on)
-						{
-							
+            {
 							if (blink > blink_min)
-							{
-								
-								blink = blink - blink_delta;
+              {
+                blink -= blink_delta;
 								
 								if (blink < blink_min)
-								{
-									
-									 blink = blink_min;
-									
-								}
-								
+                { blink = blink_min; }
 							}
 							else
-							{
-								
-								blink_on = true;
-								
-								blink = blink + blink_delta;
-								
-							}		
-							
+              {
+                blink_on = true;
+                blink += blink_delta;
+              }
 						}
 						
-						Background_Blinker(background_blink_on, background_blink, max_transp);
-													
+            Background_Blinker(background_blink_on, background_blink, max_transp);
 					}
 					
-					position_declare = true;
-					
-					// std::cout << " ~ " << "[" << compass_x_c << ":" << compass_y_d << "] [" << compass_x_d << ":" << compass_y_d << "]" << "\n";
-							
-				}
-				
-				// std::cout << " ~ " << "[" << compass_x_c << ":" << compass_y_d << "] [" << compass_x_d << ":" << compass_y_d << "]" << "\n";
-				
+          position_declare = true;
+        }
 				
 				if ((level == 26) && delay_flipping && (delay_flip == -2))
-				{
-					
-					// square_matrix[max_level][max_level + 1] = 2;
-					
+        {
 					if ((square_matrix[max_level][max_level] == 4) &&
 						(square_matrix[max_level + 1][max_level] == 10) &&
 						(square_matrix[max_level - 1][max_level] == 10) &&
 						(square_matrix[max_level][max_level + 1] == 10) &&
 						(square_matrix[max_level][max_level - 1] == 10))
-					{
-						
+          {
 						square_matrix[max_level][max_level] = 2;
 						
 						square_matrix[max_level + 1][max_level] = 8;
@@ -4082,22 +3885,13 @@ int main()
 						square_matrix[max_level][max_level + 1] = 8;
 						square_matrix[max_level][max_level - 1] = 8;
 						
-						delay_flip = 0;
-						
-						delay_flipping = false;
-						
-					}
-					
-				}
-				
+            delay_flip = 0;
+            delay_flipping = false;
+          }
+        }
 				
 				if (((level == 27) || (level == 28)) && delay_flipping && (delay_flip == -2))
-				{
-					
-					// square_matrix[max_level][max_level + 1] = 2;
-					
-					
-						
+        {
 					if (((square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] == 5) ||
 						(square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] == 6) ||
 						(square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] == 7) ||
@@ -4106,184 +3900,98 @@ int main()
 						(square_matrix[max_level + coord_a_sub - 1][max_level + coord_b_sub] == 10) &&
 						(square_matrix[max_level + coord_a_sub][max_level + coord_b_sub + 1] == 10) &&
 						(square_matrix[max_level + coord_a_sub][max_level + coord_b_sub - 1] == 10))
-					{
-						
+          {
 						square_matrix[max_level + coord_a_sub + 1][max_level + coord_b_sub] = 0;
 						square_matrix[max_level + coord_a_sub - 1][max_level + coord_b_sub] = 0;
 						square_matrix[max_level + coord_a_sub][max_level + coord_b_sub + 1] = 0;
 						square_matrix[max_level + coord_a_sub][max_level + coord_b_sub - 1] = 0;
 						
-						delay_flip = 0;
-						
-						delay_flipping = false;
-						
-						
+            delay_flip = 0;
+            delay_flipping = false;
 						
 						if (square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] == 8)
-						{
-							
-							square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] = 10;
-							
-						}
-						
+            { square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] = 10; }
 						
 						if (square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] == 7)
-						{
-							
-							square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] = 8;
-							
-						}
-						
+            { square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] = 8; }
 						
 						if (square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] == 6)
-						{
-							
-							square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] = 7;
-							
-						}
-						
-						
-						
-						
+            { square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] = 7; }
+
 						if (square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] == 5)
-						{
-							
-							square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] = 6;
-							
-						}
-						
-						
-						/// meganisuto
+            { square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] = 6; }
 						
 						Fiborand(fib_val, max_val, fractal);
 						
 						if (fib_val[0] < 0.25*max_val)
-						{
-							
-							
-							square_matrix[max_level + coord_a_sub + 3][max_level + coord_b_sub] = 8;
-							
-							
-						}
+            { square_matrix[max_level + coord_a_sub + 3][max_level + coord_b_sub] = 8; }
 						
 						if ((fib_val[0] >= 0.25*max_val) &&
 							(fib_val[0] < 0.5*max_val))
-						{
-							
-							
-							square_matrix[max_level + coord_a_sub][max_level + coord_b_sub + 3] = 8;
-							
-							
-						}
+            { square_matrix[max_level + coord_a_sub][max_level + coord_b_sub + 3] = 8; }
 						
 						if ((fib_val[0] >= 0.5*max_val) &&
 							(fib_val[0] < 0.75*max_val))
-						{
-							
-							
-							square_matrix[max_level + coord_a_sub - 3][max_level + coord_b_sub] = 8;
-							
-							
-						}
+            { square_matrix[max_level + coord_a_sub - 3][max_level + coord_b_sub] = 8; }
 						
 						if (fib_val[0] >= 0.75*max_val)
-						{
-							
-							
-							square_matrix[max_level + coord_a_sub][max_level + coord_b_sub - 3] = 8;
-							
-							
-						}
-						
-					}
-					
+            { square_matrix[max_level + coord_a_sub][max_level + coord_b_sub - 3] = 8; }
+          }
 				}
-		
-				
-				
-				
-				view_glitch = false;
-				
+
+        view_glitch = false;
 				level_recet = false;
 				
 				if (level_reset)
-				{
-						
-					level--;
-					
-					level_recet = true;
-					
-					level_change = true;
-					
-					glitch_excempt = true;
-						
+        {
+          --level;
+          level_recet = true;
+          level_change = true;
+          glitch_excempt = true;
 				}
 				
 				level_reset = false;
 				
 				if (level_back)
-				{
-					
-					level--;
-					level--;
-					
-					level_change = true;
-					
-					glitch_excempt = true;			
-					
+        {
+          --level;
+          --level;
+          level_change = true;
+          glitch_excempt = true;
 				}
 				
 				level_back = false;
 				
 				if (two_turn_uplight && !one_turn_uplight)
-				{
-					
-					two_turn_uplight = false;
-					
-				}
+        { two_turn_uplight = false; }
 				
 				one_turn_uplight = false;
 				
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) ||
 					(mouse_pressed && (mouse_pos_x > 350) && (mouse_pos_x < 400) &&
 					(mouse_pos_y > 525) && (mouse_pos_y < 575)))
-				{
-						
-					// level--;
-					
-					// level_change = true;
-					
+        {
 					level_reset = true;
 					
-					one_turn_uplight = true;
-					
-					two_turn_uplight = true;
-					
+          one_turn_uplight = true;
+          two_turn_uplight = true;
 					key_r_uplight = true;
 					
 					uplight_transp = -6;
 					
 					if (mouse_pressed)
-					{
-					
-						sf::Mouse::setPosition(sf::Vector2i(375, 500), window);
-						
-					}
-						
-				}	
-				
+          { sf::Mouse::setPosition(sf::Vector2i(375, 500), window); }
+        }
 				
 				if (!two_turn_uplight)
-				{
-				
+        {
 					key_up_uplight = false;
 					key_right_uplight= false;
 					key_down_uplight = false;
 					key_left_uplight = false;
 			
 					key_d_uplight = false;
-					key_a_uplight = false;
-					
+          key_a_uplight = false;
 					key_w_uplight = false;
 					key_r_uplight = false;			
 				}
@@ -4294,10 +4002,8 @@ int main()
 				key_left_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
 						
 				key_d_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-				key_a_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-						
+        key_a_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
 				key_w_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-
 				key_r_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
 						
 				key_esc_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
@@ -4307,25 +4013,19 @@ int main()
 				turn_right = false;
 				turn_left = false;
 				
-				action = false;
-				
+        action = false;
 				exhale = false;
 
-				mouse_pressed = false;
-				
-				timecop = false;
-						
+        mouse_pressed = false;
+        timecop = false;
 				
 				toransupu = max_transp;
 				paruto = 1;
 				
 				if (!inhale)
-				{
-				
-					sukuwarii.setSize(sf::Vector2f(2*squarrel, 2*squarrel));
-				
-					bitomasuku_supuraito.setScale(sf::Vector2f(1, 1));
-					
+        {
+          sukuwarii.setSize(sf::Vector2f(2*squarrel, 2*squarrel));
+          bitomasuku_supuraito.setScale(sf::Vector2f(1, 1));
 				}
 				
 				exit_filler.setScale(1, 1);
@@ -4334,33 +4034,23 @@ int main()
 				pitmask_sprite.setScale(1, 1);
 				pitmask_sprite.setRotation(0);
 				
-				std::this_thread::sleep_for(delay);
-				
-				
+        std::this_thread::sleep_for(delay);
 				
 				position_declare = false;
 				
-				dosh = dosh + dosh_increase;
-				
-				dosh_increase = 0;
-				
+        dosh = dosh + dosh_increase;
+        dosh_increase = 0;
 			}
 						
-			level_pass++;
+      ++level_pass;
 			
 			if ((level >= level_max) && level_change)
-			{
-				
-				level = 0;
-				
-			}
-			
+      { level = 0; }
 		}
 		
-		window.close();
-					
-		return(0);
-		
-	}
-	
-}  
+    window.close();
+
+    return(0);
+    }
+  }
+}
