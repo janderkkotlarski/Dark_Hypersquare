@@ -29,17 +29,16 @@ int main()
 	
   const int delaz{ 10 };
 
-  const std::chrono::milliseconds delay(delaz);
+  const std::chrono::milliseconds delay{ delaz };
 
   int delay_flip{ 0 }, coord_a_sub, coord_b_sub;
 
   bool delay_flipping{ false };
 		
-  int crunchy_number{ 0 }, crunched{ 0 }, max_pow{ 20 };
+  int crunchy_number{ 0 }, crunched{ 0 };
+  const int max_pow{ 20 };
 	
   int dosh{ 0 }, dosh_increase{ 0 };
-
-
 	
   bool start_screen{ true }, testing{ false };
   bool level_change{ false }, level_back{ false }, level_reset{ false }, level_recet{ false };
@@ -51,6 +50,8 @@ int main()
   bool action{ false }, dark_setback{ false }, dark_flicker{ false };
 	
   bool timecop{ false };
+
+  bool position_declare { false };
 	
   bool inhale{ false }, exhale{ false };
   bool turning{ false }, exchange{ false };
@@ -74,47 +75,47 @@ int main()
 	
   int colours[3], karasu[3], kolours[3], toransupu = max_transp;
 	
-  int color_black[]{0, 0, 0}, key_colour[]{0, 0, 0};
+  int color_black[]{ 0, 0, 0 }, key_colour[]{ 0, 0, 0 };
 	
   const sf::Color black{ 0, 0, 0, 255 };
 
-  const sf::Color white(255, 255, 255, 255);
+  const sf::Color white{ 255, 255, 255, 255 };
 
 	int uplight_transp;
 	
-	int pacman = 0;
-	
-  float dark_transp = 0.0f;
+  int pacman{ 0 };
 
-  const float dark_mult = 3.0f;
+  float dark_transp{ 0.0f };
+
+  const float dark_mult{ 3.0f };
 	
-	int exit_colors[3] = {full_intensity, 0, 0};
+  int exit_colors[3]{ full_intensity, 0, 0 };
 
   sf::Color exit_colours{full_intensity, 0, 0};
 	
-	int dir_up[2] = {0, -1}, dir_down[2] = {0, 1}, dir_right[2] = {1, 0}, dir_left[2] = {-1, 0};
+  int dir_up[2]{ 0, -1 }, dir_down[2]{ 0, 1 }, dir_right[2]{ 1, 0 }, dir_left[2]{ -1, 0 };
 	
-	int dir_move[2] = {0, 0}, dir_direct[2] = {0, 0};
+  int dir_move[2]{ 0, 0 }, dir_direct[2]{ 0, 0 };
 	
-  float dir_mult = 2.5f, final_move[2] = {0.0f, 0.0f}, cumu_move[2] = {0.0f, 0.0f};
+  float dir_mult{ 2.5f }, final_move[2]{ 0.0f, 0.0f }, cumu_move[2]{ 0.0f, 0.0f };
 	
-	int rot_right = -1, rot_left = 1;
+  int rot_right{ -1 }, rot_left{ 1 };
 	
-  float rot_mult = 4.5f, paruto = 1.0f, scale_mult = 1.17f, scale_rot = 18.0f;
+  float rot_mult{ 4.5f }, paruto{ 1.0f }, scale_mult{ 1.17f }, scale_rot{ 18.0f };
 	
-  float final_rot = 0.0f, pos_x = 0.0f, pos_y = 0.0f;
+  float final_rot{ 0.0f }, pos_x{ 0.0f }, pos_y{ 0.0f };
 	
-  float scan_pos_x = 0.0f, scan_pos_y = -squarep;
+  float scan_pos_x{ 0.0f }, scan_pos_y{ -squarep };
 	
-  int local_x = 0, local_y = -1, pot_x = 0, pot_y = 0;
+  int local_x{ 0 }, local_y{ -1 }, pot_x{ 0 }, pot_y{ 0 };
 
   int fib_val[3];
 
-  const int max_val = 1000000000, fractal = (max_val - 2);
+  const int max_val{ 1000000000 }, fractal{ max_val - 2 };
 	
-	int blink = max_transp, background_blink = 0, blink_min = 32, blink_delta = 4;
+  int blink{ max_transp }, background_blink{ 0 }, blink_min{ 32 }, blink_delta{ 4 };
 	
-  bool blink_on = true, background_blink_on{ false }, position_declare = true;
+  bool blink_on{ true }, background_blink_on{ false }, position_declar{ true };
 	
 	sf::Vector2i mouse_position;
 	
@@ -122,20 +123,19 @@ int main()
 	
   int mouse_pressed{ false };
 	
-	double red_candy_frac = 0.50, yellow_candy_frac = 0.10, green_candy_frac = 0.02, blue_candy_frac = 0.005;
+  float red_candy_frac{ 0.5f }, yellow_candy_frac{ 0.1f }, green_candy_frac{ 0.02f }, blue_candy_frac{ 0.005f };
 	
-	double wall_frac = 0.40, dark_frac = 0.1, exit_frac = 0.03;
+  float wall_frac = 0.40, dark_frac = 0.1, exit_frac = 0.03;
 	
-	double candy_frac = red_candy_frac + yellow_candy_frac + green_candy_frac + blue_candy_frac;
+  double candy_frac{ red_candy_frac + yellow_candy_frac + green_candy_frac + blue_candy_frac };
 	
   bool wall_exist{ false }, pillars_exist{ false }, dark_exist{ false }, exit_exist{ false };
 	
   bool wall_concrete{ false }, half_gone{ false }, zero_wall{ false };
 	
-	int clear_radius = 4;
+  int clear_radius{ 4 };
 	
 	Fiboinit(fib_val, max_val, fractal);
-
 
 
   const std::string start_screen_file{ "Start_Screen_a.png" };
@@ -159,18 +159,15 @@ int main()
 	
   const std::string bitmask_key_d_file{ "Key_D_Icon.png" };
   const std::string bitmask_key_right_turn_file{ "Key_Turn_Right_Icon.png" };
-	
   const std::string bitmask_key_a_file{ "Key_A_Icon.png" };
   const std::string bitmask_key_left_turn_file{ "Key_Turn_Left_Icon.png" };
 	
   const std::string bitmask_key_w_file{ "Key_W_Icon.png" };
   const std::string bitmask_exchange_file{ "Exchange_Icon.png" };
-		
   const std::string bitmask_key_r_file{ "Key_R_Icon.png" };
   const std::string bitmask_reset_file{ "Reset_Icon.png" };
 	
   const std::string bitmask_key_esc_file{ "Key_Esc_Icon.png" };
-	
   const std::string bitmask_key_s_file{ "Key_S_Icon.png" };
 	
   const std::string bitmask_level_file{ "L3V3L_Icon.png" };
@@ -192,18 +189,18 @@ int main()
   const sf::Vector2f half_windows{ 0.5f*window_x, 0.5f*window_y };
 
   const sf::Vector2f full_square{ squarep, squarep};
-  const sf::Vector2f right_square{ squarep, 0.0f };
-  const sf::Vector2f down_square{ 0.0f, squarep };
+  const sf::Vector2f left_square{ squarep, 0.0f };
+  const sf::Vector2f up_square{ 0.0f, squarep };
   const sf::Vector2f no_square{ 0.0f, 0.0f };
+
 
 	sf::Texture start_screen_tex;
   load_texture(start_screen_tex, start_screen_file);
 	
 	sf::Sprite start_screen_sprite;
   init_sprite(start_screen_sprite, start_screen_tex,
-              half_windows, -down_square,
+              half_windows, -up_square,
               white);
-
 
 	
 	sf::Texture start_shadow_tex;	
@@ -211,9 +208,8 @@ int main()
 	
 	sf::Sprite start_shadow_sprite;
   init_sprite(start_shadow_sprite, start_shadow_tex,
-              half_windows, -down_square,
+              half_windows, -up_square,
               black);
-
 
 
 	sf::Texture scanner_tex;
@@ -221,14 +217,11 @@ int main()
 	
 	sf::Sprite scanner_sprite;
   init_sprite(scanner_sprite, scanner_tex,
-              half_windows, -down_square,
+              half_windows, -up_square,
               white);
-
-
 
 	sf::VertexArray squanner(sf::Quads, 4);
   init_vertex_array(squanner, window_x, window_y, white);
-
 
 
 	sf::Texture compass_back_tex;  
@@ -236,8 +229,7 @@ int main()
 			
 	sf::Sprite compass_back_sprite;
   init_sprite(compass_back_sprite, compass_back_tex,
-              half_sprite_dims(compass_back_sprite), -down_square);
-	
+              half_sprite_dims(compass_back_sprite), -up_square);
 
 
 	sf::Texture compass_tex;	
@@ -245,8 +237,7 @@ int main()
 	
 	sf::Sprite compass_sprite;  
   init_sprite(compass_sprite, compass_tex,
-              half_sprite_dims(compass_sprite), -down_square);
-
+              half_sprite_dims(compass_sprite), -up_square);
 
 
 	sf::Texture arrow_tex;	
@@ -254,8 +245,7 @@ int main()
 	
 	sf::Sprite arrow_sprite;
   init_sprite(arrow_sprite, arrow_tex,
-              half_sprite_dims(arrow_sprite), -down_square);
-
+              half_sprite_dims(arrow_sprite), -up_square);
 
 
 	sf::Texture bitmask_tex;
@@ -274,7 +264,6 @@ int main()
               0.5f*full_square, no_square);
 
 
-
 	sf::Texture bitsquare_tex;
   load_texture(bitsquare_tex, bitsquare_file);
 
@@ -282,12 +271,14 @@ int main()
   init_sprite(bitsquare_sprite, bitsquare_tex,
               0.5f*full_square, no_square);
 
+
   sf::Texture bitshadow_tex;
   load_texture(bitshadow_tex, bitshadow_file);
 
   sf::Sprite bitshadow_sprite;
   init_sprite(bitshadow_sprite, bitshadow_tex,
               0.5f*full_square, no_square);
+
 	
   sf::Texture bitshine_tex;
   load_texture(bitshine_tex, bitshine_file);
@@ -296,252 +287,161 @@ int main()
   init_sprite(bitshine_sprite, bitshine_tex,
               0.5f*full_square, no_square);
 
+
 	sf::Texture bitmask_key_up;
   load_texture(bitmask_key_up, bitmask_key_up_file);
 
 	sf::Sprite key_up_sprite;
   init_sprite(key_up_sprite, bitmask_key_up,
-              -3.5f*right_square + -3.5f*down_square, -down_square);
+              -3.5f*left_square + -3.5f*up_square, -up_square);
+
 	
 	sf::Texture bitmask_key_right;
   load_texture(bitmask_key_right, bitmask_key_right_file);
 
   sf::Sprite key_right_sprite;
   init_sprite(key_right_sprite, bitmask_key_right,
-              -4.5f*right_square + -4.5f*down_square, -down_square);
+              -4.5f*left_square + -4.5f*up_square, -up_square);
+
 
 	sf::Texture bitmask_key_down;
   load_texture(bitmask_key_down, bitmask_key_down_file);
 
 	sf::Sprite key_down_sprite;
   init_sprite(key_down_sprite, bitmask_key_down,
-              -3.5f*right_square + -4.5f*down_square, -down_square);
+              -3.5f*left_square + -4.5f*up_square, -up_square);
+
 
 	sf::Texture bitmask_key_left;
   load_texture(bitmask_key_left, bitmask_key_left_file);
 
 	sf::Sprite key_left_sprite;
   init_sprite(key_left_sprite, bitmask_key_left,
-              -2.5f*right_square + -4.5f*down_square, -down_square);
+              -2.5f*left_square + -4.5f*up_square, -up_square);
+
 	
 	sf::Texture bitmask_key_d;
   load_texture(bitmask_key_d, bitmask_key_d_file);
 
 	sf::Sprite key_d_sprite;
   init_sprite(key_d_sprite, bitmask_key_d,
-              4.5f*right_square + -4.5f*down_square, -down_square);
+              4.5f*left_square + -4.5f*up_square, -up_square);
+
 
 	sf::Texture bitmask_key_right_turn;
   load_texture(bitmask_key_right_turn, bitmask_key_right_turn_file);
 
 	sf::Sprite key_right_turn_sprite;
   init_sprite(key_right_turn_sprite, bitmask_key_right_turn,
-              4.5f*right_square + -3.5f*down_square, -down_square);
+              4.5f*left_square + -3.5f*up_square, -up_square);
 
 	
 	sf::Texture bitmask_key_a;
-	
-	if (!bitmask_key_a.loadFromFile(bitmask_key_a_file))
-	{
-			
-		std::cout << bitmask_key_a_file << " not found!\n";
-			
-	}
-	
+  load_texture(bitmask_key_a, bitmask_key_a_file);
+
 	sf::Sprite key_a_sprite;
-	key_a_sprite.setTexture(bitmask_key_a);
-	
-	key_a_sprite.setOrigin(sf::Vector2f(5.5*squarep, -4.5*squarep));
-	
-	key_a_sprite.setPosition(sf::Vector2f(0, -squarep));
-	
-	
+  init_sprite(key_a_sprite, bitmask_key_a,
+              5.5f*left_square + -4.5f*up_square, -up_square);
+
 	
 	sf::Texture bitmask_key_left_turn;
-	
-	if (!bitmask_key_left_turn.loadFromFile(bitmask_key_left_turn_file))
-	{
-			
-		std::cout << bitmask_key_left_turn_file << " not found!\n";
-			
-	}
+  load_texture(bitmask_key_left_turn, bitmask_key_left_turn_file);
 	
 	sf::Sprite key_left_turn_sprite;
-	key_left_turn_sprite.setTexture(bitmask_key_left_turn);
-	
-	key_left_turn_sprite.setOrigin(sf::Vector2f(5.5*squarep, -3.5*squarep));
-	
-	key_left_turn_sprite.setPosition(sf::Vector2f(0, -squarep));
+  init_sprite(key_left_turn_sprite, bitmask_key_left_turn,
+              5.5f*left_square + -3.5f*up_square, -up_square);
 
-	
-	
+
 	sf::Texture bitmask_key_w;
-	
-	if (!bitmask_key_w.loadFromFile(bitmask_key_w_file))
-	{
-			
-		std::cout << bitmask_key_w_file << " not found!\n";
-			
-	}
-	
+  load_texture(bitmask_key_w, bitmask_key_w_file);
+
 	sf::Sprite key_w_sprite;
-	key_w_sprite.setTexture(bitmask_key_w);
-	
-	key_w_sprite.setOrigin(sf::Vector2f(3*squarep, -4.5*squarep));
-	
-	key_w_sprite.setPosition(sf::Vector2f(0, -squarep));
-	
-	
-	
+  init_sprite(key_w_sprite, bitmask_key_w,
+              3.0f*left_square + -4.5f*up_square, -up_square);
+
+
 	sf::Texture bitmask_exchange;
-	
-	if (!bitmask_exchange.loadFromFile(bitmask_exchange_file))
-	{
-			
-		std::cout << bitmask_exchange_file << " not found!\n";
-			
-	}
-	
+  load_texture(bitmask_exchange, bitmask_exchange_file);
+
 	sf::Sprite exchange_sprite;
-	exchange_sprite.setTexture(bitmask_exchange);
-	
-	exchange_sprite.setOrigin(sf::Vector2f(3*squarep, -3.5*squarep));
-	
-	exchange_sprite.setPosition(sf::Vector2f(0, -squarep));
+  init_sprite(exchange_sprite, bitmask_exchange,
+              3.0f*left_square + -3.5f*up_square, -up_square);
+
 
 	sf::Texture bitmask_key_r;
-	
-	if (!bitmask_key_r.loadFromFile(bitmask_key_r_file))
-	{
-			
-		std::cout << bitmask_key_r_file << " not found!\n";
-			
-	}
-	
+  load_texture(bitmask_key_r, bitmask_key_r_file);
+
 	sf::Sprite key_r_sprite;
-	key_r_sprite.setTexture(bitmask_key_r);
-	
-	key_r_sprite.setOrigin(sf::Vector2f(-1*squarep, -4.5*squarep));
-	
-	key_r_sprite.setPosition(sf::Vector2f(0, -squarep));
-	
-	
+  init_sprite(key_r_sprite, bitmask_key_r,
+              -1.0f*left_square + -4.5f*up_square, -up_square);
+
 	
 	sf::Texture bitmask_reset;
-	
-	if (!bitmask_reset.loadFromFile(bitmask_reset_file))
-	{
-			
-		std::cout << bitmask_reset_file << " not found!\n";
-			
-	}
+  load_texture(bitmask_reset, bitmask_reset_file);
 	
 	sf::Sprite reset_sprite;
-	reset_sprite.setTexture(bitmask_reset);
-	
-	reset_sprite.setOrigin(sf::Vector2f(-1*squarep, -3.5*squarep));
-	
-	reset_sprite.setPosition(sf::Vector2f(0, -squarep));
-	
-	
+  init_sprite(reset_sprite, bitmask_reset,
+              -1.0f*left_square + -3.5f*up_square, -up_square);
+
 	
 	sf::Texture bitmask_key_esc;
-	
-	if (!bitmask_key_esc.loadFromFile(bitmask_key_esc_file))
-	{
-			
-		std::cout << bitmask_key_esc_file << " not found!\n";
-			
-	}
-	
+  load_texture(bitmask_key_esc, bitmask_key_esc_file);
+
 	sf::Sprite key_esc_sprite;
-	key_esc_sprite.setTexture(bitmask_key_esc);
+  init_sprite(key_esc_sprite, bitmask_key_esc,
+              5.5f*left_square + 5.5f*up_square, -up_square);
 	
-	key_esc_sprite.setOrigin(sf::Vector2f(5.5*squarep, 5.5*squarep));
-	
-	key_esc_sprite.setPosition(sf::Vector2f(0, -squarep));
-	
-	
-	
-	
-	
+
 	sf::Texture bitmask_key_s;
-	
-	if (!bitmask_key_s.loadFromFile(bitmask_key_s_file))
-	{
-			
-		std::cout << bitmask_key_s_file << " not found!\n";
-			
-	}
+  load_texture(bitmask_key_s, bitmask_key_s_file);
 	
 	sf::Sprite key_s_sprite;
-	key_s_sprite.setTexture(bitmask_key_s);
-	
-	key_s_sprite.setOrigin(sf::Vector2f(0.5*squarep, -3.5*squarep));
-	
-	key_s_sprite.setPosition(sf::Vector2f(0, -squarep));
-	
-	
-	
-	
+  init_sprite(key_s_sprite, bitmask_key_s,
+              0.5f*left_square + -3.5f*up_square, -up_square);
+
 	sf::Texture bitmask_level;	
+  load_texture(bitmask_level, bitmask_level_file);
 	
-	if (!bitmask_level.loadFromFile(bitmask_level_file))
+  std::vector <sf::Sprite> level_sprite;
+	
+  for (unsigned int i = 0; i <= max_pow; ++i)
 	{
-			
-		std::cout << bitmask_level_file << " not found!\n";
-			
-	}
-	
-	sf::Sprite level_sprite[max_pow + 1];
-	
-	for (int b_sub = 0; b_sub <= max_pow; b_sub++)
-	{
-	
-		level_sprite[b_sub].setTexture(bitmask_level);
-		
-		level_sprite[b_sub].setOrigin(sf::Vector2f(-4.5*squarep + (b_sub + 1)*18, 5.5*squarep));
-		
-		level_sprite[b_sub].setPosition(sf::Vector2f(0, -squarep));
-		
-	}
-	
-	
-	
-	
-	sf::Texture bitmask_number[number_max];
-	
-	for (int a_sub = 0; a_sub < number_max; a_sub++)
-	{
-	
-		if (!bitmask_number[a_sub].loadFromFile(bitmask_number_file[a_sub]))
-		{
-				
-			std::cout << bitmask_number_file[a_sub] << " not found!\n";
-				
-		}
+    sf::Sprite sprite;
+    level_sprite.push_back(sprite);
 
-	}
-	
-	sf::Sprite number_sprite[number_max][max_pow + 1];
-	
-	for (int a_sub = 0; a_sub < number_max; a_sub++)
-	{
-		
-		for (int b_sub = 0; b_sub <= max_pow; b_sub++)
-		{
+    init_sprite(level_sprite[i], bitmask_level,
+                -4.5f*left_square + 5.5f*up_square + sf::Vector2f((i + 1.0f)*18.0f,0.0f), -up_square);
+  }
 
-		
-			number_sprite[a_sub][b_sub].setTexture(bitmask_number[a_sub]);
-		
-			number_sprite[a_sub][b_sub].setOrigin(sf::Vector2f(-4.5*squarep + (b_sub - 2)*18, 5.5*squarep + 1));
-		
-			number_sprite[a_sub][b_sub].setPosition(sf::Vector2f(0, -squarep));
-			
-		}
+  std::vector <sf::Texture> bitmask_number;
 	
+  for (int i = 0; i < number_max; ++i)
+	{
+    sf::Texture bitmask;
+
+    bitmask_number.push_back(bitmask);
+    load_texture(bitmask_number[i], bitmask_number_file[i]);
 	}
 	
+  std::vector <std::vector <sf::Sprite>> number_sprite;
+	
+  for (int i = 0; i < number_max; ++i)
+  {
+    sf::Sprite sprite;
+
+    std::vector <sf::Sprite> sprites;
+
+    for (int j = 0; j <= max_pow; ++j)
+    { sprites.push_back(sprite); }
+
+    for (int j = 0; j <= max_pow; ++j)
+		{
+      number_sprite.push_back(sprites);
+
+      init_sprite(number_sprite[i][j], bitmask_number[i],
+                  -4.5f*left_square + 5.5f*up_square + sf::Vector2f((j - 2.0f)*18.0f, 0.0f), -up_square);
+    }
+  }
 	
 	sf::Texture bitmask_dollar;	
 	
@@ -649,7 +549,7 @@ int main()
   sf::RenderWindow window(sf::VideoMode(static_cast<unsigned int>(window_x), static_cast<unsigned int>(window_y)),
                           version, sf::Style::Default);
 	
-  sf::View view(-down_square, full_windows);
+  sf::View view(-up_square, full_windows);
 	
 	view.setViewport(sf::FloatRect(0, 0, 1, 1));
 	
