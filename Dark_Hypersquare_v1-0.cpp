@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 #include <cmath>
 #include <chrono>
 #include <thread>
@@ -21,18 +22,13 @@
 
 #include "dhs_functions.h"
 
-
 /// g++ -std=c++11 -o "%e" "%f" -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
-
-
-
-
 
 int main()
 {  
   std::string amazad_var = "Dark Hypersquare V1.0";
 	
-	int max_level = 100, max_side = 2*max_level + 1, square_matrix[201][201];
+  int max_level = 100, square_matrix[201][201];
 	
 	int size_level = 20, level_side, level_pass = 0, max_view = 6;
 	
@@ -50,15 +46,15 @@ int main()
 	
 	bool level_change = false, level_back = false, level_reset = false, level_recet = false;
 	
-	bool level_begin = false, pause = false, view_glitch = false, glitch_excempt = false;
+  bool view_glitch = false, glitch_excempt = false;
 	
 	bool up_movement = false, down_movement = false, right_movement = false, left_movement = false;
 	
-	bool moving = false, turn_right = false, turn_left = false, roturning = false;
+  bool moving = false, turn_right = false, turn_left = false;
 	
 	bool action = false, dark_setback = false, dark_flicker = false;
 	
-	bool dark_backed = false, first_dark_back = false, timecop = false;
+  bool timecop = false;
 	
 	bool inhale = false, exhale = false, building = false;
 	
@@ -77,17 +73,19 @@ int main()
 	int absorbed = 0, assimilated = 0, nullvoid = 0;
 	
 	int transitions = 20;
-	
-	double pi = 2*acos(0), theta = 0, delta_theta = pi/(2*transitions);
-	
+
 	int squarep = 50, window_x = 12*squarep, window_y = 12*squarep, squarrel = 20;
 	
-	int half_wind = 6*squarep, max_transp = 255, square_transp, bat_transp, full_intensity = 255;
+  const int half_wind = 6*squarep, max_transp = 255, full_intensity = 255;
+
+  int bat_transp;
 	
-	int colours[3], karasu[3], kolours[3], transp, toransupu = max_transp, intro_transp = max_transp;
+  int colours[3], karasu[3], kolours[3], toransupu = max_transp;
 	
-	int color_black[3] = {0, 0, 0}, color_white[3] = {full_intensity, full_intensity, full_intensity}, key_colour[3], background_colour[3], shadow_colours[3];
+  int color_black[]{0, 0, 0}, key_colour[]{0, 0, 0};
 	
+  const sf::Color black(0, 0, 0, 255);
+
 	int uplight_transp;
 	
 	int pacman = 0;
@@ -95,6 +93,8 @@ int main()
 	double dark_transp = 0, dark_mult = 3;
 	
 	int exit_colors[3] = {full_intensity, 0, 0};
+
+  sf::Color exit_colours{full_intensity, 0, 0};
 	
 	int dir_up[2] = {0, -1}, dir_down[2] = {0, 1}, dir_right[2] = {1, 0}, dir_left[2] = {-1, 0};
 	
@@ -104,18 +104,14 @@ int main()
 	
 	int rot_right = -1, rot_left = 1;
 	
-	double rot_mult = 4.5, final_rot = 0, paruto = 1, paruto_sub = 0.05, scale = 1, scale_mult = 1.17, scale_rot = 18;
+  double rot_mult = 4.5, final_rot = 0, paruto = 1, scale_mult = 1.17, scale_rot = 18;
 	
-	int turn_right_matrix[2][2] = {0, -1, 1, 0}, turn_left_matrix[2][2] = {0, 1, -1, 0};
+  double pos_x = 0, pos_y = 0;
 	
-	double pos_x = 0, pos_y = 0, pos_i = 0, pos_j = 0;
+  double scan_pos_x = 0, scan_pos_y = -50;
 	
-	double scan_pos_x = 0, scan_pos_y = -50, level_pot_x, level_pot_y;
-	
-	int local_x = 0, local_y = -1, pot_x = 0, pot_y = 0, qot_x = 0, qot_y = 0, radius_max_2 = 72;
-	
-	int possible_triggers = 0, actual_triggers = 0;
-	
+  int local_x = 0, local_y = -1, pot_x = 0, pot_y = 0;
+
 	int fib_val[3], max_val = 1000000000, fractal = (max_val - 2);
 	
 	int blink = max_transp, background_blink = 0, blink_min = 32, blink_delta = 4;
@@ -124,14 +120,9 @@ int main()
 	
 	sf::Vector2i mouse_position;
 	
-	int mouse_pos_x, mouse_pos_y;
+  int mouse_pos_x{ 0 }, mouse_pos_y{ 0 };
 	
 	int mouse_pressed = false;
-	
-	
-	int level_loop_counter = 0;
-	
-
 	
 	double red_candy_frac = 0.50, yellow_candy_frac = 0.10, green_candy_frac = 0.02, blue_candy_frac = 0.005;
 	
@@ -203,23 +194,19 @@ int main()
 	
 	std::string bitmask_level_file = "L3V3L_Icon.png";
 	
-	int number_max = 11;
+	int number_max = 11; 
 	
-	std::string bitmask_number_file[number_max];
+  std::vector <std::string> bitmask_number_file;
+
+  const std::string number{ "Number_" };
+  const std::string icon{ "_Icon.png" };
 	
-		
-	bitmask_number_file[0] = "Number_0_Icon.png";
-	bitmask_number_file[1] = "Number_1_Icon.png";
-	bitmask_number_file[2] = "Number_2_Icon.png";	
-	bitmask_number_file[3] = "Number_3_Icon.png";
-	bitmask_number_file[4] = "Number_4_Icon.png";
-	bitmask_number_file[5] = "Number_5_Icon.png";
-	bitmask_number_file[6] = "Number_6_Icon.png";
-	bitmask_number_file[7] = "Number_7_Icon.png";
-	bitmask_number_file[8] = "Number_8_Icon.png";
-	bitmask_number_file[9] = "Number_9_Icon.png";
-	
-	bitmask_number_file[10] = "Number_Minus_Icon.png";
+  for (int i{ 0 }; i < 10; ++i)
+  {
+    bitmask_number_file.push_back(number + std::to_string(i) + icon);
+  }
+
+  bitmask_number_file.push_back("Number_Minus_Icon.png");
 	
 	std::string bitmask_dollar_file = "Number_Dollar_Icon.png";
 	
@@ -233,46 +220,27 @@ int main()
 
   init_sprite(start_screen_sprite, start_screen_tex,
               sf::Vector2f(half_wind, half_wind), sf::Vector2f(0, -squarep),
-              sf::Color(full_intensity, full_intensity, full_intensity, max_transp));
-
-	int shadow_blink = 0;
-	
-	bool shadow_blink_up = true;
-	
+              sf::Color(1*full_intensity, 1*full_intensity, 1*full_intensity, 1*max_transp));
 	
 	sf::Texture start_shadow_tex;
 	
-	if (!start_shadow_tex.loadFromFile(start_shadow_img))
-	{
-			
-    std::cerr << start_shadow_img << " not found!\n";
-			
-	}
+  load_texture(start_shadow_tex, start_shadow_img);
 	
 	sf::Sprite start_shadow_sprite;
-	start_shadow_sprite.setTexture(start_shadow_tex);
-	
-	start_shadow_sprite.setOrigin(sf::Vector2f(half_wind, half_wind));
-	
-	start_shadow_sprite.setPosition(sf::Vector2f(0, -squarep));
-	
-	start_shadow_sprite.setColor(sf::Color(0, 0, 0, max_transp));
-	
-	
-	
-	
-	
-	
+
+  init_sprite(start_shadow_sprite, start_shadow_tex,
+              sf::Vector2f(half_wind, half_wind), sf::Vector2f(0, -squarep),
+              sf::Color(0, 0, 0, 1*max_transp));
+
 	sf::Texture scanner_tex;
-	
-	if (!scanner_tex.loadFromFile(scanner_img))
-	{
-			
-    std::cerr << scanner_img << " not found!\n";
-			
-	}
+
+  load_texture(scanner_tex, scanner_img);
 	
 	sf::Sprite scanner_sprite;
+
+  init_sprite(scanner_sprite, scanner_tex,
+              sf::Vector2f(half_wind, half_wind), sf::Vector2f(0, -squarep),
+              sf::Color(1*full_intensity, 1*full_intensity, 1*full_intensity, 1*max_transp));
 	scanner_sprite.setTexture(scanner_tex);
 	
 	scanner_sprite.setOrigin(sf::Vector2f(half_wind, half_wind));
@@ -918,7 +886,7 @@ int main()
 	
 	sf::RectangleShape infobox(sf::Vector2f(2*half_wind, half_wind - 0.5*squarep));
 	
-	Color_Picker(0, color_black, exit_colors);
+  Color_Picker(0, color_black, exit_colors);
 	
 	infobox.setOrigin(sf::Vector2f(half_wind, -0.5*squarep));
 	
@@ -993,7 +961,7 @@ int main()
 		for (int b_sub = 1; b_sub <= 255; b_sub = b_sub + 2)
 		{
 			
-			window.clear(sf::Color(color_black[0], color_black[1], color_black[2]));
+      window.clear(black);
 			
 			window.draw(start_shadow_sprite);
 			
@@ -1072,7 +1040,7 @@ int main()
     while (start_screen)
 		{
 			
-			window.clear(sf::Color(color_black[0], color_black[1], color_black[2]));
+      window.clear(black);
 			
 			window.draw(start_shadow_sprite);
 			
@@ -1153,7 +1121,7 @@ int main()
 				
 			}
 			
-			window.clear(sf::Color(color_black[0], color_black[1], color_black[2]));
+      window.clear(black);
 			
 			window.draw(start_shadow_sprite);
 			
@@ -3741,11 +3709,7 @@ int main()
 			view_glitch = true;
 			
 			position_declare = true;
-			
-			dark_backed = false;
-			
-			first_dark_back = false;
-			
+
 			mouse_pressed = false;
 			
 			
@@ -3894,7 +3858,7 @@ int main()
 				if (!view_glitch && !exhale)
 				{
 																	
-					window.clear(sf::Color(color_black[0], color_black[1], color_black[2]));
+          window.clear(black);
 					
 					// window.clear(sf::Color(255, 255, 255));
 					
@@ -3944,42 +3908,21 @@ int main()
 						
 						
 							Color_Picker(square_matrix[pot_x + max_level][pot_y + max_level], colours, exit_colors);
-							
-							if ((square_matrix[pot_x + max_level][pot_y + max_level] <= 4) ||
-								(square_matrix[pot_x + max_level][pot_y + max_level] == 10))
-							{
-								
-								square_transp = max_transp;
-								
-							}
-							else
-							{
-								
-								square_transp = blink;
-								
-							}
-							
+
 							if (square_matrix[pot_x + max_level][pot_y + max_level] == 3)
 							{
 									
 								dark_transp = exp(-sqrt(1.0*a_sub*a_sub + 1.0*b_sub*b_sub)/(dark_mult));
 									
 							}
-							
-							
-							// dark_transp = 1;
-						
-								
-							// qot_x = a_sub + local_x + c_sub*level_side;
-							
-							// qot_y = b_sub + local_y + d_sub*level_side;
+
 							
 							bitsquare_sprite.setPosition(pos_x, pos_y);
 							
 							if (square_matrix[pot_x + max_level][pot_y + max_level] == 0)
 							{	
 															
-								bitsquare_sprite.setColor(sf::Color(color_black[0], color_black[1], color_black[2], max_transp));
+                bitsquare_sprite.setColor(black);
 	
 							}
 								
@@ -5903,13 +5846,8 @@ int main()
 						
 						window.setView(view);
 						
-						window.clear(sf::Color(color_black[0], color_black[1], color_black[2]));
-											
-						// window.clear(sf::Color(255, 255, 255));
-						
-						possible_triggers = 0;
-						actual_triggers = 0;
-						
+            window.clear(black);
+
 						for (int a_sub = -max_view; a_sub <= max_view; a_sub++)
 						{
 							
@@ -5960,21 +5898,7 @@ int main()
 								
 								
 								Color_Picker(square_matrix[pot_x + max_level][pot_y + max_level], colours, exit_colors);
-							
-								if ((square_matrix[pot_x + max_level][pot_y + max_level] <= 4) ||
-									(square_matrix[pot_x + max_level][pot_y + max_level] == 10))
-								{
-									
-									square_transp = max_transp;
-									
-								}
-								else
-								{
-									
-									square_transp = blink;
-									
-								}
-								
+
 								dark_transp = dark_transp = exp(-sqrt(1.0*a_sub*a_sub + 1.0*b_sub*b_sub)/(dark_mult));
 										
 								
@@ -5985,13 +5909,7 @@ int main()
 										
 								}
 		
-								
-								// dark_transp = 1;
-							
-									
-								// qot_x = a_sub + local_x + c_sub*level_side;
-								
-								// qot_y = b_sub + local_y + d_sub*level_side;
+
 								
 								if ((a_sub == 0) && (b_sub == 0) && timecop)
 								{
@@ -6000,15 +5918,7 @@ int main()
 																			
 									bitshine_sprite.setColor(sf::Color(full_intensity, full_intensity, full_intensity, max_transp));
 									
-									window.draw(bitshine_sprite);
-									
-									
-									
-									// bitsquare_sprite.setPosition(pos_x, pos_y);
-							
-									// bitsquare_sprite.setColor(sf::Color(color_black[0], color_black[1], color_black[2], 0));
-																			
-									// window.draw(bitsquare_sprite);
+                  window.draw(bitshine_sprite);
 									
 								}
 								
@@ -6020,7 +5930,7 @@ int main()
 								if (square_matrix[pot_x + max_level][pot_y + max_level] == 0)
 								{	
 																
-									bitsquare_sprite.setColor(sf::Color(color_black[0], color_black[1], color_black[2], max_transp));
+                  bitsquare_sprite.setColor(black);
 		
 								}
 									
@@ -6130,7 +6040,7 @@ int main()
 										
 										bitsquare_sprite.setPosition(pos_x, pos_y);
 							
-										bitsquare_sprite.setColor(sf::Color(color_black[0], color_black[1], color_black[2], max_transp));
+                    bitsquare_sprite.setColor(black);
 																			
 										window.draw(bitsquare_sprite);
 										
@@ -6210,7 +6120,7 @@ int main()
 							
 							bitsquare_sprite.setPosition(scan_pos_x + dir_up[0]*squarep, scan_pos_y + dir_up[1]*squarep);
 							
-							bitsquare_sprite.setColor(sf::Color(color_black[0], color_black[1], color_black[2], max_transp));
+              bitsquare_sprite.setColor(black);
 																			
 							window.draw(bitsquare_sprite);
 							
@@ -6343,7 +6253,7 @@ int main()
 										
 							pitmask_sprite.setPosition(local_x*squarep, local_y*squarep);
 																
-							pitmask_sprite.setColor(sf::Color(color_black[0], color_black[1], color_black[2], toransupu));
+              pitmask_sprite.setColor(black);
 											
 							window.draw(pitmask_sprite);
 		
