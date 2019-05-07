@@ -18,6 +18,8 @@ void init_sprite(sf::Sprite& sprite, sf::Texture& texture,
                  const sf::Vector2f& origin, const sf::Vector2f& position,
                  const sf::Color& color);
 
+void init_vertex_array(sf::VertexArray& vertex_array, const float full_x, const float full_y, const sf::Color& color);
+
 std::vector <std::string> number_file_vector(const std::string& begin,
                                              const std::string& end,
                                              const std::string& last);

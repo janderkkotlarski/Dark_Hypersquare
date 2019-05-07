@@ -33,6 +33,26 @@ void init_sprite(sf::Sprite& sprite, sf::Texture& texture,
   sprite.setColor(color);
 }
 
+void init_vertex_array(sf::VertexArray& vertex_array, const float full_x, const float full_y, const sf::Color& color)
+{
+  vertex_array[0].position = 0.5f*sf::Vector2f(-full_x, -full_y);
+  vertex_array[0].color = color;
+
+  vertex_array[1].position = sf::Vector2f(full_x, -full_y);
+  vertex_array[1].color = color;
+
+  vertex_array[2].position = sf::Vector2f(full_x, full_y);
+  vertex_array[2].color = color;
+
+  vertex_array[3].position = sf::Vector2f(-full_x, full_y);
+  vertex_array[3].color = color;
+
+  vertex_array[0].texCoords = sf::Vector2f(0, 0);
+  vertex_array[1].texCoords = sf::Vector2f(full_x, 0);
+  vertex_array[2].texCoords = sf::Vector2f(full_x, full_y);
+  vertex_array[3].texCoords = sf::Vector2f(0, full_y);
+}
+
 std::vector <std::string> number_file_vector(const std::string& begin,
                                              const std::string& end,
                                              const std::string& last)
