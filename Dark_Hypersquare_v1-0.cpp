@@ -25,7 +25,7 @@ int main()
 
   int size_level{ 20 }, level_side, level_pass{ 0 };
 	
-  const int level_max{ 34 }, level_threshold{ 16 }, level_init{ 8 };
+  const int level_max{ 34 }, level_threshold{ 16 }, level_init{ 18 };
 	
   const int delaz{ 10 };
 
@@ -401,12 +401,13 @@ int main()
 
 	sf::Texture bitmask_level;	
   load_texture(bitmask_level, bitmask_level_file);
+
+  const sf::Sprite sprite;
 	
   std::vector <sf::Sprite> level_sprite;
 	
   for (unsigned int i = 0; i <= max_pow; ++i)
-	{
-    sf::Sprite sprite;
+  {
     level_sprite.push_back(sprite);
 
     init_sprite(level_sprite[i], bitmask_level,
@@ -417,18 +418,18 @@ int main()
 	
   for (int i = 0; i < number_max; ++i)
 	{
-    sf::Texture bitmask;
+    const sf::Texture bitmask;
 
     bitmask_number.push_back(bitmask);
     load_texture(bitmask_number[i], bitmask_number_file[i]);
 	}
 	
   std::vector <std::vector <sf::Sprite>> number_sprite;
+
+  std::vector <std::vector <sf::Sprite>> dosh_sprite;
 	
   for (int i = 0; i < number_max; ++i)
   {
-    sf::Sprite sprite;
-
     std::vector <sf::Sprite> sprites;
 
     for (int j = 0; j <= max_pow; ++j)
@@ -440,95 +441,53 @@ int main()
 
       init_sprite(number_sprite[i][j], bitmask_number[i],
                   -4.5f*left_square + 5.5f*up_square + sf::Vector2f((j - 2.0f)*18.0f, 0.0f), -up_square);
+
+      dosh_sprite.push_back(sprites);
+
+      init_sprite(number_sprite[i][j], bitmask_number[i],
+                  -4.5f*left_square + -1.5f*up_square + sf::Vector2f((j - 2.0f)*18.0f, 0.0f), -up_square);
     }
   }
 	
 	sf::Texture bitmask_dollar;	
-	
-	if (!bitmask_dollar.loadFromFile(bitmask_dollar_file))
-	{
-			
-		std::cout << bitmask_dollar_file << " not found!\n";
-			
-	}
-	
-	sf::Sprite dollar_sprite[max_pow + 1];
-	
-	for (int b_sub = 0; b_sub <= max_pow; b_sub++)
-	{
-	
-		dollar_sprite[b_sub].setTexture(bitmask_dollar);
-		
-		dollar_sprite[b_sub].setOrigin(sf::Vector2f(-4.5*squarep + (b_sub + 0)*18, -1.5*squarep));
-		
-		dollar_sprite[b_sub].setPosition(sf::Vector2f(0, -squarep));
-		
-	}
-	
-	
-	
-	sf::Sprite dosh_sprite[number_max][max_pow + 1];
-	
-	for (int a_sub = 0; a_sub < number_max; a_sub++)
-  {
-		for (int b_sub = 0; b_sub <= max_pow; b_sub++)
-    {
-      dosh_sprite[a_sub][b_sub].setTexture(bitmask_number[a_sub]);
-      dosh_sprite[a_sub][b_sub].setOrigin(sf::Vector2f(-4.5*squarep + (b_sub - 2)*18, -1.5*squarep + 1));
-      dosh_sprite[a_sub][b_sub].setPosition(sf::Vector2f(0, -squarep));
-    }
-	}
+  load_texture(bitmask_dollar, bitmask_dollar_file);
 
+  std::vector <sf::Sprite> dollar_sprite;
 	
-	sf::RectangleShape squaree(sf::Vector2f(2*squarrel, 2*squarrel));
+  for (int i = 0; i <= max_pow; ++i)
+	{
+    dollar_sprite.push_back(sprite);
+
+    init_sprite(dollar_sprite[i], bitmask_dollar,
+                -4.5f*left_square + -1.5f*up_square + sf::Vector2f((i - 0.0f)*18.0f, 0.0f), -up_square);
+  }
 	
-	Color_Picker(8, colours, exit_colors);
+	sf::RectangleShape squaree(sf::Vector2f(2*squarrel, 2*squarrel));	
+	Color_Picker(8, colours, exit_colors);	
+  squaree = Square_Draw(squaree, colours, blink, pos_x, pos_y, squarrel, squarrel);
 	
-	squaree = Square_Draw(squaree, colours, blink, pos_x, pos_y, squarrel, squarrel);
+	sf::RectangleShape sukuwarii(sf::Vector2f(2*squarrel, 2*squarrel));	
+	Color_Picker(8, karasu, exit_colors);	
+  sukuwarii = Square_Draw(sukuwarii, karasu, blink, pos_x, pos_y, squarrel, squarrel);
 	
-	
-	
-	sf::RectangleShape sukuwarii(sf::Vector2f(2*squarrel, 2*squarrel));
-	
-	Color_Picker(8, karasu, exit_colors);
-	
-	sukuwarii = Square_Draw(sukuwarii, karasu, blink, pos_x, pos_y, squarrel, squarrel);
-	
-	
-	
-	sf::RectangleShape squarei(sf::Vector2f(2*squarrel, 2*squarrel));
-	
+	sf::RectangleShape squarei(sf::Vector2f(2*squarrel, 2*squarrel));	
 	Color_Picker(0, kolours, exit_colors);
-
-	squarei = Square_Draw(squarei, kolours, max_transp, local_x*squarep, local_y*squarep - squarep, squarrel, squarrel);
-	
+  squarei = Square_Draw(squarei, kolours, max_transp, local_x*squarep, local_y*squarep - squarep, squarrel, squarrel);
 	
   sf::RectangleShape infobox(sf::Vector2f(window_x, window_y - 0.5*squarep));
-	
-  Color_Picker(0, color_black, exit_colors);
-	
+  Color_Picker(0, color_black, exit_colors);	
   infobox.setOrigin(sf::Vector2f(0.5*window_x, -0.5*squarep));
+  infobox = Square_Draw(infobox, color_black, 1*max_transp, 0, -squarep, 0, 0);
 	
-	infobox = Square_Draw(infobox, color_black, 1*max_transp, 0, -squarep, 0, 0);
+	sf::RectangleShape exit_filler(sf::Vector2f(2*squarrel, 2*squarrel));	
+	Color_Picker(0, karasu, exit_colors);	
+	exit_filler.setOrigin(squarrel, squarrel);	
+  exit_filler = Square_Draw(exit_filler, karasu, max_transp, pos_x, pos_y, 0, 0);
 	
-	
-	sf::RectangleShape exit_filler(sf::Vector2f(2*squarrel, 2*squarrel));
-	
-	Color_Picker(0, karasu, exit_colors);
-	
-	exit_filler.setOrigin(squarrel, squarrel);
-	
-	exit_filler = Square_Draw(exit_filler, karasu, max_transp, pos_x, pos_y, 0, 0);
-	
-	
-	sf::RectangleShape intro_filler(sf::Vector2f(2*squarrel, 2*squarrel));
-	
-	Color_Picker(0, karasu, exit_colors);
-	
-	intro_filler.setOrigin(squarrel, squarrel);
-	
-	intro_filler = Square_Draw(intro_filler, karasu, max_transp, pos_x, pos_y, 0, 0);
-	
+	sf::RectangleShape intro_filler(sf::Vector2f(2*squarrel, 2*squarrel));	
+	Color_Picker(0, karasu, exit_colors);	
+	intro_filler.setOrigin(squarrel, squarrel);	
+	intro_filler = Square_Draw(intro_filler, karasu, max_transp, pos_x, pos_y, 0, 0);	
   intro_filler.scale(18, 18);
 	
   Color_Picker(2, key_colour, exit_colors);
@@ -536,14 +495,11 @@ int main()
 	if (!font.loadFromFile("Carlito-Regular.ttf"))
   { // error...	}
 	
-	sf::Text text;
-		
+	sf::Text text;		
   text.setFont(font);
-	text.setCharacterSize(18);
-		
+	text.setCharacterSize(18);		
   text.setFillColor(white);
   text.setOutlineColor(white);
-
 	text.setPosition(50, 350);
 	
   sf::RenderWindow window(sf::VideoMode(static_cast<unsigned int>(window_x), static_cast<unsigned int>(window_y)),
@@ -1917,7 +1873,8 @@ int main()
 				right_movement = true;				
 				left_movement = true;				
 				down_movement = true;				
-				up_movement = true;				
+        up_movement = true;
+        exchange = true;
         turning = true;
       }
 			
