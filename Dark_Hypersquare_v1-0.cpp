@@ -5,6 +5,7 @@
 #include <chrono>
 #include <thread>
 #include <random>
+#include <cassert>
 #include <SFML/Graphics.hpp>
 
 #include "Fiboinit.h"
@@ -26,13 +27,15 @@
 
 int main()
 {  
-  std::string amazad_var = "Dark Hypersquare V1.0";
+  const std::string amazad_var = "Dark Hypersquare V1.0";
 	
-  int max_level = 100, square_matrix[201][201];
+  const int max_level = 100;
+
+  int square_matrix[201][201];
 	
 	int size_level = 20, level_side, level_pass = 0, max_view = 6;
 	
-  int level_max = 34, level_threshold = 16, level_init = 1;
+  const int level_max = 34, level_threshold = 16, level_init = 6;
 	
 	int delaz = 10, delay_flip = 0, coord_a_sub, coord_b_sub;
 	
@@ -74,9 +77,11 @@ int main()
 	
 	int transitions = 20;
 
-	int squarep = 50, window_x = 12*squarep, window_y = 12*squarep, squarrel = 20;
-	
-  const int half_wind = 6*squarep, max_transp = 255, full_intensity = 255;
+  const float squarep{ 50.0f }, window_x{ 12*squarep }, window_y{ 12*squarep }, half_wind{ 6*squarep };
+
+  int squarrel = 20;
+
+  const int max_transp = 255, full_intensity = 255;
 
   int bat_transp;
 	
@@ -85,6 +90,8 @@ int main()
   int color_black[]{0, 0, 0}, key_colour[]{0, 0, 0};
 	
   const sf::Color black(0, 0, 0, 255);
+
+  const sf::Color white(255, 255, 255, 255);
 
 	int uplight_transp;
 	
@@ -137,12 +144,7 @@ int main()
 	int clear_radius = 4;
 	
 	Fiboinit(fib_val, max_val, fractal);
-	
-	
-	
-	
-	
-	
+
 	
 	std::string start_screen_img = "Start_Screen_a.png";
 	
@@ -195,136 +197,92 @@ int main()
 	std::string bitmask_level_file = "L3V3L_Icon.png";
 	
 	int number_max = 11; 
-	
-  std::vector <std::string> bitmask_number_file;
 
-  const std::string number{ "Number_" };
-  const std::string icon{ "_Icon.png" };
-	
-  for (int i{ 0 }; i < 10; ++i)
-  {
-    bitmask_number_file.push_back(number + std::to_string(i) + icon);
-  }
+  const std::string number
+  { "Number_" };
+  const std::string icon
+  { "_Icon.png" };
+  const std::string minus_file
+  { "Number_Minus_Icon.png" };
 
-  bitmask_number_file.push_back("Number_Minus_Icon.png");
-	
-	std::string bitmask_dollar_file = "Number_Dollar_Icon.png";
-	
-	
-	
+  const std::vector <std::string> bitmask_number_file
+  { number_file_vector(number, icon, minus_file) };
+
+  const std::string bitmask_dollar_file
+  { "Number_Dollar_Icon.png" };
+
+  const sf::Vector2f half_windows
+  { half_wind, half_wind};
+
+  const sf::Vector2f square_up_offset
+  { 0.0f, -squarep };
+
 	sf::Texture start_screen_tex;
-
   load_texture(start_screen_tex, start_screen_img);
 	
 	sf::Sprite start_screen_sprite;
-
   init_sprite(start_screen_sprite, start_screen_tex,
-              sf::Vector2f(half_wind, half_wind), sf::Vector2f(0, -squarep),
-              sf::Color(1*full_intensity, 1*full_intensity, 1*full_intensity, 1*max_transp));
+              half_windows, square_up_offset,
+              white);
 	
-	sf::Texture start_shadow_tex;
-	
+	sf::Texture start_shadow_tex;	
   load_texture(start_shadow_tex, start_shadow_img);
 	
 	sf::Sprite start_shadow_sprite;
-
   init_sprite(start_shadow_sprite, start_shadow_tex,
-              sf::Vector2f(half_wind, half_wind), sf::Vector2f(0, -squarep),
-              sf::Color(0, 0, 0, 1*max_transp));
+              half_windows, square_up_offset,
+              black);
 
 	sf::Texture scanner_tex;
-
   load_texture(scanner_tex, scanner_img);
 	
 	sf::Sprite scanner_sprite;
-
   init_sprite(scanner_sprite, scanner_tex,
-              sf::Vector2f(half_wind, half_wind), sf::Vector2f(0, -squarep),
-              sf::Color(1*full_intensity, 1*full_intensity, 1*full_intensity, 1*max_transp));
-	scanner_sprite.setTexture(scanner_tex);
-	
-	scanner_sprite.setOrigin(sf::Vector2f(half_wind, half_wind));
-	
-	scanner_sprite.setPosition(sf::Vector2f(0, -squarep));
-	
-	scanner_sprite.setColor(sf::Color(full_intensity, full_intensity, full_intensity, 1*max_transp));
-
+              half_windows, square_up_offset,
+              white);
 
 	sf::VertexArray squanner(sf::Quads, 4);
 	
 	squanner[0].position = sf::Vector2f(-half_wind, -half_wind);
-	squanner[0].color = sf::Color(full_intensity, full_intensity, full_intensity, max_transp);
+  squanner[0].color = white;
 									
 	squanner[1].position = sf::Vector2f(half_wind, -half_wind);
-	squanner[1].color = sf::Color(full_intensity, full_intensity, full_intensity, max_transp);
+  squanner[1].color = white;
 								
 	squanner[2].position = sf::Vector2f(half_wind, half_wind);
-	squanner[2].color = sf::Color(full_intensity, full_intensity, full_intensity, max_transp);
+  squanner[2].color = white;
 									
 	squanner[3].position = sf::Vector2f(-half_wind, half_wind);
-	squanner[3].color = sf::Color(full_intensity, full_intensity, full_intensity, max_transp);
+  squanner[3].color = white;
 	
 	squanner[0].texCoords = sf::Vector2f(0, 0);
-	squanner[1].texCoords = sf::Vector2f(2*half_wind, 0);
-	squanner[2].texCoords = sf::Vector2f(2*half_wind, 2*half_wind);
-	squanner[3].texCoords = sf::Vector2f(0, 2*half_wind);
+  squanner[1].texCoords = sf::Vector2f(window_x, 0);
+  squanner[2].texCoords = sf::Vector2f(window_x, window_y);
+  squanner[3].texCoords = sf::Vector2f(0, window_y);
 	
 	
 	
-	sf::Texture compass_back_tex;
-	
-	if (!compass_back_tex.loadFromFile(compass_back_img))
-	{
+	sf::Texture compass_back_tex;  
+  load_texture(compass_back_tex, compass_back_img);
 			
-    std::cerr << compass_back_img << " not found!\n";
-			
-	}
-	
 	sf::Sprite compass_back_sprite;
-	compass_back_sprite.setTexture(compass_back_tex);
+  init_sprite(compass_back_sprite, compass_back_tex,
+              half_sprite_dims(compass_back_sprite), square_up_offset);
 	
-	compass_back_sprite.setOrigin(sf::Vector2f(12, 12));
+	sf::Texture compass_tex;	
+  load_texture(compass_tex, compass_img);
 	
-	compass_back_sprite.setPosition(sf::Vector2f(0, -squarep));
-	
-	
-	sf::Texture compass_tex;
-	
-	if (!compass_tex.loadFromFile(compass_img))
-	{
-			
-    std::cerr << compass_img << " not found!\n";
-			
-	}
-	
-	sf::Sprite compass_sprite;
-	compass_sprite.setTexture(compass_tex);
-	
-	compass_sprite.setOrigin(sf::Vector2f(12, 12));
-	
-	compass_sprite.setPosition(sf::Vector2f(0, -squarep));
-	
-	
-	
-	sf::Texture arrow_tex;
-	
-	if (!arrow_tex.loadFromFile(arrow_img))
-	{
-			
-    std::cerr << arrow_img << " not found!\n";
-			
-	}
+	sf::Sprite compass_sprite;  
+  init_sprite(compass_sprite, compass_tex,
+              half_sprite_dims(compass_sprite), square_up_offset);
+
+	sf::Texture arrow_tex;	
+  load_texture(arrow_tex, arrow_img);
 	
 	sf::Sprite arrow_sprite;
-	arrow_sprite.setTexture(arrow_tex);
-	
-	arrow_sprite.setOrigin(sf::Vector2f(12, 12));
-	
-	arrow_sprite.setPosition(sf::Vector2f(0, -squarep));
-	
-	
-	
-	
+  init_sprite(arrow_sprite, arrow_tex,
+              half_sprite_dims(arrow_sprite), square_up_offset);
+
 	
 	
 	
@@ -436,7 +394,7 @@ int main()
 	sf::Sprite key_up_sprite;
 	key_up_sprite.setTexture(bitmask_key_up);
 	
-	key_up_sprite.setOrigin(sf::Vector2f(-3.5*squarep, -3.5*squarep));
+  key_up_sprite.setOrigin(sf::Vector2f(-3.5f*squarep, -3.5f*squarep));
 	
 	key_up_sprite.setPosition(sf::Vector2f(0, -squarep));
 	
@@ -937,7 +895,7 @@ int main()
 		
 	text.setPosition(50, 350);
 	
-	sf::RenderWindow window(sf::VideoMode(window_x, window_y), amazad_var, sf::Style::Default);
+  sf::RenderWindow window(sf::VideoMode(static_cast<unsigned int>(window_x), static_cast<unsigned int>(window_y)), amazad_var, sf::Style::Default);
 	
 	sf::View view(sf::Vector2f(0, -squarep), sf::Vector2f(window_x, window_x));
 	

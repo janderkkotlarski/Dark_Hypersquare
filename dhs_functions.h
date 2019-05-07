@@ -8,10 +8,22 @@
 
 void load_texture(sf::Texture& texture, const std::string& file_name);
 
+sf::Vector2f half_sprite_dims(const sf::Sprite& sprite);
+
+
+void init_sprite(sf::Sprite& sprite, sf::Texture& texture,
+                 const sf::Vector2f& origin, const sf::Vector2f& position);
+
 void init_sprite(sf::Sprite& sprite, sf::Texture& texture,
                  const sf::Vector2f& origin, const sf::Vector2f& position,
                  const sf::Color& color);
 
+std::vector <std::string> number_file_vector(const std::string& begin,
+                                             const std::string& end,
+                                             const std::string& last);
+
 void color_picker(int square_identity, sf::Color& colors, sf::Color& multicolor);
+
+
 
 #endif // DHS_FUNCTIONS_H
