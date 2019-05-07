@@ -629,23 +629,16 @@ int main()
 	
 	intro_filler = Square_Draw(intro_filler, karasu, max_transp, pos_x, pos_y, 0, 0);
 	
-	intro_filler.scale(18, 18);
+  intro_filler.scale(18, 18);
 	
-	
-	
-	
-	Color_Picker(2, key_colour, exit_colors);
-	
-	
-	
+  Color_Picker(2, key_colour, exit_colors);
 	sf::Font font;
 	if (!font.loadFromFile("Carlito-Regular.ttf"))
   { // error...	}
 	
 	sf::Text text;
 		
-	text.setFont(font);
-		
+  text.setFont(font);
 	text.setCharacterSize(18);
 		
   text.setFillColor(white);
@@ -685,40 +678,27 @@ int main()
 			
 			key_s_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], b_sub));
 			
-			start_shadow_sprite.setColor(sf::Color(b_sub, b_sub, b_sub, background_blink));
-			
-			start_screen_sprite.setColor(sf::Color(b_sub, b_sub, b_sub, max_transp));
-			
+      start_shadow_sprite.setColor(sf::Color(b_sub, b_sub, b_sub, background_blink));
+      start_screen_sprite.setColor(sf::Color(b_sub, b_sub, b_sub, max_transp));
 			
 			Color_Picker(2, key_colour, exit_colors);
 					
 			for (int a_sub = 0; a_sub <= 2; a_sub++)
-			{
-						
-				key_colour[a_sub] = 128 + key_colour[a_sub]/2;
-						
-			}
-					
-					
+      {
+        key_colour[a_sub] = 128 + key_colour[a_sub]/2;
+      }
 					
 			Exit_Multicolor(exit_colors);
 			
-			Background_Blinker(background_blink_on, background_blink, max_transp);
-			
+      Background_Blinker(background_blink_on, background_blink, max_transp);
 			
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-			{
-					
-				mouse_position = sf::Mouse::getPosition(window);
-				
-				mouse_pos_x = mouse_position.x;
-				
-				mouse_pos_y = mouse_position.y;
-													
-				mouse_pressed = true;
-			
-			}
-			
+      {
+        mouse_position = sf::Mouse::getPosition(window);
+        mouse_pos_x = mouse_position.x;
+        mouse_pos_y = mouse_position.y;
+        mouse_pressed = true;
+      }
 			
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) ||
 				(mouse_pressed && (mouse_pos_x > 275) && (mouse_pos_x < 325) &&
@@ -727,13 +707,10 @@ int main()
 				start_screen = false;
 				
         sf::Mouse::setPosition(static_cast<sf::Vector2i>(half_windows), window);
-				
 				mouse_pressed = false;
 				
-				outro = b_sub;
-				
-				b_sub = 255;
-						
+        outro = b_sub;
+        b_sub = 255;
 			}
 
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) ||
@@ -744,79 +721,49 @@ int main()
         return(0);
       }
 			
-			std::this_thread::sleep_for(delay);
-			
-			
-			
+      std::this_thread::sleep_for(delay);
 		}
 		
 		
     while (start_screen)
-		{
-			
+    {
       window.clear(black);
 			
-			window.draw(start_shadow_sprite);
-			
-			window.draw(start_screen_sprite);
-			
-			
+			window.draw(start_shadow_sprite);			
+      window.draw(start_screen_sprite);
 			
       window.draw(key_esc_sprite);
-			
-			window.draw(key_s_sprite);
-			
+      window.draw(key_s_sprite);
 			
 			window.display();
 			
-			key_s_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-			
-			start_shadow_sprite.setColor(sf::Color(full_intensity, full_intensity, full_intensity, background_blink));
-			
+      key_s_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
+      start_shadow_sprite.setColor(sf::Color(full_intensity, full_intensity, full_intensity, background_blink));
 			start_screen_sprite.setColor(sf::Color(full_intensity, full_intensity, full_intensity, max_transp));
 			
 			Color_Picker(2, key_colour, exit_colors);
 					
 			for (int a_sub = 0; a_sub <= 2; a_sub++)
-			{
-						
-				key_colour[a_sub] = 128 + key_colour[a_sub]/2;
-						
-			}
+      { key_colour[a_sub] = 128 + key_colour[a_sub]/2; }
 					
-					
-					
-			Exit_Multicolor(exit_colors);
-			
-			Background_Blinker(background_blink_on, background_blink, max_transp);
-			
-			
+      Exit_Multicolor(exit_colors);
+      Background_Blinker(background_blink_on, background_blink, max_transp);
 			
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-			{
-					
-				mouse_position = sf::Mouse::getPosition(window);
-				
-				mouse_pos_x = mouse_position.x;
-				
-				mouse_pos_y = mouse_position.y;
-													
-				mouse_pressed = true;
-			
-			}
-			
+      {
+        mouse_position = sf::Mouse::getPosition(window);
+        mouse_pos_x = mouse_position.x;
+        mouse_pos_y = mouse_position.y;
+        mouse_pressed = true;
+      }
 			
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) ||
 				(mouse_pressed && (mouse_pos_x > 275) && (mouse_pos_x < 325) &&
 				(mouse_pos_y > 475) && (mouse_pos_y < 525)))
-			{
-						
-				start_screen = false;
-				
+      {
+        start_screen = false;
         sf::Mouse::setPosition(static_cast<sf::Vector2i>(half_windows), window);
-				
-				mouse_pressed = false;
-						
+        mouse_pressed = false;
 			}
 
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) ||
@@ -827,11 +774,8 @@ int main()
         return(0);
       }
 			
-			std::this_thread::sleep_for(delay);
-			
-		}
-		
-		
+      std::this_thread::sleep_for(delay);
+    }
 		
 		for (int b_sub = outro; b_sub >= 0; b_sub = b_sub - 2)
 		{
