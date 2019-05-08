@@ -31,7 +31,7 @@ int main()
 
   const std::chrono::milliseconds delay{ delaz };
 
-  int delay_flip{ 0 }, coord_a_sub, coord_b_sub;
+  int delay_flip{ 0 }, coord_i{ 0 }, coord_j{ 0 };
 
   bool delay_flipping{ false };
 		
@@ -51,8 +51,6 @@ int main()
 	
   bool timecop{ false };
 
-  bool position_declare { false };
-	
   bool inhale{ false }, exhale{ false };
   bool turning{ false }, exchange{ false };
 
@@ -73,7 +71,7 @@ int main()
 
   int bat_transp;
 	
-  int colours[3], karasu[3], kolours[3], toransupu = max_transp;
+  int colours[3], karasu[3], kolours[3], toransupu{ max_transp };
 	
   int color_black[]{ 0, 0, 0 }, key_colour[]{ 0, 0, 0 };
 	
@@ -81,7 +79,7 @@ int main()
 
   const sf::Color white{ 255, 255, 255, 255 };
 
-	int uplight_transp;
+  int uplight_transp{ -12 };
 	
   int pacman{ 0 };
 
@@ -115,7 +113,7 @@ int main()
 	
   int blink{ max_transp }, background_blink{ 0 }, blink_min{ 32 }, blink_delta{ 4 };
 	
-  bool blink_on{ true }, background_blink_on{ false }, position_declar{ true };
+  bool blink_on{ true }, background_blink_on{ false };
 	
 	sf::Vector2i mouse_position;
 	
@@ -125,9 +123,9 @@ int main()
 	
   float red_candy_frac{ 0.5f }, yellow_candy_frac{ 0.1f }, green_candy_frac{ 0.02f }, blue_candy_frac{ 0.005f };
 	
-  float wall_frac = 0.40, dark_frac = 0.1, exit_frac = 0.03;
+  float wall_frac{ 0.4f }, dark_frac{ 0.1f }, exit_frac{ 0.03f };
 	
-  double candy_frac{ red_candy_frac + yellow_candy_frac + green_candy_frac + blue_candy_frac };
+  float candy_frac{ red_candy_frac + yellow_candy_frac + green_candy_frac + blue_candy_frac };
 	
   bool wall_exist{ false }, pillars_exist{ false }, dark_exist{ false }, exit_exist{ false };
 	
@@ -406,45 +404,47 @@ int main()
 	
   std::vector <sf::Sprite> level_sprite;
 	
-  for (unsigned int i = 0; i <= max_pow; ++i)
+  for (int i{ 0 }; i <= max_pow; ++i)
   {
     level_sprite.push_back(sprite);
 
-    init_sprite(level_sprite[i], bitmask_level,
+    init_sprite(level_sprite[static_cast<unsigned>(i)], bitmask_level,
                 -4.5f*left_square + 5.5f*up_square + sf::Vector2f((i + 1.0f)*18.0f,0.0f), -up_square);
   }
 
   std::vector <sf::Texture> bitmask_number;
 	
-  for (int i = 0; i < number_max; ++i)
+  for (int i{ 0 }; i < number_max; ++i)
 	{
     const sf::Texture bitmask;
 
     bitmask_number.push_back(bitmask);
-    load_texture(bitmask_number[i], bitmask_number_file[i]);
+    load_texture(bitmask_number[static_cast<unsigned>(i)], bitmask_number_file[static_cast<unsigned>(i)]);
 	}
 	
   std::vector <std::vector <sf::Sprite>> number_sprite;
 
   std::vector <std::vector <sf::Sprite>> dosh_sprite;
 	
-  for (int i = 0; i < number_max; ++i)
+  for (int i{ 0 }; i < number_max; ++i)
   {
     std::vector <sf::Sprite> sprites;
 
-    for (int j = 0; j <= max_pow; ++j)
+    for (int j{ 0 }; j <= max_pow; ++j)
     { sprites.push_back(sprite); }
 
-    for (int j = 0; j <= max_pow; ++j)
+    for (int j{ 0 }; j <= max_pow; ++j)
 		{
       number_sprite.push_back(sprites);
 
-      init_sprite(number_sprite[i][j], bitmask_number[i],
+      init_sprite(number_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)],
+                  bitmask_number[static_cast<unsigned>(i)],
                   -4.5f*left_square + 5.5f*up_square + sf::Vector2f((j - 2.0f)*18.0f, 0.0f), -up_square);
 
       dosh_sprite.push_back(sprites);
 
-      init_sprite(number_sprite[i][j], bitmask_number[i],
+      init_sprite(number_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)],
+                  bitmask_number[static_cast<unsigned>(i)],
                   -4.5f*left_square + -1.5f*up_square + sf::Vector2f((j - 2.0f)*18.0f, 0.0f), -up_square);
     }
   }
@@ -454,11 +454,11 @@ int main()
 
   std::vector <sf::Sprite> dollar_sprite;
 	
-  for (int i = 0; i <= max_pow; ++i)
+  for (int i{ 0 }; i <= max_pow; ++i)
 	{
     dollar_sprite.push_back(sprite);
 
-    init_sprite(dollar_sprite[i], bitmask_dollar,
+    init_sprite(dollar_sprite[static_cast<unsigned>(i)], bitmask_dollar,
                 -4.5f*left_square + -1.5f*up_square + sf::Vector2f((i - 0.0f)*18.0f, 0.0f), -up_square);
   }
 	
@@ -470,25 +470,25 @@ int main()
 	Color_Picker(8, karasu, exit_colors);	
   sukuwarii = Square_Draw(sukuwarii, karasu, blink, pos_x, pos_y, squarrel, squarrel);
 	
-	sf::RectangleShape squarei(sf::Vector2f(2*squarrel, 2*squarrel));	
+  sf::RectangleShape squarei(sf::Vector2f(2.0f*squarrel, 2.0f*squarrel));
 	Color_Picker(0, kolours, exit_colors);
   squarei = Square_Draw(squarei, kolours, max_transp, local_x*squarep, local_y*squarep - squarep, squarrel, squarrel);
 	
-  sf::RectangleShape infobox(sf::Vector2f(window_x, window_y - 0.5*squarep));
+  sf::RectangleShape infobox(sf::Vector2f(window_x, window_y - 0.5f*squarep));
   Color_Picker(0, color_black, exit_colors);	
-  infobox.setOrigin(sf::Vector2f(0.5*window_x, -0.5*squarep));
-  infobox = Square_Draw(infobox, color_black, 1*max_transp, 0, -squarep, 0, 0);
+  infobox.setOrigin(sf::Vector2f(0.5f*window_x, -0.5f*squarep));
+  infobox = Square_Draw(infobox, color_black, 1*max_transp, 0.0f, -squarep, 0.0f, 0.0f);
 	
 	sf::RectangleShape exit_filler(sf::Vector2f(2*squarrel, 2*squarrel));	
 	Color_Picker(0, karasu, exit_colors);	
 	exit_filler.setOrigin(squarrel, squarrel);	
-  exit_filler = Square_Draw(exit_filler, karasu, max_transp, pos_x, pos_y, 0, 0);
+  exit_filler = Square_Draw(exit_filler, karasu, max_transp, pos_x, pos_y, 0.0f, 0.0f);
 	
 	sf::RectangleShape intro_filler(sf::Vector2f(2*squarrel, 2*squarrel));	
 	Color_Picker(0, karasu, exit_colors);	
 	intro_filler.setOrigin(squarrel, squarrel);	
-	intro_filler = Square_Draw(intro_filler, karasu, max_transp, pos_x, pos_y, 0, 0);	
-  intro_filler.scale(18, 18);
+  intro_filler = Square_Draw(intro_filler, karasu, max_transp, pos_x, pos_y, 0.0f, 0.0f);
+  intro_filler.scale(18.0f, 18.0f);
 	
   Color_Picker(2, key_colour, exit_colors);
 	sf::Font font;
@@ -500,14 +500,13 @@ int main()
 	text.setCharacterSize(18);		
   text.setFillColor(white);
   text.setOutlineColor(white);
-	text.setPosition(50, 350);
+  text.setPosition(50.0f, 350.0f);
 	
   sf::RenderWindow window(sf::VideoMode(static_cast<unsigned int>(window_x), static_cast<unsigned int>(window_y)),
                           version, sf::Style::Default);
 	
   sf::View view(-up_square, full_windows);
-	
-	view.setViewport(sf::FloatRect(0, 0, 1, 1));
+  view.setViewport(sf::FloatRect(0.0f, 0.0f, 1.0f, 1.0f));
 	
   window.setView(view);
 	
@@ -520,7 +519,7 @@ int main()
     start_shadow_sprite.setColor(sf::Color(0, 0, 0, background_blink/4));
 		start_screen_sprite.setColor(sf::Color(0, 0, 0, max_transp));
 
-		for (int b_sub = 1; b_sub <= 255; b_sub = b_sub + 2)
+    for (int j{ 1 }; j <= 255; j += 2)
     {
       window.clear(black);
 
@@ -532,17 +531,15 @@ int main()
 			
 			window.display();
 			
-			key_s_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], b_sub));
+      key_s_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], j));
 			
-      start_shadow_sprite.setColor(sf::Color(b_sub, b_sub, b_sub, background_blink));
-      start_screen_sprite.setColor(sf::Color(b_sub, b_sub, b_sub, max_transp));
+      start_shadow_sprite.setColor(sf::Color(j, j, j, background_blink));
+      start_screen_sprite.setColor(sf::Color(j, j, j, max_transp));
 			
 			Color_Picker(2, key_colour, exit_colors);
 					
-			for (int a_sub = 0; a_sub <= 2; a_sub++)
-      {
-        key_colour[a_sub] = 128 + key_colour[a_sub]/2;
-      }
+      for (int i{ 0 }; i <= 2; ++i)
+      { key_colour[i] = 128 + key_colour[i]/2; }
 					
 			Exit_Multicolor(exit_colors);
 			
@@ -565,8 +562,8 @@ int main()
         sf::Mouse::setPosition(static_cast<sf::Vector2i>(half_windows), window);
 				mouse_pressed = false;
 				
-        outro = b_sub;
-        b_sub = 255;
+        outro = j;
+        j = 255;
 			}
 
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) ||
@@ -599,8 +596,8 @@ int main()
 			
 			Color_Picker(2, key_colour, exit_colors);
 					
-			for (int a_sub = 0; a_sub <= 2; a_sub++)
-      { key_colour[a_sub] = 128 + key_colour[a_sub]/2; }
+      for (int i{ 0 }; i <= 2; ++i)
+      { key_colour[i] = 128 + key_colour[i]/2; }
 					
       Exit_Multicolor(exit_colors);
       Background_Blinker(background_blink_on, background_blink, max_transp);
@@ -633,62 +630,37 @@ int main()
       std::this_thread::sleep_for(delay);
     }
 		
-		for (int b_sub = outro; b_sub >= 0; b_sub = b_sub - 2)
-		{
-			
-			if (b_sub < 0)
-			{
-				
-				b_sub = 0;
-				
-			}
+    for (int j{ outro }; j >= 0; j -= 2)
+    {
+      if (j < 0)
+      { j = 0; }
 			
       window.clear(black);
 			
-			window.draw(start_shadow_sprite);
-			
-			window.draw(start_screen_sprite);
-			
-			
-			
-			// window.draw(key_esc_sprite);
-			
-			window.draw(key_s_sprite);
-			
+      window.draw(start_shadow_sprite);
+      window.draw(start_screen_sprite);
+
+      window.draw(key_esc_sprite);
+      window.draw(key_s_sprite);
 			
 			window.display();
 			
-			key_s_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], b_sub));
+      key_s_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], j));
 			
-			start_shadow_sprite.setColor(sf::Color(b_sub, b_sub, b_sub, background_blink));
-			
-			start_screen_sprite.setColor(sf::Color(b_sub, b_sub, b_sub, max_transp));
-			
+      start_shadow_sprite.setColor(sf::Color(j, j, j, background_blink));
+      start_screen_sprite.setColor(sf::Color(j, j, j, max_transp));
 			
 			Color_Picker(2, key_colour, exit_colors);
 					
-			for (int a_sub = 0; a_sub <= 2; a_sub++)
-			{
-						
-				key_colour[a_sub] = 128 + key_colour[a_sub]/2;
-						
-			}
+      for (int i{ 0 }; i <= 2; ++i)
+      { key_colour[i] = 128 + key_colour[i]/2; }
 					
-					
-					
-			Exit_Multicolor(exit_colors);
+      Exit_Multicolor(exit_colors);
+      Background_Blinker(background_blink_on, background_blink, max_transp);
 			
-			Background_Blinker(background_blink_on, background_blink, max_transp);
-			
-			
-			
-			std::this_thread::sleep_for(delay);
-			
-			
+      std::this_thread::sleep_for(delay);
 		}
-		
-		
-		
+
 		for (int level = level_init; level <= level_max; level++)
     {
       level_change = false;
@@ -701,26 +673,26 @@ int main()
 			
       level_side = 2*size_level + 1;
 			
-			for (int a_sub = -max_level; a_sub <= max_level; a_sub++)
+      for (int i{ -max_level }; i <= max_level; ++i)
       {
-				for (int b_sub = -max_level; b_sub <= max_level; b_sub++)
-        { square_matrix[a_sub + max_level][b_sub + max_level] = 1; }
+        for (int j{ -max_level }; j <= max_level; ++j)
+        { square_matrix[i + max_level][j + max_level] = 1; }
       }
 
 			if (level < level_threshold)
       {
-				for (int a_sub = -size_level; a_sub <= size_level; a_sub++)
+        for (int i{ -size_level }; i <= size_level; ++i)
         {
-					for (int b_sub = -size_level; b_sub <= size_level; b_sub++)
+          for (int j{ -size_level }; j <= size_level; ++j)
           {
-						square_matrix[a_sub + max_level][b_sub + max_level] = 1;
+            square_matrix[i + max_level][j + max_level] = 1;
 						
 						if (level <= 8)
             {
-							square_matrix[a_sub + max_level][b_sub + max_level] = 10;
+              square_matrix[i + max_level][j + max_level] = 10;
 							
 							if (testing)
-              { square_matrix[a_sub + max_level][b_sub + max_level] = 6; }
+              { square_matrix[i + max_level][j + max_level] = 6; }
             }
           }
         }
@@ -728,9 +700,9 @@ int main()
 
 			if (level >= level_threshold)
       {
-        wall_frac = 0.3 + level/100;
-        dark_frac = 0.1;
-				exit_frac = 0.3/level;
+        wall_frac = 0.3f + level/100.0f;
+        dark_frac = 0.1f;
+        exit_frac = 0.3f/level;
 	
         wall_exist = false;
         pillars_exist = false;
@@ -907,53 +879,53 @@ int main()
 			
 			if (level == 1)
       {
-				for (int a_sub = -size_level; a_sub <= size_level; a_sub++)
-        { square_matrix[max_level][a_sub + max_level] = 0; }
+        for (int i{ -size_level }; i <= size_level; ++i)
+        { square_matrix[max_level][i + max_level] = 0; }
       }
 
 			if ((level == 2) && !testing)
       {
 				// up
-				for (int a_sub = -size_level; a_sub <= 1; a_sub++)
-        { square_matrix[max_level][a_sub + max_level] = 0; }
+        for (int i{ -size_level }; i <= 1; ++i)
+        { square_matrix[max_level][i + max_level] = 0; }
 				
 				// right
-				for (int a_sub = 0; a_sub <= size_level; a_sub++)
-        { square_matrix[a_sub + max_level][-size_level + max_level] = 0; }
+        for (int i{ 0 }; i <= size_level; ++i)
+        { square_matrix[i + max_level][-size_level + max_level] = 0; }
 				
 				// up
-				for (int a_sub = 2; a_sub <= size_level; a_sub++)
-        { square_matrix[size_level + max_level][a_sub + max_level] = 0; }
+        for (int i{ 2 }; i <= size_level; ++i)
+        { square_matrix[size_level + max_level][i + max_level] = 0; }
 				
 								
 				// right
-				for (int a_sub = -size_level; a_sub <= 0; a_sub++)
-        { square_matrix[a_sub + max_level][2 + max_level] = 0; }
+        for (int i{ -size_level }; i <= 0; ++i)
+        { square_matrix[i + max_level][2 + max_level] = 0; }
 			}
 			
 			if (level == 3)
       {
 				// up
-				for (int a_sub = -size_level; a_sub <= 1; a_sub++)
-        { square_matrix[max_level][a_sub + max_level] = 0; }
+        for (int i{ -size_level }; i <= 1; ++i)
+        { square_matrix[max_level][i + max_level] = 0; }
 				
 				// left
-				for (int a_sub = -size_level; a_sub <= 0; a_sub++)
-        { square_matrix[a_sub + max_level][-size_level + max_level] = 0; }
+        for (int i{ -size_level }; i <= 0; ++i)
+        { square_matrix[i + max_level][-size_level + max_level] = 0; }
 				
 				// up
-				for (int a_sub = 2; a_sub <= size_level; a_sub++)
-        { square_matrix[-size_level + max_level][a_sub + max_level] = 0; }
+        for (int i{ 2 }; i <= size_level; ++i)
+        { square_matrix[-size_level + max_level][i + max_level] = 0; }
 
 				// left
-				for (int a_sub = 0; a_sub <= size_level; a_sub++)
-        { square_matrix[a_sub + max_level][2 + max_level] = 0; }
+        for (int i{ 0 }; i <= size_level; ++i)
+        { square_matrix[i + max_level][2 + max_level] = 0; }
 			}
 			
 			if (level == 4)
       {
-				for (int a_sub = -size_level; a_sub <= size_level; a_sub++)
-        { square_matrix[max_level][a_sub + max_level] = 0; }
+        for (int i { -size_level }; i <= size_level; ++i)
+        { square_matrix[max_level][i + max_level] = 0; }
 			}
 			
 			if (level == 5)
@@ -961,16 +933,16 @@ int main()
 				square_matrix[+ max_level][-1 + max_level] = 0;
 				
         // left
-				for (int a_sub = -2; a_sub <= 0; a_sub++)
-        { square_matrix[a_sub + max_level][-2 + max_level] = 0; }
+        for (int i{ -2 }; i <= 0; ++i)
+        { square_matrix[i + max_level][-2 + max_level] = 0; }
 				
         //down
-				for (int a_sub = -2; a_sub <= 4; a_sub++)
-        { square_matrix[-2 + max_level][a_sub + max_level] = 0; }
+        for (int i{ -2 }; i <= 4; ++i)
+        { square_matrix[-2 + max_level][i + max_level] = 0; }
 				
         // right
-				for (int a_sub = -2; a_sub <= size_level; a_sub++)
-        { square_matrix[a_sub + max_level][4 + max_level] = 0; }
+        for (int i{ -2 }; i <= size_level; ++i)
+        { square_matrix[i + max_level][4 + max_level] = 0; }
 				
         square_matrix[size_level + max_level][2 + max_level] = 0;
         square_matrix[size_level + max_level][0 + max_level] = 0;
@@ -982,25 +954,25 @@ int main()
         square_matrix[-size_level + max_level][0 + max_level] = 0;
 				square_matrix[-size_level + max_level][-2 + max_level] = 0;
 
-				for (int a_sub = 2; a_sub <= 4; a_sub++)
-        { square_matrix[-4 + max_level][a_sub + max_level] = 0; }
+        for (int i{ 2 }; i <= 4; ++i)
+        { square_matrix[-4 + max_level][i + max_level] = 0; }
 				
-				for (int a_sub = 0; a_sub <= 2; a_sub++)
-        { square_matrix[4 + max_level][a_sub + max_level] = 0; }
+        for (int i{ 0 }; i <= 2; ++i)
+        { square_matrix[4 + max_level][i + max_level] = 0; }
 				
-				for (int a_sub = -2; a_sub <= 0; a_sub++)
-        { square_matrix[-4 + max_level][a_sub + max_level] = 0; }
+        for (int i{ -2 }; i <= 0; ++i)
+        { square_matrix[-4 + max_level][i + max_level] = 0; }
 				
-				for (int a_sub = -4; a_sub <= -2; a_sub++)
-        { square_matrix[4 + max_level][a_sub + max_level] = 0; }
+        for (int i{ -4 }; i <= -2; ++i)
+        { square_matrix[4 + max_level][i + max_level] = 0; }
 				
         // right
-				for (int a_sub = -size_level; a_sub <= 2; a_sub++)
-        { square_matrix[a_sub + max_level][-4 + max_level] = 0; }
+        for (int i{ -size_level }; i <= 2; ++i)
+        { square_matrix[i + max_level][-4 + max_level] = 0; }
 				
         //down
-				for (int a_sub = -4; a_sub <= 2; a_sub++)
-        { square_matrix[2 + max_level][a_sub + max_level] = 0; }
+        for (int i{ -4 }; i <= 2; ++i)
+        { square_matrix[2 + max_level][i + max_level] = 0; }
 				
         square_matrix[1 + max_level][2 + max_level] = 0;
         square_matrix[max_level][2 + max_level] = 0;
@@ -1012,16 +984,16 @@ int main()
 				square_matrix[+ max_level][-1 + max_level] = 0;
 				
         // left
-				for (int a_sub = 0; a_sub <= 2; a_sub++)
-        { square_matrix[a_sub + max_level][-2 + max_level] = 0; }
+        for (int i{ 0 }; i <= 2; ++i)
+        { square_matrix[i + max_level][-2 + max_level] = 0; }
 				
         //down
-				for (int a_sub = -2; a_sub <= 4; a_sub++)
-        { square_matrix[2 + max_level][a_sub + max_level] = 0; }
+        for (int i{ -2 }; i <= 4; ++i)
+        { square_matrix[2 + max_level][i + max_level] = 0; }
 				
         // right
-				for (int a_sub = -size_level; a_sub <= 2; a_sub++)
-        { square_matrix[a_sub + max_level][4 + max_level] = 0; }
+        for (int i{ -size_level }; i <= 2; ++i)
+        { square_matrix[i + max_level][4 + max_level] = 0; }
 				
         square_matrix[-size_level + max_level][2 + max_level] = 0;
         square_matrix[-size_level + max_level][0 + max_level] = 0;
@@ -1033,25 +1005,25 @@ int main()
         square_matrix[size_level + max_level][0 + max_level] = 0;
         square_matrix[size_level + max_level][-2 + max_level] = 0;
 				
-				for (int a_sub = 2; a_sub <= 4; a_sub++)
-        { square_matrix[4 + max_level][a_sub + max_level] = 0; }
+        for (int i{ 2 }; i <= 4; ++i)
+        { square_matrix[4 + max_level][i + max_level] = 0; }
 				
-				for (int a_sub = 0; a_sub <= 2; a_sub++)
-        { square_matrix[-4 + max_level][a_sub + max_level] = 0; }
+        for (int i{ 0 }; i <= 2; ++i)
+        { square_matrix[-4 + max_level][i + max_level] = 0; }
 				
-				for (int a_sub = -2; a_sub <= 0; a_sub++)
-        { square_matrix[4 + max_level][a_sub + max_level] = 0; }
+        for (int i{ -2 }; i <= 0; ++i)
+        { square_matrix[4 + max_level][i + max_level] = 0; }
 				
-				for (int a_sub = -4; a_sub <= -2; a_sub++)
-        { square_matrix[-4 + max_level][a_sub + max_level] = 0; }
+        for (int i{ -4 }; i <= -2; ++i)
+        { square_matrix[-4 + max_level][i + max_level] = 0; }
 				
         // right
-				for (int a_sub = -2; a_sub <= size_level; a_sub++)
-        { square_matrix[a_sub + max_level][-4 + max_level] = 0; }
+        for (int i{ -2 }; i <= size_level; ++i)
+        { square_matrix[i + max_level][-4 + max_level] = 0; }
 				
         //down
-				for (int a_sub = -4; a_sub <= 2; a_sub++)
-        { square_matrix[-2 + max_level][a_sub + max_level] = 0; }
+        for (int i{ -4 }; i <= 2; ++i)
+        { square_matrix[-2 + max_level][i + max_level] = 0; }
 				
         square_matrix[-1 + max_level][2 + max_level] = 0;
         square_matrix[max_level][2 + max_level] = 0;
@@ -1061,52 +1033,52 @@ int main()
 			if (level == 7)
       {
         // y = -1, 1
-				for (int a_sub = -1; a_sub <= 1; a_sub++)
+        for (int i{ -1 }; i <= 1; ++i)
         {
-          square_matrix[max_level + a_sub][max_level - 1] = 0;
-          square_matrix[max_level + a_sub][max_level + 1] = 0;
+          square_matrix[max_level + i][max_level - 1] = 0;
+          square_matrix[max_level + i][max_level + 1] = 0;
 				}
 				
         // y = 0
-				for (int a_sub = -size_level; a_sub <= size_level; a_sub++)
-        { square_matrix[max_level + a_sub][max_level] = 0; }
+        for (int i{ -size_level }; i <= size_level; ++i)
+        { square_matrix[max_level + i][max_level] = 0; }
 				
         // y = -2, 2
-				for (int a_sub = 2; a_sub <= size_level; a_sub++)
+        for (int i{ 2 }; i <= size_level; ++i)
         {
-          square_matrix[a_sub + max_level][-2 + max_level] = 0;
-          square_matrix[-a_sub + max_level][-2 + max_level] = 0;
-          square_matrix[a_sub + max_level][2 + max_level] = 0;
-          square_matrix[-a_sub + max_level][2 + max_level] = 0;
+          square_matrix[i + max_level][-2 + max_level] = 0;
+          square_matrix[-i + max_level][-2 + max_level] = 0;
+          square_matrix[i + max_level][2 + max_level] = 0;
+          square_matrix[-i + max_level][2 + max_level] = 0;
 				}
 				
         square_matrix[max_level][-2 + max_level] = 0;
 				square_matrix[max_level][2 + max_level] = 0;
 				
         // y = -3, 3
-				for (int a_sub = -2; a_sub <= 2; a_sub++)
+        for (int i{ -2 }; i <= 2; ++i)
         {
-          square_matrix[a_sub + max_level][-3 + max_level] = 0;
-          square_matrix[a_sub + max_level][3 + max_level] = 0;
+          square_matrix[i + max_level][-3 + max_level] = 0;
+          square_matrix[i + max_level][3 + max_level] = 0;
 				}
 								
         // y = -4, 4
-				for (int a_sub = -size_level; a_sub <= -3; a_sub++)
+        for (int i{ -size_level }; i <= -3; ++i)
         {
-          square_matrix[a_sub + max_level][-4 + max_level] = 0;
-          square_matrix[a_sub + max_level][4 + max_level] = 0;
+          square_matrix[i + max_level][-4 + max_level] = 0;
+          square_matrix[i + max_level][4 + max_level] = 0;
 				}
 				
         square_matrix[-3 + max_level][-size_level + max_level] = 0;
 				square_matrix[-3 + max_level][size_level + max_level] = 0;
 				
         // c = -1, 1
-				for (int a_sub = 4; a_sub <= size_level; a_sub++)
+        for (int i{ 4 }; i <= size_level; ++i)
         {
-          square_matrix[-1 + max_level][a_sub + max_level] = 0;
-          square_matrix[1 + max_level][a_sub + max_level] = 0;
-          square_matrix[-1 + max_level][-a_sub + max_level] = 0;
-          square_matrix[1 + max_level][-a_sub + max_level] = 0;
+          square_matrix[-1 + max_level][i + max_level] = 0;
+          square_matrix[1 + max_level][i + max_level] = 0;
+          square_matrix[-1 + max_level][-i + max_level] = 0;
+          square_matrix[1 + max_level][-i + max_level] = 0;
 				}
 				
         square_matrix[4 + max_level][-3 + max_level] = 0;
@@ -1125,17 +1097,17 @@ int main()
 			if (level == 8)
       {
         // vertical
-				for (int a_sub = -4; a_sub <= 4; a_sub++)
+        for (int i{ -4 }; i <= 4; ++i)
         {
-          square_matrix[max_level][max_level + a_sub] = 0;
-          square_matrix[max_level - 4][max_level + a_sub] = 0;
+          square_matrix[max_level][max_level + i] = 0;
+          square_matrix[max_level - 4][max_level + i] = 0;
 				}
 				
         // horizontal
-				for (int a_sub = 0; a_sub <= 4; a_sub++)
+        for (int i{ 0 }; i <= 4; ++i)
         {
-          square_matrix[max_level - a_sub][max_level - 4] = 0;
-          square_matrix[max_level + a_sub][max_level + 4] = 0;
+          square_matrix[max_level - i][max_level - 4] = 0;
+          square_matrix[max_level + i][max_level + 4] = 0;
 				}
 				
         square_matrix[max_level + size_level][max_level + 4] = 0;
@@ -1147,17 +1119,17 @@ int main()
 			if (level == 9)
       {
         // vertical
-				for (int a_sub = -4; a_sub <= 4; a_sub++)
+        for (int i{ -4 }; i <= 4; ++i)
         {
-          square_matrix[max_level][max_level + a_sub] = 0;
-          square_matrix[max_level + 4][max_level + a_sub] = 0;
+          square_matrix[max_level][max_level + i] = 0;
+          square_matrix[max_level + 4][max_level + i] = 0;
 				}
 				
         // horizontal
-				for (int a_sub = 0; a_sub <= 4; a_sub++)
+        for (int i{ 0 }; i <= 4; ++i)
         {
-          square_matrix[max_level + a_sub][max_level - 4] = 0;
-          square_matrix[max_level - a_sub][max_level + 4] = 0;
+          square_matrix[max_level + i][max_level - 4] = 0;
+          square_matrix[max_level - i][max_level + 4] = 0;
 				}
 				
         square_matrix[max_level + size_level][max_level + 4] = 0;
@@ -1169,10 +1141,10 @@ int main()
 			if (level == 10)
       {
         // cross
-				for (int a_sub = -size_level; a_sub <= size_level; a_sub++)
+        for (int i{ -size_level }; i <= size_level; ++i)
         {
-          square_matrix[max_level][max_level + a_sub] = 0;
-          square_matrix[max_level + a_sub][max_level] = 0;
+          square_matrix[max_level][max_level + i] = 0;
+          square_matrix[max_level + i][max_level] = 0;
 				}
 								
 				square_matrix[max_level + 1][max_level + 1] = 0;
@@ -1184,24 +1156,24 @@ int main()
 			if (level == 11)
       {
         // cross
-				for (int a_sub = 1; a_sub <= size_level; a_sub++)
+        for (int i{ 1 }; i <= size_level; ++i)
         {
-          square_matrix[max_level - a_sub][max_level + 1] = 0;
-          square_matrix[max_level - a_sub][max_level + 2] = 0;
-          square_matrix[max_level - a_sub][max_level + 4] = 0;
-          square_matrix[max_level - a_sub][max_level - 1] = 0;
-          square_matrix[max_level - a_sub][max_level - 3] = 0;
-          square_matrix[max_level - a_sub][max_level - 5] = 0;
+          square_matrix[max_level - i][max_level + 1] = 0;
+          square_matrix[max_level - i][max_level + 2] = 0;
+          square_matrix[max_level - i][max_level + 4] = 0;
+          square_matrix[max_level - i][max_level - 1] = 0;
+          square_matrix[max_level - i][max_level - 3] = 0;
+          square_matrix[max_level - i][max_level - 5] = 0;
 					
-          square_matrix[max_level + a_sub][max_level + 1] = 0;
-          square_matrix[max_level + a_sub][max_level + 4] = 0;
-          square_matrix[max_level + a_sub][max_level - 1] = 0;
-          square_matrix[max_level + a_sub][max_level - 3] = 0;
-          square_matrix[max_level + a_sub][max_level - 5] = 0;
+          square_matrix[max_level + i][max_level + 1] = 0;
+          square_matrix[max_level + i][max_level + 4] = 0;
+          square_matrix[max_level + i][max_level - 1] = 0;
+          square_matrix[max_level + i][max_level - 3] = 0;
+          square_matrix[max_level + i][max_level - 5] = 0;
 					
-          square_matrix[max_level + 1][max_level + a_sub] = 1;
-          square_matrix[max_level + a_sub][max_level + 2] = 0;
-          square_matrix[max_level + 1][max_level - a_sub] = 1;
+          square_matrix[max_level + 1][max_level + i] = 1;
+          square_matrix[max_level + i][max_level + 2] = 0;
+          square_matrix[max_level + 1][max_level - i] = 1;
 				}
 								
         square_matrix[max_level][max_level - 1] = 0;
@@ -1233,24 +1205,24 @@ int main()
 			if (level == 12)
       {
         // cross
-				for (int a_sub = 1; a_sub <= size_level; a_sub++)
+        for (int i{ 1 }; i <= size_level; ++i)
         {
-          square_matrix[max_level + a_sub][max_level + 1] = 0;
-          square_matrix[max_level + a_sub][max_level + 2] = 0;
-          square_matrix[max_level + a_sub][max_level + 4] = 0;
-          square_matrix[max_level + a_sub][max_level - 1] = 0;
-          square_matrix[max_level + a_sub][max_level - 3] = 0;
-          square_matrix[max_level + a_sub][max_level - 5] = 0;
+          square_matrix[max_level + i][max_level + 1] = 0;
+          square_matrix[max_level + i][max_level + 2] = 0;
+          square_matrix[max_level + i][max_level + 4] = 0;
+          square_matrix[max_level + i][max_level - 1] = 0;
+          square_matrix[max_level + i][max_level - 3] = 0;
+          square_matrix[max_level + i][max_level - 5] = 0;
 					
-          square_matrix[max_level - a_sub][max_level + 1] = 0;
-          square_matrix[max_level - a_sub][max_level + 4] = 0;
-          square_matrix[max_level - a_sub][max_level - 1] = 0;
-          square_matrix[max_level - a_sub][max_level - 3] = 0;
-          square_matrix[max_level - a_sub][max_level - 5] = 0;
+          square_matrix[max_level - i][max_level + 1] = 0;
+          square_matrix[max_level - i][max_level + 4] = 0;
+          square_matrix[max_level - i][max_level - 1] = 0;
+          square_matrix[max_level - i][max_level - 3] = 0;
+          square_matrix[max_level - i][max_level - 5] = 0;
 					
-          square_matrix[max_level - 1][max_level + a_sub] = 1;
-          square_matrix[max_level - a_sub][max_level + 2] = 0;
-          square_matrix[max_level - 1][max_level - a_sub] = 1;
+          square_matrix[max_level - 1][max_level + i] = 1;
+          square_matrix[max_level - i][max_level + 2] = 0;
+          square_matrix[max_level - 1][max_level - i] = 1;
 				}
 								
         square_matrix[max_level][max_level - 1] = 0;
@@ -1309,40 +1281,40 @@ int main()
       {
 				square_matrix[max_level][max_level - 1] = 0;
 				
-				for (int a_sub = -5; a_sub <= 5; a_sub++)
+        for (int i{ -5 }; i <= 5; ++i)
         {
-          square_matrix[max_level + a_sub][max_level - 2] = 0;
-          square_matrix[max_level + a_sub][max_level + 5] = 0;
+          square_matrix[max_level + i][max_level - 2] = 0;
+          square_matrix[max_level + i][max_level + 5] = 0;
 				}
 				
-				for (int a_sub = 3; a_sub <= 5; a_sub++)
+        for (int i{ 3 }; i <= 5; ++i)
         {
-          square_matrix[max_level - 4][max_level - a_sub] = 0;
-          square_matrix[max_level - 2][max_level - a_sub] = 0;
-          square_matrix[max_level][max_level - a_sub] = 0;
-          square_matrix[max_level + 2][max_level - a_sub] = 0;
-          square_matrix[max_level + 4][max_level - a_sub] = 0;
-          square_matrix[max_level - a_sub][max_level] = 0;
-          square_matrix[max_level + a_sub][max_level] = 0;
+          square_matrix[max_level - 4][max_level - i] = 0;
+          square_matrix[max_level - 2][max_level - i] = 0;
+          square_matrix[max_level][max_level - i] = 0;
+          square_matrix[max_level + 2][max_level - i] = 0;
+          square_matrix[max_level + 4][max_level - i] = 0;
+          square_matrix[max_level - i][max_level] = 0;
+          square_matrix[max_level + i][max_level] = 0;
 				}
 				
-				for (int a_sub = -1; a_sub <= 1; a_sub++)
-        { square_matrix[max_level + a_sub][max_level + 3] = 0; }
+        for (int i{ -1 }; i <= 1; ++i)
+        { square_matrix[max_level + i][max_level + 3] = 0; }
 				
-				for (int a_sub = 0; a_sub <= 3; a_sub++)
+        for (int i{ 0 }; i <= 3; ++i)
         {
-          square_matrix[max_level - 2][max_level + a_sub] = 0;
-          square_matrix[max_level + 2][max_level + a_sub] = 0;
-          square_matrix[max_level - 4][max_level + a_sub + 1] = 0;
-          square_matrix[max_level + 4][max_level + a_sub + 1] = 0;
+          square_matrix[max_level - 2][max_level + i] = 0;
+          square_matrix[max_level + 2][max_level + i] = 0;
+          square_matrix[max_level - 4][max_level + i + 1] = 0;
+          square_matrix[max_level + 4][max_level + i + 1] = 0;
 				}
 				
-				for (int a_sub = -4; a_sub <= 4; a_sub = a_sub + 2)
+        for (int i{ -4 }; i <= 4; i += 2)
         {
-          square_matrix[max_level + a_sub][max_level - 5] = 3;
-          square_matrix[max_level + a_sub][max_level - 3] = 3;
-          square_matrix[max_level + a_sub][max_level] = 3;
-          square_matrix[max_level + a_sub][max_level + 5] = 3;
+          square_matrix[max_level + i][max_level - 5] = 3;
+          square_matrix[max_level + i][max_level - 3] = 3;
+          square_matrix[max_level + i][max_level] = 3;
+          square_matrix[max_level + i][max_level + 5] = 3;
 				}
 				
         square_matrix[max_level - 4][max_level + 2] = 3;
@@ -1390,31 +1362,31 @@ int main()
 			
 			if (level == 14)
       {
-				for (int a_sub = -5; a_sub <= 5; a_sub++)
+        for (int i{ -5 }; i <= 5; ++i)
         {
-					for (int b_sub = 1; b_sub <= 5; b_sub++)
+          for (int j{ 1 }; j <= 5; ++j)
           {
-            square_matrix[max_level + a_sub][max_level - b_sub] = 0;
-            square_matrix[max_level + a_sub][max_level + b_sub] = 0;
+            square_matrix[max_level + i][max_level - j] = 0;
+            square_matrix[max_level + i][max_level + j] = 0;
 					}
 					
-          square_matrix[max_level + a_sub][max_level] = 1;
+          square_matrix[max_level + i][max_level] = 1;
         }
 
         square_matrix[max_level][max_level + 1] = 0;
 				
-				for (int a_sub = 2; a_sub <= 5; a_sub++)
+        for (int i{ 2 }; i <= 5; ++i)
         {
-          square_matrix[max_level - 3][max_level - a_sub] = 3;
-          square_matrix[max_level - 1][max_level - a_sub] = 3;
-          square_matrix[max_level + 1][max_level - a_sub] = 3;
-          square_matrix[max_level + 3][max_level - a_sub] = 3;
-          square_matrix[max_level - 3][max_level + a_sub] = 3;
-          square_matrix[max_level + 3][max_level + a_sub] = 3;
+          square_matrix[max_level - 3][max_level - i] = 3;
+          square_matrix[max_level - 1][max_level - i] = 3;
+          square_matrix[max_level + 1][max_level - i] = 3;
+          square_matrix[max_level + 3][max_level - i] = 3;
+          square_matrix[max_level - 3][max_level + i] = 3;
+          square_matrix[max_level + 3][max_level + i] = 3;
         }
 				
-				for (int a_sub = -2; a_sub <= 2; a_sub++)
-        { square_matrix[max_level + a_sub][max_level + 2] = 3; }
+        for (int i{ -2 }; i <= 2; ++i)
+        { square_matrix[max_level + i][max_level + 2] = 3; }
 				
         square_matrix[max_level - 1][max_level + 5] = 3;
         square_matrix[max_level + 1][max_level + 5] = 3;
@@ -1441,21 +1413,21 @@ int main()
 			
 			if (level == 15)
       {
-				for (int a_sub = 1; a_sub <= 5; a_sub++)
+        for (int i{ 1 }; i <= 5; ++i)
         {
-          square_matrix[max_level - a_sub][max_level + 1] = 0;
-          square_matrix[max_level + a_sub][max_level + 3] = 0;
-          square_matrix[max_level][max_level - a_sub] = 0;
+          square_matrix[max_level - i][max_level + 1] = 0;
+          square_matrix[max_level + i][max_level + 3] = 0;
+          square_matrix[max_level][max_level - i] = 0;
 				}
 				
-				for (int a_sub = 0; a_sub <= 2; a_sub++)
+        for (int i{ 0 }; i <= 2; ++i)
         {
-          square_matrix[max_level + 5][max_level - 5 + a_sub] = 0;
-          square_matrix[max_level + 5][max_level - 1 + a_sub] = 0;
-          square_matrix[max_level - 2][max_level + 3 + a_sub] = 0;
-          square_matrix[max_level][max_level + 3 + a_sub] = 0;
-          square_matrix[max_level - 5 + a_sub][max_level + 3] = 0;
-          square_matrix[max_level - 5 + a_sub][max_level + 5] = 0;
+          square_matrix[max_level + 5][max_level - 5 + i] = 0;
+          square_matrix[max_level + 5][max_level - 1 + i] = 0;
+          square_matrix[max_level - 2][max_level + 3 + i] = 0;
+          square_matrix[max_level][max_level + 3 + i] = 0;
+          square_matrix[max_level - 5 + i][max_level + 3] = 0;
+          square_matrix[max_level - 5 + i][max_level + 5] = 0;
 				}
 				
         square_matrix[max_level + 5][max_level + 5] = 0;
@@ -1541,19 +1513,19 @@ int main()
 			
 			if (level == 27)
 			{
-				for (int a_sub = -27; a_sub <= 27; a_sub += 6)
+        for (int i{ -27 }; i <= 27; i += 6)
         {
-					for (int b_sub = -size_level; b_sub <= size_level; b_sub++)
+          for (int j{ -size_level }; j <= size_level; ++j)
           {
-            square_matrix[max_level + a_sub][max_level + b_sub] = 1;
-            square_matrix[max_level + b_sub][max_level + a_sub] = 1;
+            square_matrix[max_level + i][max_level + j] = 1;
+            square_matrix[max_level + j][max_level + i] = 1;
           }
 				}
 				
-				for (int a_sub = -24; a_sub <= 24; a_sub += 6)
+        for (int i{ -24 }; i <= 24; i += 6)
         {
-					for (int b_sub = -24; b_sub <= 24; b_sub += 6)
-          { square_matrix[max_level + a_sub][max_level + b_sub] = 5; }
+          for (int j{ -24 }; j <= 24; j += 6)
+          { square_matrix[max_level + i][max_level + j] = 5; }
 				}
 				
         square_matrix[max_level - 1][max_level + 1] = 1;
@@ -1586,46 +1558,46 @@ int main()
 			
 			if (level == 28)
       {
-				for (int a_sub = 27; a_sub <= 28; a_sub++)
+        for (int i{ 27 }; i <= 28; ++i)
         {
-					for (int b_sub = 27; b_sub <= 28; b_sub++)
+          for (int j{ 27 }; j <= 28; ++j)
           {
-						square_matrix[max_level + a_sub][max_level + b_sub] = 6;
-						square_matrix[max_level - a_sub][max_level + b_sub] = 6;
-						square_matrix[max_level + a_sub][max_level - b_sub] = 6;
-            square_matrix[max_level - a_sub][max_level - b_sub] = 6;
+            square_matrix[max_level + i][max_level + j] = 6;
+            square_matrix[max_level - i][max_level + j] = 6;
+            square_matrix[max_level + i][max_level - j] = 6;
+            square_matrix[max_level - i][max_level - j] = 6;
           }
 				}
 									
         square_matrix[max_level + 28][max_level + 28] = 2;
 				square_matrix[max_level - 28][max_level - 28] = 4;
 				
-				for (int a_sub = -15; a_sub <= 15; a_sub += 6)
+        for (int i{ -15 }; i <= 15; i += 6)
         {
-					for (int b_sub = -16; b_sub <= 16; b_sub++)
+          for (int j{ -16 }; j <= 16; ++j)
           {
-            square_matrix[max_level + a_sub][max_level + b_sub] = 1;
-            square_matrix[max_level + b_sub][max_level + a_sub] = 1;
+            square_matrix[max_level + i][max_level + j] = 1;
+            square_matrix[max_level + j][max_level + i] = 1;
           }
         }
 				
-				for (int a_sub = -12; a_sub <= 12; a_sub += 6)
+        for (int i{ -12 }; i <= 12; i += 6)
         {
-					for (int b_sub = -12; b_sub <= 12; b_sub += 6)
-          { square_matrix[max_level + a_sub][max_level + b_sub] = 5; }
+          for (int j{ -12 }; j <= 12; j += 6)
+          { square_matrix[max_level + i][max_level + j] = 5; }
         }
 			}
 			
 			if (level == 29)
       {
-				for (int a_sub = 28; a_sub <= 29; a_sub++)
+        for (int i{ 28 }; i <= 29; ++i)
         {
-					for (int b_sub = 28; b_sub <= 29; b_sub++)
+          for (int j{ 28 }; j <= 29; ++j)
           {
-						square_matrix[max_level + a_sub][max_level + b_sub] = 7;
-						square_matrix[max_level - a_sub][max_level + b_sub] = 7;
-						square_matrix[max_level + a_sub][max_level - b_sub] = 7;
-            square_matrix[max_level - a_sub][max_level - b_sub] = 7;
+            square_matrix[max_level + i][max_level + j] = 7;
+            square_matrix[max_level - i][max_level + j] = 7;
+            square_matrix[max_level + i][max_level - j] = 7;
+            square_matrix[max_level - i][max_level - j] = 7;
           }
 				}
 									
@@ -1649,14 +1621,14 @@ int main()
 			
 			if (level == 33)
       {
-				for (int a_sub = 0; a_sub <= 2; a_sub++)
+        for (int i{ 0 }; i <= 2; ++i)
         {
-					for (int b_sub = 0; b_sub <= 2; b_sub++)
+          for (int j{ 0 }; j <= 2; ++j)
           {
-						square_matrix[max_level + level - a_sub][max_level + level - b_sub] = 7;
-						square_matrix[max_level - level + a_sub][max_level + level - b_sub] = 7;
-						square_matrix[max_level + level - a_sub][max_level - level + b_sub] = 7;
-            square_matrix[max_level - level + a_sub][max_level - level + b_sub] = 7;
+            square_matrix[max_level + level - i][max_level + level - j] = 7;
+            square_matrix[max_level - level + i][max_level + level - j] = 7;
+            square_matrix[max_level + level - i][max_level - level + j] = 7;
+            square_matrix[max_level - level + i][max_level - level + j] = 7;
           }
 				}
 					
@@ -1683,10 +1655,10 @@ int main()
       {
 				square_matrix[max_level][1 + max_level] = 1;
 				
-				for (int a_sub = -1; a_sub <= 1; a_sub = a_sub + 2)
+        for (int i{ -1 }; i <= 1; i += 2)
         {
-					for (int b_sub = -1; b_sub <= 1; b_sub++)
-          { square_matrix[a_sub + max_level][b_sub + max_level] = 1; }
+          for (int j{ -1 }; j <= 1; ++j)
+          { square_matrix[i + max_level][j + max_level] = 1; }
         }
       }
 
@@ -1959,83 +1931,83 @@ int main()
 			local_y = -1;
 			
       view.setCenter(0, -squarep);
-			view.setRotation(0);
+      view.setRotation(0.0f);
 			
-			scanner_sprite.setPosition(sf::Vector2f(0, -squarep));			
-			scanner_sprite.setRotation(0);			
+      scanner_sprite.setPosition(-up_square);
+      scanner_sprite.setRotation(0.0f);
 			
 			compass_back_sprite.setOrigin(sf::Vector2f(12, 12));
-			compass_back_sprite.setPosition(sf::Vector2f(0, -squarep));			
-			compass_back_sprite.setRotation(0);
+      compass_back_sprite.setPosition(-up_square);
+      compass_back_sprite.setRotation(0.0f);
 			
 			compass_sprite.setOrigin(sf::Vector2f(12, 12));
-			compass_sprite.setPosition(sf::Vector2f(0, -squarep));			
-			compass_sprite.setRotation(0);
+      compass_sprite.setPosition(-up_square);
+      compass_sprite.setRotation(0.0f);
 			
 			arrow_sprite.setOrigin(sf::Vector2f(12, 12));
-			arrow_sprite.setPosition(sf::Vector2f(0, -squarep));			
-      arrow_sprite.setRotation(0);
+      arrow_sprite.setPosition(-up_square);
+      arrow_sprite.setRotation(0.0f);
 
-			infobox.setPosition(sf::Vector2f(0, -squarep));			
-      infobox.setRotation(0);
+      infobox.setPosition(-up_square);
+      infobox.setRotation(0.0f);
 			
-			key_up_sprite.setPosition(sf::Vector2f(0, -squarep));
-			key_up_sprite.setRotation(0);
+      key_up_sprite.setPosition(-up_square);
+      key_up_sprite.setRotation(0.0f);
 			
-			key_right_sprite.setPosition(sf::Vector2f(0, -squarep));
-			key_right_sprite.setRotation(0);
+      key_right_sprite.setPosition(-up_square);
+      key_right_sprite.setRotation(0.0f);
 			
-			key_down_sprite.setPosition(sf::Vector2f(0, -squarep));
-			key_down_sprite.setRotation(0);
+      key_down_sprite.setPosition(-up_square);
+      key_down_sprite.setRotation(0.0f);
 			
-			key_left_sprite.setPosition(sf::Vector2f(0, -squarep));
-			key_left_sprite.setRotation(0);
+      key_left_sprite.setPosition(-up_square);
+      key_left_sprite.setRotation(0.0f);
 			
-			key_d_sprite.setPosition(sf::Vector2f(0, -squarep));
-			key_d_sprite.setRotation(0);
+      key_d_sprite.setPosition(-up_square);
+      key_d_sprite.setRotation(0.0f);
 			
-			key_right_turn_sprite.setPosition(sf::Vector2f(0, -squarep));
-			key_right_turn_sprite.setRotation(0);
+      key_right_turn_sprite.setPosition(-up_square);
+      key_right_turn_sprite.setRotation(0.0f);
 			
-			key_a_sprite.setPosition(sf::Vector2f(0, -squarep));
-			key_a_sprite.setRotation(0);
+      key_a_sprite.setPosition(-up_square);
+      key_a_sprite.setRotation(0.0f);
 			
-			key_left_turn_sprite.setPosition(sf::Vector2f(0, -squarep));
-			key_left_turn_sprite.setRotation(0);
+      key_left_turn_sprite.setPosition(-up_square);
+      key_left_turn_sprite.setRotation(0.0f);
 			
-			key_w_sprite.setPosition(sf::Vector2f(0, -squarep));
-			key_w_sprite.setRotation(0);
+      key_w_sprite.setPosition(-up_square);
+      key_w_sprite.setRotation(0.0f);
 			
-			exchange_sprite.setPosition(sf::Vector2f(0, -squarep));
-			exchange_sprite.setRotation(0);
+      exchange_sprite.setPosition(-up_square);
+      exchange_sprite.setRotation(0.0f);
 
-			key_r_sprite.setPosition(sf::Vector2f(0, -squarep));
-			key_r_sprite.setRotation(0);
+      key_r_sprite.setPosition(-up_square);
+      key_r_sprite.setRotation(0.0f);
 			
-			reset_sprite.setPosition(sf::Vector2f(0, -squarep));
-			reset_sprite.setRotation(0);
+      reset_sprite.setPosition(-up_square);
+      reset_sprite.setRotation(0.0f);
 			
-			key_esc_sprite.setPosition(sf::Vector2f(0, -squarep));
-			key_esc_sprite.setRotation(0);
+      key_esc_sprite.setPosition(-up_square);
+      key_esc_sprite.setRotation(0.0f);
 			
-			for (int b_sub = 0; b_sub <= max_pow; b_sub++)
+      for (int j{ 0 }; j <= max_pow; ++j)
       {
-				level_sprite[b_sub].setPosition(sf::Vector2f(0, -squarep));
-				level_sprite[b_sub].setRotation(0);
+        level_sprite[static_cast<unsigned>(j)].setPosition(-up_square);
+        level_sprite[static_cast<unsigned>(j)].setRotation(0.0f);
 				
-				dollar_sprite[b_sub].setPosition(sf::Vector2f(0, -squarep));
-        dollar_sprite[b_sub].setRotation(0);
+        dollar_sprite[static_cast<unsigned>(j)].setPosition(-up_square);
+        dollar_sprite[static_cast<unsigned>(j)].setRotation(0.0f);
 			}
 			
-			for (int a_sub = 0; a_sub < number_max; a_sub++)
+      for (int i{ 0 }; i < number_max; ++i)
       {
-				for (int b_sub = 0; b_sub <= max_pow; b_sub++)
+        for (int j{ 0 }; j <= max_pow; ++j)
         {
-					number_sprite[a_sub][b_sub].setPosition(sf::Vector2f(0, -squarep));
-					number_sprite[a_sub][b_sub].setRotation(0);
+          number_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)].setPosition(-up_square);
+          number_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)].setRotation(0.0f);
 					
-					dosh_sprite[a_sub][b_sub].setPosition(sf::Vector2f(0, -squarep));
-          dosh_sprite[a_sub][b_sub].setRotation(0);
+          dosh_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)].setPosition(-up_square);
+          dosh_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)].setRotation(0.0f);
         }
 			}
 
@@ -2076,9 +2048,7 @@ int main()
 			scan_pos_x = 0;
       scan_pos_y = -squarep;
 							
-			view_glitch = true;
-			
-			position_declare = true;
+      view_glitch = true;
 
       mouse_pressed = false;
 
@@ -2103,12 +2073,9 @@ int main()
 				
 				if (dark_setback)
         {
-					level_recet = true;
-					
-					view_glitch = true;
-					
-					action = true;
-					
+					level_recet = true;					
+					view_glitch = true;					
+					action = true;					
 					dark_flicker = true;
 					
 					local_x = 0;
@@ -2116,50 +2083,50 @@ int main()
 			
 					view.setCenter(0, -squarep);
 					
-          scanner_sprite.setPosition(sf::Vector2f(0, -squarep));
+          scanner_sprite.setPosition(-up_square);
 					
 					compass_back_sprite.setOrigin(sf::Vector2f(12, 12));
-          compass_back_sprite.setPosition(sf::Vector2f(0, -squarep));
+          compass_back_sprite.setPosition(-up_square);
 					
 					compass_sprite.setOrigin(sf::Vector2f(12, 12));
-          compass_sprite.setPosition(sf::Vector2f(0, -squarep));
+          compass_sprite.setPosition(-up_square);
 
 					arrow_sprite.setOrigin(sf::Vector2f(12, 12));
-          arrow_sprite.setPosition(sf::Vector2f(0, -squarep));
+          arrow_sprite.setPosition(-up_square);
 					
-          infobox.setPosition(sf::Vector2f(0, -squarep));
+          infobox.setPosition(-up_square);
 
-					key_up_sprite.setPosition(sf::Vector2f(0, -squarep));
-					key_right_sprite.setPosition(sf::Vector2f(0, -squarep));	
-					key_down_sprite.setPosition(sf::Vector2f(0, -squarep));	
-					key_left_sprite.setPosition(sf::Vector2f(0, -squarep));	
+          key_up_sprite.setPosition(-up_square);
+          key_right_sprite.setPosition(-up_square);
+          key_down_sprite.setPosition(-up_square);
+          key_left_sprite.setPosition(-up_square);
 					
-					key_d_sprite.setPosition(sf::Vector2f(0, -squarep));
-					key_right_turn_sprite.setPosition(sf::Vector2f(0, -squarep));	
+          key_d_sprite.setPosition(-up_square);
+          key_right_turn_sprite.setPosition(-up_square);
 					
-					key_a_sprite.setPosition(sf::Vector2f(0, -squarep));	
-					key_left_turn_sprite.setPosition(sf::Vector2f(0, -squarep));	
+          key_a_sprite.setPosition(-up_square);
+          key_left_turn_sprite.setPosition(-up_square);
 					
-					key_w_sprite.setPosition(sf::Vector2f(0, -squarep));	
-					exchange_sprite.setPosition(sf::Vector2f(0, -squarep));
+          key_w_sprite.setPosition(-up_square);
+          exchange_sprite.setPosition(-up_square);
 
-					key_r_sprite.setPosition(sf::Vector2f(0, -squarep));	
-					reset_sprite.setPosition(sf::Vector2f(0, -squarep));
+          key_r_sprite.setPosition(-up_square);
+          reset_sprite.setPosition(-up_square);
 					
-					key_esc_sprite.setPosition(sf::Vector2f(0, -squarep));
+          key_esc_sprite.setPosition(-up_square);
 					
-					for (int b_sub = 0; b_sub <= max_pow; b_sub++)
+          for (int j{ 0 }; j <= max_pow; ++j)
           {
-						level_sprite[b_sub].setPosition(sf::Vector2f(0, -squarep));
-            dollar_sprite[b_sub].setPosition(sf::Vector2f(0, -squarep));
+            level_sprite[static_cast<unsigned>(j)].setPosition(-up_square);
+            dollar_sprite[static_cast<unsigned>(j)].setPosition(-up_square);
 					}
 
-					for (int a_sub = 0; a_sub < number_max; a_sub++)
+          for (int i{ 0 }; i < number_max; ++i)
           {
-						for (int b_sub = 0; b_sub <= max_pow; b_sub++)
+            for (int j{ 0 }; j <= max_pow; ++j)
             {
-							number_sprite[a_sub][b_sub].setPosition(sf::Vector2f(0, -squarep));
-              dosh_sprite[a_sub][b_sub].setPosition(sf::Vector2f(0, -squarep));
+              number_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)].setPosition(-up_square);
+              dosh_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)].setPosition(-up_square);
             }
           }
 					
@@ -2179,9 +2146,9 @@ int main()
         {
           window.clear(black);
 					
-					for (int a_sub = -max_view; a_sub <= max_view; a_sub++)
+          for (int i{ -max_view }; i <= max_view; ++i)
           {
-						pot_x = local_x + a_sub;						
+            pot_x = local_x + i;
 						pos_x = pot_x*squarep;
 						
 						if (pot_x > size_level)
@@ -2190,9 +2157,9 @@ int main()
 						if (pot_x < -size_level)
             { pot_x = pot_x + level_side; }
 
-						for (int b_sub = -max_view; b_sub <= max_view; b_sub++)
+            for (int j{ -max_view }; j <= max_view; ++j)
             {
-              pot_y = local_y + b_sub;
+              pot_y = local_y + j;
 							pos_y = pot_y*squarep;
 						
 							if (pot_y > size_level)
@@ -2204,7 +2171,7 @@ int main()
 							Color_Picker(square_matrix[pot_x + max_level][pot_y + max_level], colours, exit_colors);
 
 							if (square_matrix[pot_x + max_level][pot_y + max_level] == 3)
-              { dark_transp = exp(-sqrt(1.0*a_sub*a_sub + 1.0*b_sub*b_sub)/(dark_mult)); }
+              { dark_transp = exp(-sqrt(1.0f*i*i + 1.0f*j*j)/(dark_mult)); }
 							
 							bitsquare_sprite.setPosition(pos_x, pos_y);
 							
@@ -2351,43 +2318,43 @@ int main()
 					
 					while (abs(crunchy_number) > 0)
           {
-            window.draw(number_sprite[abs(crunchy_number) % 10][crunched]);
+            window.draw(number_sprite[abs(crunchy_number) % 10][static_cast<unsigned>(crunched)]);
             crunchy_number = crunchy_number/10;
             ++crunched;
 					}
 					
-          window.draw(level_sprite[crunched]);
+          window.draw(level_sprite[static_cast<unsigned>(crunched)]);
 					
-					for (int b_sub = 0; b_sub <= max_pow; b_sub++)
-          { dollar_sprite[b_sub].setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], blink)); }
+          for (int j{ 0 }; j <= max_pow; ++j)
+          { dollar_sprite[j].setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], blink)); }
 					
 					crunchy_number = dosh;					
 					crunched = 0;
 					
 					if (crunchy_number == 0)
           {
-            window.draw(dosh_sprite[crunchy_number][crunched]);
+            window.draw(dosh_sprite[static_cast<unsigned>(crunchy_number)][static_cast<unsigned>(crunched)]);
             ++crunched;
           }
 					
 					while (abs(crunchy_number) > 0)
           {
-            window.draw(dosh_sprite[abs(crunchy_number) % 10][crunched]);
+            window.draw(dosh_sprite[abs(crunchy_number) % 10][static_cast<unsigned>(crunched)]);
             crunchy_number = crunchy_number/10;
             ++crunched;
 					}
 					
 					if (dosh < 0)
-          { window.draw(dosh_sprite[10][crunched]); }
+          { window.draw(dosh_sprite[10][static_cast<unsigned>(crunched)]); }
 								
-          window.draw(dollar_sprite[crunched]);
+          window.draw(dollar_sprite[static_cast<unsigned>(crunched)]);
           window.display();
 					
           Color_Picker(level, kolours, exit_colors);
 					Color_Picker(2, key_colour, exit_colors);
 					
-					for (int a_sub = 0; a_sub <= 2; a_sub++)
-          { key_colour[a_sub] = 128 + key_colour[a_sub]/2; }
+          for (int i{ 0 }; i <= 2; ++i)
+          { key_colour[i] = 128 + key_colour[i]/2; }
 					
 					Exit_Multicolor(exit_colors);
 
@@ -2615,9 +2582,7 @@ int main()
 						
             one_turn_uplight = true;
             key_left_uplight = true;
-					}
-										
-					position_declare = true;
+          }
 
 					if ((abs(local_x + dir_direct[0]) <= size_level) &&
 						(abs(local_y + dir_direct[1]) <= size_level) &&
@@ -2650,42 +2615,45 @@ int main()
             local_x = local_x - level_side;
 
 						view.move(-level_side*squarep, 0);
+
+            const sf::Vector2f level_side_right_squares
+            { static_cast<float>(level_side)*-left_square };
 						
-            scanner_sprite.move(sf::Vector2f(-level_side*squarep, 0));
-            compass_back_sprite.move(sf::Vector2f(-level_side*squarep, 0));
-            compass_sprite.move(sf::Vector2f(-level_side*squarep, 0));
-            arrow_sprite.move(sf::Vector2f(-level_side*squarep, 0));
-            infobox.move(sf::Vector2f(-level_side*squarep, 0));
+            scanner_sprite.move(level_side_right_squares);
+            compass_back_sprite.move(level_side_right_squares);
+            compass_sprite.move(level_side_right_squares);
+            arrow_sprite.move(level_side_right_squares);
+            infobox.move(level_side_right_squares);
 							
-						key_up_sprite.move(sf::Vector2f(-level_side*squarep, 0));
-						key_right_sprite.move(sf::Vector2f(-level_side*squarep, 0));
-						key_down_sprite.move(sf::Vector2f(-level_side*squarep, 0));
-						key_left_sprite.move(sf::Vector2f(-level_side*squarep, 0));
+            key_up_sprite.move(level_side_right_squares);
+            key_right_sprite.move(level_side_right_squares);
+            key_down_sprite.move(level_side_right_squares);
+            key_left_sprite.move(level_side_right_squares);
 							
-						key_d_sprite.move(sf::Vector2f(-level_side*squarep, 0));
-            key_right_turn_sprite.move(sf::Vector2f(-level_side*squarep, 0));
-						key_a_sprite.move(sf::Vector2f(-level_side*squarep, 0));
-						key_left_turn_sprite.move(sf::Vector2f(-level_side*squarep, 0));
+            key_d_sprite.move(level_side_right_squares);
+            key_right_turn_sprite.move(level_side_right_squares);
+            key_a_sprite.move(level_side_right_squares);
+            key_left_turn_sprite.move(level_side_right_squares);
 							
-						key_w_sprite.move(sf::Vector2f(-level_side*squarep, 0));
-						exchange_sprite.move(sf::Vector2f(-level_side*squarep, 0));
-						key_r_sprite.move(sf::Vector2f(-level_side*squarep, 0));
-						reset_sprite.move(sf::Vector2f(-level_side*squarep, 0));
+            key_w_sprite.move(level_side_right_squares);
+            exchange_sprite.move(level_side_right_squares);
+            key_r_sprite.move(level_side_right_squares);
+            reset_sprite.move(level_side_right_squares);
 							
-						key_esc_sprite.move(sf::Vector2f(-level_side*squarep, 0));
+            key_esc_sprite.move(level_side_right_squares);
 						
-						for (int b_sub = 0; b_sub <= max_pow; b_sub++)
+            for (int j{ 0 }; j <= max_pow; ++j)
             {
-							level_sprite[b_sub].move(sf::Vector2f(-level_side*squarep, 0));
-              dollar_sprite[b_sub].move(sf::Vector2f(-level_side*squarep, 0));
+              level_sprite[static_cast<unsigned>(j)].move(level_side_right_squares);
+              dollar_sprite[static_cast<unsigned>(j)].move(level_side_right_squares);
 						}
 
-						for (int a_sub = 0; a_sub < number_max; a_sub++)
+            for (int i{ 0 }; i < number_max; ++i)
             {
-							for (int b_sub = 0; b_sub <= max_pow; b_sub++)
+              for (int j{ 0 }; j <= max_pow; ++j)
               {
-								number_sprite[a_sub][b_sub].move(sf::Vector2f(-level_side*squarep, 0));
-                dosh_sprite[a_sub][b_sub].move(sf::Vector2f(-level_side*squarep, 0));
+                number_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)].move(level_side_right_squares);
+                dosh_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)].move(level_side_right_squares);
               }
             }
 							
@@ -2709,41 +2677,44 @@ int main()
 							
             view.move(level_side*squarep, 0);
 
-            scanner_sprite.move(sf::Vector2f(level_side*squarep, 0));
-            compass_back_sprite.move(sf::Vector2f(level_side*squarep, 0));
-            compass_sprite.move(sf::Vector2f(level_side*squarep, 0));
-            arrow_sprite.move(sf::Vector2f(level_side*squarep, 0));
-            infobox.move(sf::Vector2f(level_side*squarep, 0));
+            const sf::Vector2f level_side_left_squares
+            { static_cast<float>(level_side)*left_square };
+
+            scanner_sprite.move(level_side_left_squares);
+            compass_back_sprite.move(level_side_left_squares);
+            compass_sprite.move(level_side_left_squares);
+            arrow_sprite.move(level_side_left_squares);
+            infobox.move(level_side_left_squares);
 							
-						key_up_sprite.move(sf::Vector2f(level_side*squarep, 0));
-						key_right_sprite.move(sf::Vector2f(level_side*squarep, 0));
-						key_down_sprite.move(sf::Vector2f(level_side*squarep, 0));
-						key_left_sprite.move(sf::Vector2f(level_side*squarep, 0));
+            key_up_sprite.move(level_side_left_squares);
+            key_right_sprite.move(level_side_left_squares);
+            key_down_sprite.move(level_side_left_squares);
+            key_left_sprite.move(level_side_left_squares);
 							
-						key_d_sprite.move(sf::Vector2f(level_side*squarep, 0));
-            key_right_turn_sprite.move(sf::Vector2f(level_side*squarep, 0));
-						key_a_sprite.move(sf::Vector2f(level_side*squarep, 0));
-						key_left_turn_sprite.move(sf::Vector2f(level_side*squarep, 0));
+            key_d_sprite.move(level_side_left_squares);
+            key_right_turn_sprite.move(level_side_left_squares);
+            key_a_sprite.move(level_side_left_squares);
+            key_left_turn_sprite.move(level_side_left_squares);
 						
-						key_w_sprite.move(sf::Vector2f(level_side*squarep, 0));
-						exchange_sprite.move(sf::Vector2f(level_side*squarep, 0));
-						key_r_sprite.move(sf::Vector2f(level_side*squarep, 0));
-						reset_sprite.move(sf::Vector2f(level_side*squarep, 0));
+            key_w_sprite.move(level_side_left_squares);
+            exchange_sprite.move(level_side_left_squares);
+            key_r_sprite.move(level_side_left_squares);
+            reset_sprite.move(level_side_left_squares);
 						
-						key_esc_sprite.move(sf::Vector2f(level_side*squarep, 0));
+            key_esc_sprite.move(level_side_left_squares);
 						
-						for (int b_sub = 0; b_sub <= max_pow; b_sub++)
+            for (int j{ 0 }; j <= max_pow; ++j)
             {
-							level_sprite[b_sub].move(sf::Vector2f(level_side*squarep, 0));
-              dollar_sprite[b_sub].move(sf::Vector2f(level_side*squarep, 0));
+              level_sprite[static_cast<unsigned>(j)].move(level_side_left_squares);
+              dollar_sprite[static_cast<unsigned>(j)].move(level_side_left_squares);
 						}
 							
-						for (int a_sub = 0; a_sub < number_max; a_sub++)
+            for (int i{ 0 }; i < number_max; ++i)
             {
-							for (int b_sub = 0; b_sub <= max_pow; b_sub++)
+              for (int j{ 0 }; j <= max_pow; ++j)
               {
-								number_sprite[a_sub][b_sub].move(sf::Vector2f(level_side*squarep, 0));
-                dosh_sprite[a_sub][b_sub].move(sf::Vector2f(level_side*squarep, 0));
+                number_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)].move(level_side_left_squares);
+                dosh_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)].move(level_side_left_squares);
               }
             }
 
@@ -2764,43 +2735,47 @@ int main()
 						local_x = local_x + dir_direct[0];
             local_y = local_y + dir_direct[1];
 						local_y = local_y - level_side;
-							
+
             view.move(0, -level_side*squarep);
-            scanner_sprite.move(sf::Vector2f(0, -level_side*squarep));
-            compass_back_sprite.move(sf::Vector2f(0, -level_side*squarep));
-            compass_sprite.move(sf::Vector2f(0, -level_side*squarep));
-            arrow_sprite.move(sf::Vector2f(0, -level_side*squarep));
-            infobox.move(sf::Vector2f(0, -level_side*squarep));
+
+            const sf::Vector2f level_side_down_squares
+            { static_cast<float>(level_side)*-up_square };
+
+            scanner_sprite.move(level_side_down_squares);
+            compass_back_sprite.move(level_side_down_squares);
+            compass_sprite.move(level_side_down_squares);
+            arrow_sprite.move(level_side_down_squares);
+            infobox.move(level_side_down_squares);
 							
-						key_up_sprite.move(sf::Vector2f(0, -level_side*squarep));							
-						key_right_sprite.move(sf::Vector2f(0, -level_side*squarep));							
-						key_down_sprite.move(sf::Vector2f(0, -level_side*squarep));							
-						key_left_sprite.move(sf::Vector2f(0, -level_side*squarep));
+            key_up_sprite.move(level_side_down_squares);
+            key_right_sprite.move(level_side_down_squares);
+            key_down_sprite.move(level_side_down_squares);
+            key_left_sprite.move(level_side_down_squares);
 							
-						key_d_sprite.move(sf::Vector2f(0, -level_side*squarep));
-            key_right_turn_sprite.move(sf::Vector2f(0, -level_side*squarep));
-						key_a_sprite.move(sf::Vector2f(0, -level_side*squarep));
-						key_left_turn_sprite.move(sf::Vector2f(0, -level_side*squarep));
+            key_d_sprite.move(level_side_down_squares);
+            key_right_turn_sprite.move(level_side_down_squares);
+            key_a_sprite.move(level_side_down_squares);
+            key_left_turn_sprite.move(level_side_down_squares);
 							
-						key_w_sprite.move(sf::Vector2f(0, -level_side*squarep));
-						exchange_sprite.move(sf::Vector2f(0, -level_side*squarep));
-						key_r_sprite.move(sf::Vector2f(0, -level_side*squarep));
-						reset_sprite.move(sf::Vector2f(0, -level_side*squarep));
+            key_w_sprite.move(level_side_down_squares);
+            exchange_sprite.move(level_side_down_squares);
+            key_r_sprite.move(level_side_down_squares);
+            reset_sprite.move(level_side_down_squares);
 							
-						key_esc_sprite.move(sf::Vector2f(0, -level_side*squarep));
+            key_esc_sprite.move(level_side_down_squares);
 						
-						for (int b_sub = 0; b_sub <= max_pow; b_sub++)
+            for (int j{ 0 }; j <= max_pow; ++j)
             {
-							level_sprite[b_sub].move(sf::Vector2f(0, -level_side*squarep));
-              dollar_sprite[b_sub].move(sf::Vector2f(0, -level_side*squarep));
+              level_sprite[static_cast<unsigned>(j)].move(level_side_down_squares);
+              dollar_sprite[static_cast<unsigned>(j)].move(level_side_down_squares);
 						}
 
-						for (int a_sub = 0; a_sub < number_max; a_sub++)
+            for (int i{ 0 }; i < number_max; ++i)
             {
-							for (int b_sub = 0; b_sub <= max_pow; b_sub++)
+              for (int j{ 0 }; j <= max_pow; ++j)
               {
-								number_sprite[a_sub][b_sub].move(sf::Vector2f(0, -level_side*squarep));
-                dosh_sprite[a_sub][b_sub].move(sf::Vector2f(0, -level_side*squarep));
+                number_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)].move(level_side_down_squares);
+                dosh_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)].move(level_side_down_squares);
               }
             }
 						
@@ -2823,41 +2798,45 @@ int main()
 						local_y = local_y + level_side;
 							
             view.move(0, level_side*squarep);
-            scanner_sprite.move(sf::Vector2f(0, level_side*squarep));
-            compass_back_sprite.move(sf::Vector2f(0, level_side*squarep));
-            compass_sprite.move(sf::Vector2f(0, level_side*squarep));
-            arrow_sprite.move(sf::Vector2f(0, level_side*squarep));
-            infobox.move(sf::Vector2f(0, level_side*squarep));
+
+            const sf::Vector2f level_side_up_squares
+            { static_cast<float>(level_side)*up_square };
+
+            scanner_sprite.move(level_side_up_squares);
+            compass_back_sprite.move(level_side_up_squares);
+            compass_sprite.move(level_side_up_squares);
+            arrow_sprite.move(level_side_up_squares);
+            infobox.move(level_side_up_squares);
 							
-						key_up_sprite.move(sf::Vector2f(0, level_side*squarep));
-						key_right_sprite.move(sf::Vector2f(0, level_side*squarep));
-						key_down_sprite.move(sf::Vector2f(0, level_side*squarep));
-						key_left_sprite.move(sf::Vector2f(0, level_side*squarep));
+            key_up_sprite.move(level_side_up_squares);
+            key_right_sprite.move(level_side_up_squares);
+            key_down_sprite.move(level_side_up_squares);
+            key_left_sprite.move(level_side_up_squares);
 							
-						key_d_sprite.move(sf::Vector2f(0, level_side*squarep));
-            key_right_turn_sprite.move(sf::Vector2f(0, level_side*squarep));
-						key_a_sprite.move(sf::Vector2f(0, level_side*squarep));
-						key_left_turn_sprite.move(sf::Vector2f(0, level_side*squarep));
+            key_d_sprite.move(level_side_up_squares);
+            key_right_turn_sprite.move(level_side_up_squares);
+            key_a_sprite.move(level_side_up_squares);
+            key_left_turn_sprite.move(level_side_up_squares);
 							
-						key_w_sprite.move(sf::Vector2f(0, level_side*squarep));
-						exchange_sprite.move(sf::Vector2f(0, level_side*squarep));
-						key_r_sprite.move(sf::Vector2f(0, level_side*squarep));
-						reset_sprite.move(sf::Vector2f(0, level_side*squarep));
+            key_w_sprite.move(level_side_up_squares);
+            exchange_sprite.move(level_side_up_squares);
+            key_r_sprite.move(level_side_up_squares);
+            reset_sprite.move(level_side_up_squares);
 							
-						key_esc_sprite.move(sf::Vector2f(0, level_side*squarep));
+            key_esc_sprite.move(level_side_up_squares);
 						
-						for (int b_sub = 0; b_sub <= max_pow; b_sub++)
+            for (int j{ 0 }; j <= max_pow; ++j)
             {
-							level_sprite[b_sub].move(sf::Vector2f(0, level_side*squarep));
-              dollar_sprite[b_sub].move(sf::Vector2f(0, level_side*squarep));
+              level_sprite[static_cast<unsigned>(j)].move(level_side_up_squares);
+              dollar_sprite[static_cast<unsigned>(j)].move(level_side_up_squares);
 						}
 
-						for (int a_sub = 0; a_sub < number_max; a_sub++)
+            for (int i{ 0 }; i < number_max; ++i)
             {
-							for (int b_sub = 0; b_sub <= max_pow; b_sub++)
+              for (int j{ 0 }; j <= max_pow; ++j)
               {
-								number_sprite[a_sub][b_sub].move(sf::Vector2f(0, level_side*squarep));
-                dosh_sprite[a_sub][b_sub].move(sf::Vector2f(0, level_side*squarep));
+                number_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)].move(level_side_up_squares);
+                dosh_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)].move(level_side_up_squares);
               }
             }
 							
@@ -2929,13 +2908,13 @@ int main()
           one_turn_uplight = true;
 					key_a_uplight = true;
 					
-					for (int a_sub = 0; a_sub <= 1; a_sub++)
+          for (int i{ 0 }; i <= 1; ++i)
           {
-            dir_move[a_sub] = dir_up[a_sub];
-						dir_up[a_sub] = dir_left[a_sub];
-						dir_left[a_sub] = dir_down[a_sub];
-            dir_down[a_sub] = dir_right[a_sub];
-            dir_right[a_sub] = dir_move[a_sub];
+            dir_move[i] = dir_up[i];
+            dir_up[i] = dir_left[i];
+            dir_left[i] = dir_down[i];
+            dir_down[i] = dir_right[i];
+            dir_right[i] = dir_move[i];
 					}
 					
           final_rot = rot_mult*rot_right;
@@ -2952,13 +2931,13 @@ int main()
 					one_turn_uplight = true;
 					key_d_uplight = true;
 					
-					for (int a_sub = 0; a_sub <= 1; a_sub++)
+          for (int i{ 0 }; i <= 1; ++i)
           {
-            dir_move[a_sub] = dir_up[a_sub];
-						dir_up[a_sub] = dir_right[a_sub];
-						dir_right[a_sub] = dir_down[a_sub];
-            dir_down[a_sub] = dir_left[a_sub];
-            dir_left[a_sub] = dir_move[a_sub];
+            dir_move[i] = dir_up[i];
+            dir_up[i] = dir_right[i];
+            dir_right[i] = dir_down[i];
+            dir_down[i] = dir_left[i];
+            dir_left[i] = dir_move[i];
 					}
 					
           final_rot = rot_mult*rot_left;
@@ -2988,24 +2967,24 @@ int main()
 				
 				if (((level == 27) || (level == 28)) && !delay_flipping)
         {
-					for (int a_sub = -24; a_sub <= 24; a_sub += 6)
+          for (int i{ -24 }; i <= 24; i += 6)
           {
-						for (int b_sub = -24; b_sub <= 24; b_sub += 6)
+            for (int j{ -24 }; j <= 24; j += 6)
             {
-							if (((square_matrix[max_level + a_sub][max_level + b_sub] == 5) ||
-                   (square_matrix[max_level + a_sub][max_level + b_sub] == 6) ||
-                   (square_matrix[max_level + a_sub][max_level + b_sub] == 7) ||
-                   (square_matrix[max_level + a_sub][max_level + b_sub] == 8)) &&
-                   (square_matrix[max_level + a_sub + 1][max_level + b_sub] == 10) &&
-                   (square_matrix[max_level + a_sub - 1][max_level + b_sub] == 10) &&
-                   (square_matrix[max_level + a_sub][max_level + b_sub + 1] == 10) &&
-                   (square_matrix[max_level + a_sub][max_level + b_sub - 1] == 10))
+              if (((square_matrix[max_level + i][max_level + j] == 5) ||
+                   (square_matrix[max_level + i][max_level + j] == 6) ||
+                   (square_matrix[max_level + i][max_level + j] == 7) ||
+                   (square_matrix[max_level + i][max_level + j] == 8)) &&
+                   (square_matrix[max_level + i + 1][max_level + j] == 10) &&
+                   (square_matrix[max_level + i - 1][max_level + j] == 10) &&
+                   (square_matrix[max_level + i][max_level + j + 1] == 10) &&
+                   (square_matrix[max_level + i][max_level + j - 1] == 10))
               {
                 delay_flip = 2;
 								delay_flipping = true;
 								
-                coord_a_sub = a_sub;
-                coord_b_sub = b_sub;
+                coord_i = i;
+                coord_j = j;
               }
             }
           }
@@ -3017,7 +2996,7 @@ int main()
 					cumu_move[1] = 0;
 					
           if (exhale)
-          { paruto = 0.08; }
+          { paruto = 0.08f; }
 				
 					for (int actions = 1; actions <= transitions; actions++)
           {
@@ -3026,7 +3005,7 @@ int main()
             if (level_reset || exhale)
             {
 							if (toransupu < 255)
-              { toransupu = toransupu + 12; }
+              { toransupu += 12; }
 							
 							if (toransupu > 255)
               { toransupu = 255; }
@@ -3035,27 +3014,27 @@ int main()
             if (!level_reset && !exhale)
             {
 							if (toransupu > 0)
-              { toransupu = toransupu - 12; }
+              { toransupu -= 12; }
 							
 							if (toransupu < 0)
               { toransupu = 0; }
 						}
 						
 						if (one_turn_uplight && !two_turn_uplight)
-            { uplight_transp = uplight_transp + 12; }
+            { uplight_transp += 12; }
 						
 						if (two_turn_uplight)
-            { uplight_transp = uplight_transp + 6; }
+            { uplight_transp += 6; }
 						
 						if (uplight_transp > 255)
             { uplight_transp = 255; }
 						
 						if (!level_change && !level_back)
             {
-							paruto = paruto - 0.04;
+              paruto -= 0.04f;
 							
               if (exhale)
-              { paruto = paruto + 0.08; }
+              { paruto += 0.08f; }
 						
               sukuwarii.setSize(sf::Vector2f(2*paruto*squarrel, 2*paruto*squarrel));
               bitomasuku_supuraito.setScale(sf::Vector2f(paruto, paruto));
@@ -3103,41 +3082,44 @@ int main()
 								cumu_move[1] = cumu_move[1] + final_move[1];
 								
                 view.move(final_move[0], final_move[1]);
-                scanner_sprite.move(sf::Vector2f(final_move[0], final_move[1]));
-                compass_back_sprite.move(sf::Vector2f(final_move[0], final_move[1]));
-                compass_sprite.move(sf::Vector2f(final_move[0], final_move[1]));
-                arrow_sprite.move(sf::Vector2f(final_move[0], final_move[1]));
-                infobox.move(sf::Vector2f(final_move[0], final_move[1]));
+
+                const sf::Vector2f final_moves{ final_move[0], final_move[1]};
+
+                scanner_sprite.move(final_moves);
+                compass_back_sprite.move(final_moves);
+                compass_sprite.move(final_moves);
+                arrow_sprite.move(final_moves);
+                infobox.move(final_moves);
 								
-								key_up_sprite.move(sf::Vector2f(final_move[0], final_move[1]));								
-								key_right_sprite.move(sf::Vector2f(final_move[0], final_move[1]));								
-								key_down_sprite.move(sf::Vector2f(final_move[0], final_move[1]));								
-								key_left_sprite.move(sf::Vector2f(final_move[0], final_move[1]));
+                key_up_sprite.move(final_moves);
+                key_right_sprite.move(final_moves);
+                key_down_sprite.move(final_moves);
+                key_left_sprite.move(final_moves);
 								
-								key_d_sprite.move(sf::Vector2f(final_move[0], final_move[1]));
-                key_right_turn_sprite.move(sf::Vector2f(final_move[0], final_move[1]));
-								key_a_sprite.move(sf::Vector2f(final_move[0], final_move[1]));
-								key_left_turn_sprite.move(sf::Vector2f(final_move[0], final_move[1]));
+                key_d_sprite.move(final_moves);
+                key_right_turn_sprite.move(final_moves);
+                key_a_sprite.move(final_moves);
+                key_left_turn_sprite.move(final_moves);
 								
-								key_w_sprite.move(sf::Vector2f(final_move[0], final_move[1]));
-								exchange_sprite.move(sf::Vector2f(final_move[0], final_move[1]));
-								key_r_sprite.move(sf::Vector2f(final_move[0], final_move[1]));
-								reset_sprite.move(sf::Vector2f(final_move[0], final_move[1]));
+                key_w_sprite.move(final_moves);
+                exchange_sprite.move(final_moves);
+                key_r_sprite.move(final_moves);
+                reset_sprite.move(final_moves);
 								
-								key_esc_sprite.move(sf::Vector2f(final_move[0], final_move[1]));
+                key_esc_sprite.move(final_moves);
 								
-								for (int b_sub = 0; b_sub <= max_pow; b_sub++)
+                for (int j{ 0 }; j <= max_pow; ++j)
                 {
-									level_sprite[b_sub].move(sf::Vector2f(final_move[0], final_move[1]));
-                  dollar_sprite[b_sub].move(sf::Vector2f(final_move[0], final_move[1]));
+                  level_sprite[static_cast<unsigned>(j)].move(final_moves);
+                  dollar_sprite[static_cast<unsigned>(j)].move(final_moves);
 								}
 
-								for (int a_sub = 0; a_sub < number_max; a_sub++)
+                for (int i{ 0 }; i < number_max; ++i)
                 {
-									for (int b_sub = 0; b_sub <= max_pow; b_sub++)
+                  for (int j{ 0 }; j <= max_pow; ++j)
                   {
-										number_sprite[a_sub][b_sub].move(sf::Vector2f(final_move[0], final_move[1]));
-                    dosh_sprite[a_sub][b_sub].move(sf::Vector2f(final_move[0], final_move[1]));
+                    number_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)].move(final_moves);
+                    dosh_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)].move(final_moves);
                   }
 								}
 									
@@ -3148,43 +3130,46 @@ int main()
               {
 								cumu_move[0] = cumu_move[0] - final_move[0];
 								cumu_move[1] = cumu_move[1] - final_move[1];
-								
+
                 view.move(-final_move[0], -final_move[1]);
-                scanner_sprite.move(sf::Vector2f(-final_move[0], -final_move[1]));
+
+                const sf::Vector2f minus_final_moves{ -final_move[0], -final_move[1]};
+
+                scanner_sprite.move(minus_final_moves);
                 compass_back_sprite.move(-final_move[0], -final_move[1]);
                 compass_sprite.move(-final_move[0], -final_move[1]);
                 arrow_sprite.move(-final_move[0], -final_move[1]);
-								infobox.move(sf::Vector2f(-final_move[0], -final_move[1]));
+                infobox.move(minus_final_moves);
 								
-								key_up_sprite.move(sf::Vector2f(-final_move[0], -final_move[1]));								
-								key_right_sprite.move(sf::Vector2f(-final_move[0], -final_move[1]));								
-								key_down_sprite.move(sf::Vector2f(-final_move[0], -final_move[1]));								
-								key_left_sprite.move(sf::Vector2f(-final_move[0], -final_move[1]));
+                key_up_sprite.move(minus_final_moves);
+                key_right_sprite.move(minus_final_moves);
+                key_down_sprite.move(minus_final_moves);
+                key_left_sprite.move(minus_final_moves);
 								
-								key_d_sprite.move(sf::Vector2f(-final_move[0], -final_move[1]));
-                key_right_turn_sprite.move(sf::Vector2f(-final_move[0], -final_move[1]));
-								key_a_sprite.move(sf::Vector2f(-final_move[0], -final_move[1]));
-								key_left_turn_sprite.move(sf::Vector2f(-final_move[0], -final_move[1]));
+                key_d_sprite.move(minus_final_moves);
+                key_right_turn_sprite.move(minus_final_moves);
+                key_a_sprite.move(minus_final_moves);
+                key_left_turn_sprite.move(minus_final_moves);
 								
-								key_w_sprite.move(sf::Vector2f(-final_move[0], -final_move[1]));
-								exchange_sprite.move(sf::Vector2f(-final_move[0], -final_move[1]));
-								key_r_sprite.move(sf::Vector2f(-final_move[0], -final_move[1]));
-								reset_sprite.move(sf::Vector2f(-final_move[0], -final_move[1]));
+                key_w_sprite.move(minus_final_moves);
+                exchange_sprite.move(minus_final_moves);
+                key_r_sprite.move(minus_final_moves);
+                reset_sprite.move(minus_final_moves);
 								
-								key_esc_sprite.move(sf::Vector2f(-final_move[0], -final_move[1]));
+                key_esc_sprite.move(minus_final_moves);
 								
-								for (int b_sub = 0; b_sub <= max_pow; b_sub++)
+                for (int j{ 0 }; j <= max_pow; ++j)
                 {
-									level_sprite[b_sub].move(sf::Vector2f(-final_move[0], -final_move[1]));
-                  dollar_sprite[b_sub].move(sf::Vector2f(-final_move[0], -final_move[1]));
+                  level_sprite[static_cast<unsigned>(j)].move(minus_final_moves);
+                  dollar_sprite[static_cast<unsigned>(j)].move(minus_final_moves);
 								}
 
-								for (int a_sub = 0; a_sub < number_max; a_sub++)
+                for (int i{ 0 }; i < number_max; ++i)
                 {
-									for (int b_sub = 0; b_sub <= max_pow; b_sub++)
+                  for (int j{ 0 }; j <= max_pow; ++j)
                   {
-										number_sprite[a_sub][b_sub].move(sf::Vector2f(-final_move[0], -final_move[1]));
-                    dosh_sprite[a_sub][b_sub].move(sf::Vector2f(-final_move[0], -final_move[1]));
+                    number_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)].move(minus_final_moves);
+                    dosh_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)].move(minus_final_moves);
                   }
 								}
 																	
@@ -3220,18 +3205,18 @@ int main()
 								
 								key_esc_sprite.rotate(final_rot);
 								
-								for (int b_sub = 0; b_sub <= max_pow; b_sub++)
+                for (int j{ 0 }; j <= max_pow; ++j)
                 {
-									level_sprite[b_sub].rotate(final_rot);
-                  dollar_sprite[b_sub].rotate(final_rot);
+                  level_sprite[static_cast<unsigned>(j)].rotate(final_rot);
+                  dollar_sprite[static_cast<unsigned>(j)].rotate(final_rot);
 								}
 
-								for (int a_sub = 0; a_sub < number_max; a_sub++)
+                for (int i{ 0 }; i < number_max; ++i)
                 {
-									for (int b_sub = 0; b_sub <= max_pow; b_sub++)
+                  for (int j{ 0 }; j <= max_pow; ++j)
                   {
-										number_sprite[a_sub][b_sub].rotate(final_rot);
-                    dosh_sprite[a_sub][b_sub].rotate(final_rot);
+                    number_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)].rotate(final_rot);
+                    dosh_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)].rotate(final_rot);
                   }
                 }
 							}
@@ -3260,18 +3245,18 @@ int main()
 								
 								key_esc_sprite.rotate(-final_rot);
 								
-								for (int b_sub = 0; b_sub <= max_pow; b_sub++)
+                for (int j{ 0 }; j <= max_pow; ++j)
                 {
-									level_sprite[b_sub].rotate(-final_rot);
-                  dollar_sprite[b_sub].rotate(-final_rot);
+                  level_sprite[static_cast<unsigned>(j)].rotate(-final_rot);
+                  dollar_sprite[static_cast<unsigned>(j)].rotate(-final_rot);
 								}
 
-								for (int a_sub = 0; a_sub < number_max; a_sub++)
+                for (int i{ 0 }; i < number_max; ++i)
                 {
-									for (int b_sub = 0; b_sub <= max_pow; b_sub++)
+                  for (int j{ 0 }; j <= max_pow; ++j)
                   {
-										number_sprite[a_sub][b_sub].rotate(-final_rot);
-                    dosh_sprite[a_sub][b_sub].rotate(-final_rot);
+                    number_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)].rotate(-final_rot);
+                    dosh_sprite[static_cast<unsigned>(i)][static_cast<unsigned>(j)].rotate(-final_rot);
                   }
                 }
               }
@@ -3280,9 +3265,9 @@ int main()
             window.setView(view);
             window.clear(black);
 
-						for (int a_sub = -max_view; a_sub <= max_view; a_sub++)
+            for (int i{ -max_view }; i <= max_view; ++i)
             {
-              pot_x = local_x + a_sub;
+              pot_x = local_x + i;
 							pos_x = pot_x*squarep;
 							
 							if (pot_x > size_level)
@@ -3291,9 +3276,9 @@ int main()
 							if (pot_x < -size_level)
               { pot_x = pot_x + level_side; }
 
-							for (int b_sub = -max_view; b_sub <= max_view; b_sub++)
+              for (int j{ -max_view }; j <= max_view; ++j)
               {
-                pot_y = local_y + b_sub;
+                pot_y = local_y + j;
 								pos_y = pot_y*squarep;
 							
 								if (pot_y > size_level)
@@ -3303,16 +3288,16 @@ int main()
                 { pot_y = pot_y + level_side; }
 								
 								Color_Picker(square_matrix[pot_x + max_level][pot_y + max_level], colours, exit_colors);
-								dark_transp = dark_transp = exp(-sqrt(1.0*a_sub*a_sub + 1.0*b_sub*b_sub)/(dark_mult));
+                dark_transp = dark_transp = exp(-sqrt(1.0*i*i + 1.0*j*j)/(dark_mult));
 										
 								
 								if ((square_matrix[pot_x + max_level][pot_y + max_level] == 3) && moving)
-                { dark_transp = exp(-sqrt(1.0*(a_sub + dir_direct[0] - 1*cumu_move[0]/squarep)*(a_sub + dir_direct[0]
-                                    - 1*cumu_move[0]/squarep) + 1.0*(b_sub + dir_direct[1]
-                                    - 1*cumu_move[1]/squarep)*(b_sub + dir_direct[1] - 1*cumu_move[1]/squarep))/(dark_mult));
+                { dark_transp = exp(-sqrt(1.0f*(i + dir_direct[0] - 1.0f*cumu_move[0]/squarep)*(i + dir_direct[0]
+                                    - 1.0f*cumu_move[0]/squarep) + 1.0f*(j + dir_direct[1]
+                                    - 1.0f*cumu_move[1]/squarep)*(j + dir_direct[1] - 1.0f*cumu_move[1]/squarep))/(dark_mult));
                 }
 								
-								if ((a_sub == 0) && (b_sub == 0) && timecop)
+                if ((i == 0) && (j == 0) && timecop)
                 {
                   bitshine_sprite.setPosition(pos_x, pos_y);
                   bitshine_sprite.setColor(sf::Color(full_intensity, full_intensity, full_intensity, max_transp));
@@ -3360,10 +3345,10 @@ int main()
                   window.draw(bitmask_sprite);
                 }
 								
-								if ((moving && (a_sub == 0) && (b_sub == 0)) &&
+                if ((moving && (i == 0) && (j == 0)) &&
 									!level_change && !level_back && !(dark_setback || dark_flicker))
                 {
-									bat_transp = 1.0*blink*toransupu/max_transp;
+                  bat_transp = blink*toransupu/max_transp;
 									
 									if ((pacman == 2) || (pacman == 3) || (pacman == 10))
                   { bat_transp = toransupu; }
@@ -3401,14 +3386,14 @@ int main()
                 window.draw(bitsquare_sprite);
               }
 																	
-							bat_transp = 1.0*blink*toransupu/max_transp;
+              bat_transp = blink*toransupu/max_transp;
 							
 							Color_Picker(pacman, karasu, exit_colors);
 
 							if ((pacman <= 4) || (pacman == 10))
               { bat_transp = toransupu; }
 							
-							dark_transp = exp(-1/dark_mult);
+              dark_transp = exp(-1.0f/dark_mult);
 									
               bitshine_sprite.setPosition(scan_pos_x + dir_up[0]*squarep, scan_pos_y + dir_up[1]*squarep);
               bitshine_sprite.setColor(sf::Color(full_intensity, full_intensity, full_intensity, max_transp));
@@ -3450,7 +3435,7 @@ int main()
 							if (actions % 2 == 1)
               { Color_Picker(actions/2, karasu, exit_colors); }
 										
-              exit_filler = Square_Draw(exit_filler, karasu, max_transp, local_x*squarep, local_y*squarep, 0, 0);
+              exit_filler = Square_Draw(exit_filler, karasu, max_transp, local_x*squarep, local_y*squarep, 0.0f, 0.0f);
 							window.draw(exit_filler);
 							
 							Color_Picker(2, karasu, exit_colors);
@@ -3467,7 +3452,7 @@ int main()
 							if (actions % 2 == 1)
               { Color_Picker(9, karasu, exit_colors); }
 
-              exit_filler = Square_Draw(exit_filler, karasu, max_transp, local_x*squarep, local_y*squarep, 0, 0);
+              exit_filler = Square_Draw(exit_filler, karasu, max_transp, local_x*squarep, local_y*squarep, 0.0f, 0.0f);
               window.draw(exit_filler);
 										
               pitmask_sprite.setPosition(local_x*squarep, local_y*squarep);
@@ -3482,7 +3467,7 @@ int main()
 							if (actions % 2 == 1)
               { Color_Picker(5, karasu, exit_colors); }
 										
-              exit_filler = Square_Draw(exit_filler, karasu, max_transp, local_x*squarep, local_y*squarep, 0, 0);
+              exit_filler = Square_Draw(exit_filler, karasu, max_transp, local_x*squarep, local_y*squarep, 0.0f, 0.0f);
               window.draw(exit_filler);
 						}
 						
@@ -3490,12 +3475,12 @@ int main()
             {
 							Color_Picker(2, karasu, exit_colors);
 							
-							intro_filler = Square_Draw(intro_filler, key_colour, toransupu, local_x*squarep, local_y*squarep, 0, 0);
+              intro_filler = Square_Draw(intro_filler, key_colour, toransupu, local_x*squarep, local_y*squarep, 0.0f, 0.0f);
 							
 							if (actions % 2 == 1)
               {
                 Color_Picker(actions/2, karasu, exit_colors);
-                intro_filler = Square_Draw(intro_filler, karasu, toransupu, local_x*squarep, local_y*squarep, 0, 0);
+                intro_filler = Square_Draw(intro_filler, karasu, toransupu, local_x*squarep, local_y*squarep, 0.0f, 0.0f);
 							}
 											
               window.draw(intro_filler);
@@ -3508,7 +3493,7 @@ int main()
 							if ((actions % 2 == 1) && dark_flicker)
               { Color_Picker(5, karasu, exit_colors); }
 							
-              intro_filler = Square_Draw(intro_filler, karasu, toransupu, local_x*squarep, local_y*squarep, 0, 0);
+              intro_filler = Square_Draw(intro_filler, karasu, toransupu, local_x*squarep, local_y*squarep, 0.0f, 0.0f);
               window.draw(intro_filler);
             }
 												
@@ -3595,44 +3580,44 @@ int main()
 						
 						while (abs(crunchy_number) > 0)
             {
-							window.draw(number_sprite[abs(crunchy_number) % 10][crunched]);							
+              window.draw(number_sprite[abs(crunchy_number) % 10][static_cast<unsigned>(crunched)]);
               crunchy_number = crunchy_number/10;
               ++crunched;
 						}
 						
-						window.draw(level_sprite[crunched]);
+            window.draw(level_sprite[static_cast<unsigned>(crunched)]);
 												
-						for (int b_sub = 0; b_sub <= max_pow; b_sub++)
-            { dollar_sprite[b_sub].setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], blink)); }
+            for (int j{ 0 }; j <= max_pow; ++j)
+            { dollar_sprite[j].setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], blink)); }
 
             crunchy_number = dosh;
 						crunched = 0;
 						
 						if (crunchy_number == 0)
             {
-              window.draw(dosh_sprite[crunchy_number][crunched]);
+              window.draw(dosh_sprite[static_cast<unsigned>(crunchy_number)][static_cast<unsigned>(crunched)]);
               ++crunched;
             }
 						
 						while (abs(crunchy_number) > 0)
             {
-              window.draw(dosh_sprite[abs(crunchy_number) % 10][crunched]);
+              window.draw(dosh_sprite[abs(crunchy_number) % 10][static_cast<unsigned>(crunched)]);
               crunchy_number = crunchy_number/10;
               ++crunched;
 						}
 						
 						if (dosh < 0)
-            { window.draw(dosh_sprite[10][crunched]); }
+            { window.draw(dosh_sprite[10][static_cast<unsigned>(crunched)]); }
 									
-            window.draw(dollar_sprite[crunched]);
+            window.draw(dollar_sprite[static_cast<unsigned>(crunched)]);
 
             window.display();
 
             Color_Picker(level, kolours, exit_colors);
 						Color_Picker(2, key_colour, exit_colors);
 						
-						for (int a_sub = 0; a_sub <= 2; a_sub++)
-            { key_colour[a_sub] = 128 + key_colour[a_sub]/2; }
+            for (int i{ 0 }; i <= 2; ++i)
+            { key_colour[i] = 128 + key_colour[i]/2; }
 
 						Exit_Multicolor(exit_colors);
 												
@@ -3666,9 +3651,7 @@ int main()
 						}
 						
             Background_Blinker(background_blink_on, background_blink, max_transp);
-					}
-					
-          position_declare = true;
+          }
         }
 				
 				if ((level == 26) && delay_flipping && (delay_flip == -2))
@@ -3693,50 +3676,50 @@ int main()
 				
 				if (((level == 27) || (level == 28)) && delay_flipping && (delay_flip == -2))
         {
-					if (((square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] == 5) ||
-						(square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] == 6) ||
-						(square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] == 7) ||
-						(square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] == 8)) &&
-						(square_matrix[max_level + coord_a_sub + 1][max_level + coord_b_sub] == 10) &&
-						(square_matrix[max_level + coord_a_sub - 1][max_level + coord_b_sub] == 10) &&
-						(square_matrix[max_level + coord_a_sub][max_level + coord_b_sub + 1] == 10) &&
-						(square_matrix[max_level + coord_a_sub][max_level + coord_b_sub - 1] == 10))
+          if (((square_matrix[max_level + coord_i][max_level + coord_j] == 5) ||
+            (square_matrix[max_level + coord_i][max_level + coord_j] == 6) ||
+            (square_matrix[max_level + coord_i][max_level + coord_j] == 7) ||
+            (square_matrix[max_level + coord_i][max_level + coord_j] == 8)) &&
+            (square_matrix[max_level + coord_i + 1][max_level + coord_j] == 10) &&
+            (square_matrix[max_level + coord_i - 1][max_level + coord_j] == 10) &&
+            (square_matrix[max_level + coord_i][max_level + coord_j + 1] == 10) &&
+            (square_matrix[max_level + coord_i][max_level + coord_j - 1] == 10))
           {
-						square_matrix[max_level + coord_a_sub + 1][max_level + coord_b_sub] = 0;
-						square_matrix[max_level + coord_a_sub - 1][max_level + coord_b_sub] = 0;
-						square_matrix[max_level + coord_a_sub][max_level + coord_b_sub + 1] = 0;
-						square_matrix[max_level + coord_a_sub][max_level + coord_b_sub - 1] = 0;
+            square_matrix[max_level + coord_i + 1][max_level + coord_j] = 0;
+            square_matrix[max_level + coord_i - 1][max_level + coord_j] = 0;
+            square_matrix[max_level + coord_i][max_level + coord_j + 1] = 0;
+            square_matrix[max_level + coord_i][max_level + coord_j - 1] = 0;
 						
             delay_flip = 0;
             delay_flipping = false;
 						
-						if (square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] == 8)
-            { square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] = 10; }
+            if (square_matrix[max_level + coord_i][max_level + coord_j] == 8)
+            { square_matrix[max_level + coord_i][max_level + coord_j] = 10; }
 						
-						if (square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] == 7)
-            { square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] = 8; }
+            if (square_matrix[max_level + coord_i][max_level + coord_j] == 7)
+            { square_matrix[max_level + coord_i][max_level + coord_j] = 8; }
 						
-						if (square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] == 6)
-            { square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] = 7; }
+            if (square_matrix[max_level + coord_i][max_level + coord_j] == 6)
+            { square_matrix[max_level + coord_i][max_level + coord_j] = 7; }
 
-						if (square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] == 5)
-            { square_matrix[max_level + coord_a_sub][max_level + coord_b_sub] = 6; }
+            if (square_matrix[max_level + coord_i][max_level + coord_j] == 5)
+            { square_matrix[max_level + coord_i][max_level + coord_j] = 6; }
 						
 						Fiborand(fib_val, max_val, fractal);
 						
 						if (fib_val[0] < 0.25*max_val)
-            { square_matrix[max_level + coord_a_sub + 3][max_level + coord_b_sub] = 8; }
+            { square_matrix[max_level + coord_i + 3][max_level + coord_j] = 8; }
 						
 						if ((fib_val[0] >= 0.25*max_val) &&
 							(fib_val[0] < 0.5*max_val))
-            { square_matrix[max_level + coord_a_sub][max_level + coord_b_sub + 3] = 8; }
+            { square_matrix[max_level + coord_i][max_level + coord_j + 3] = 8; }
 						
 						if ((fib_val[0] >= 0.5*max_val) &&
 							(fib_val[0] < 0.75*max_val))
-            { square_matrix[max_level + coord_a_sub - 3][max_level + coord_b_sub] = 8; }
+            { square_matrix[max_level + coord_i - 3][max_level + coord_j] = 8; }
 						
 						if (fib_val[0] >= 0.75*max_val)
-            { square_matrix[max_level + coord_a_sub][max_level + coord_b_sub - 3] = 8; }
+            { square_matrix[max_level + coord_i][max_level + coord_j - 3] = 8; }
           }
 				}
 
@@ -3830,14 +3813,12 @@ int main()
 				}
 				
 				exit_filler.setScale(1, 1);
-				exit_filler.setRotation(0);
+        exit_filler.setRotation(0.0f);
 				
 				pitmask_sprite.setScale(1, 1);
-				pitmask_sprite.setRotation(0);
+        pitmask_sprite.setRotation(0.0f);
 				
         std::this_thread::sleep_for(delay);
-				
-				position_declare = false;
 				
         dosh = dosh + dosh_increase;
         dosh_increase = 0;
