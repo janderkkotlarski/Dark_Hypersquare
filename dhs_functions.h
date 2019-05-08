@@ -30,7 +30,14 @@ std::vector <std::string> number_file_vector(const std::string& begin,
 
 void color_picker(int square_identity, sf::Color& colors, sf::Color& multicolor);
 
+sf::Color transparent_shader(const sf::Color& color, const int transparency);
+
+void exit_multicolor(sf::Color& kolor);
+
 void background_blinker(bool& background_blink_on, int& background_blink, int max_transp);
+
+sf::RectangleShape square_draw(sf::RectangleShape& squaraa, const sf::Color& colourz, int tranzp,
+                               float poz_x, float poz_y, float squarral_x, float squarral_y);
 
 void clear_maze_prng(std::vector <std::vector <int>>& square_matrix, int max_level, int size_level);
 

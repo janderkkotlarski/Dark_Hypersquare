@@ -79,13 +79,15 @@ int main()
 
   int bat_transp;
 	
-  int colours[3], karasu[3], kolours[3], toransupu{ max_transp };
-	
-  int color_black[]{ 0, 0, 0 }, key_colour[]{ 0, 0, 0 };
-	
+  int toransupu{ max_transp };
+
   const sf::Color black{ 0, 0, 0, 255 };
 
   const sf::Color white{ 255, 255, 255, 255 };
+
+  sf::Color key_colour{ black };
+
+  sf::Color colours, karasu, kolours;
 
   int uplight_transp{ -12 };
 	
@@ -93,11 +95,9 @@ int main()
 
   float dark_transp{ 0.0f };
 
-  const float dark_mult{ 3.0f };
-	
-  int exit_colors[3]{ full_intensity, 0, 0 };
+  const float dark_mult{ 3.0f };	
 
-  sf::Color exit_colours{full_intensity, 0, 0};
+  sf::Color exit_colors{full_intensity, 0, 0};
 	
   int dir_up[2]{ 0, -1 }, dir_down[2]{ 0, 1 }, dir_right[2]{ 1, 0 }, dir_left[2]{ -1, 0 };
 	
@@ -470,34 +470,33 @@ int main()
   }
 	
 	sf::RectangleShape squaree(sf::Vector2f(2*squarrel, 2*squarrel));	
-	Color_Picker(8, colours, exit_colors);	
-  squaree = Square_Draw(squaree, colours, blink, pos_x, pos_y, squarrel, squarrel);
+  color_picker(8, colours, exit_colors);
+  squaree = square_draw(squaree, colours, blink, pos_x, pos_y, squarrel, squarrel);
 	
 	sf::RectangleShape sukuwarii(sf::Vector2f(2*squarrel, 2*squarrel));	
-	Color_Picker(8, karasu, exit_colors);	
-  sukuwarii = Square_Draw(sukuwarii, karasu, blink, pos_x, pos_y, squarrel, squarrel);
+  color_picker(8, karasu, exit_colors);
+  sukuwarii = square_draw(sukuwarii, karasu, blink, pos_x, pos_y, squarrel, squarrel);
 	
   sf::RectangleShape squarei(sf::Vector2f(2.0f*squarrel, 2.0f*squarrel));
-	Color_Picker(0, kolours, exit_colors);
-  squarei = Square_Draw(squarei, kolours, max_transp, local_x*squarep, local_y*squarep - squarep, squarrel, squarrel);
+  color_picker(0, kolours, exit_colors);
+  squarei = square_draw(squarei, kolours, max_transp, local_x*squarep, local_y*squarep - squarep, squarrel, squarrel);
 	
   sf::RectangleShape infobox(sf::Vector2f(window_x, window_y - 0.5f*squarep));
-  Color_Picker(0, color_black, exit_colors);	
   infobox.setOrigin(sf::Vector2f(0.5f*window_x, -0.5f*squarep));
-  infobox = Square_Draw(infobox, color_black, 1*max_transp, 0.0f, -squarep, 0.0f, 0.0f);
+  infobox = square_draw(infobox, black, 1*max_transp, 0.0f, -squarep, 0.0f, 0.0f);
 	
 	sf::RectangleShape exit_filler(sf::Vector2f(2*squarrel, 2*squarrel));	
-	Color_Picker(0, karasu, exit_colors);	
+  color_picker(0, karasu, exit_colors);
 	exit_filler.setOrigin(squarrel, squarrel);	
-  exit_filler = Square_Draw(exit_filler, karasu, max_transp, pos_x, pos_y, 0.0f, 0.0f);
+  exit_filler = square_draw(exit_filler, karasu, max_transp, pos_x, pos_y, 0.0f, 0.0f);
 	
 	sf::RectangleShape intro_filler(sf::Vector2f(2*squarrel, 2*squarrel));	
-	Color_Picker(0, karasu, exit_colors);	
+  color_picker(0, karasu, exit_colors);
 	intro_filler.setOrigin(squarrel, squarrel);	
-  intro_filler = Square_Draw(intro_filler, karasu, max_transp, pos_x, pos_y, 0.0f, 0.0f);
+  intro_filler = square_draw(intro_filler, karasu, max_transp, pos_x, pos_y, 0.0f, 0.0f);
   intro_filler.scale(18.0f, 18.0f);
 	
-  Color_Picker(2, key_colour, exit_colors);
+  color_picker(2, key_colour, exit_colors);
 	sf::Font font;
 	if (!font.loadFromFile("Carlito-Regular.ttf"))
   { // error...	}
@@ -521,7 +520,7 @@ int main()
 
   while (window.isOpen())
   {
-		key_s_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], 0));
+    key_s_sprite.setColor(transparent_shader(key_colour, 0));
 			
     start_shadow_sprite.setColor(sf::Color(0, 0, 0, background_blink/4));
 		start_screen_sprite.setColor(sf::Color(0, 0, 0, max_transp));
@@ -538,17 +537,17 @@ int main()
 			
 			window.display();
 			
-      key_s_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], j));
+      key_s_sprite.setColor(transparent_shader(key_colour, j));
 			
       start_shadow_sprite.setColor(sf::Color(j, j, j, background_blink));
       start_screen_sprite.setColor(sf::Color(j, j, j, max_transp));
 			
-			Color_Picker(2, key_colour, exit_colors);
+      color_picker(2, key_colour, exit_colors);
 					
       for (int i{ 0 }; i <= 2; ++i)
       { key_colour[i] = 128 + key_colour[i]/2; }
 					
-			Exit_Multicolor(exit_colors);
+      exit_multicolor(exit_colors);
 			
       background_blinker(background_blink_on, background_blink, max_transp);
 			
@@ -601,12 +600,12 @@ int main()
       start_shadow_sprite.setColor(sf::Color(full_intensity, full_intensity, full_intensity, background_blink));
 			start_screen_sprite.setColor(sf::Color(full_intensity, full_intensity, full_intensity, max_transp));
 			
-			Color_Picker(2, key_colour, exit_colors);
+      color_picker(2, key_colour, exit_colors);
 					
       for (int i{ 0 }; i <= 2; ++i)
       { key_colour[i] = 128 + key_colour[i]/2; }
 					
-      Exit_Multicolor(exit_colors);
+      exit_multicolor(exit_colors);
       background_blinker(background_blink_on, background_blink, max_transp);
 			
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
@@ -657,12 +656,12 @@ int main()
       start_shadow_sprite.setColor(sf::Color(j, j, j, background_blink));
       start_screen_sprite.setColor(sf::Color(j, j, j, max_transp));
 			
-			Color_Picker(2, key_colour, exit_colors);
+      color_picker(2, key_colour, exit_colors);
 					
       for (int i{ 0 }; i <= 2; ++i)
       { key_colour[i] = 128 + key_colour[i]/2; }
 					
-      Exit_Multicolor(exit_colors);
+      exit_multicolor(exit_colors);
       background_blinker(background_blink_on, background_blink, max_transp);
 			
       std::this_thread::sleep_for(delay);
@@ -2175,7 +2174,7 @@ int main()
 							if (pot_y < -size_level)
               { pot_y = pot_y + level_side; }
 
-							Color_Picker(square_matrix[pot_x + max_level][pot_y + max_level], colours, exit_colors);
+              color_picker(square_matrix[pot_x + max_level][pot_y + max_level], colours, exit_colors);
 
 							if (square_matrix[pot_x + max_level][pot_y + max_level] == 3)
               { dark_transp = exp(-sqrt(1.0f*i*i + 1.0f*j*j)/(dark_mult)); }
@@ -2224,7 +2223,7 @@ int main()
 			
 					window.draw(scanner_sprite);
 					
-          Color_Picker(2, colours, exit_colors);
+          color_picker(2, colours, exit_colors);
 					
 					compass_back_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
 					
@@ -2234,9 +2233,9 @@ int main()
 					
 					if (level_recet)
           {
-						Color_Picker(0, karasu, exit_colors);
+            color_picker(0, karasu, exit_colors);
 							
-						intro_filler = Square_Draw(intro_filler, karasu, toransupu, local_x*squarep, local_y*squarep, squarrel, squarrel);
+            intro_filler = square_draw(intro_filler, karasu, toransupu, local_x*squarep, local_y*squarep, squarrel, squarrel);
 							
 						window.draw(intro_filler);
 						
@@ -2357,13 +2356,13 @@ int main()
           window.draw(dollar_sprite[static_cast<unsigned>(crunched)]);
           window.display();
 					
-          Color_Picker(level, kolours, exit_colors);
-					Color_Picker(2, key_colour, exit_colors);
+          color_picker(level, kolours, exit_colors);
+          color_picker(2, key_colour, exit_colors);
 					
           for (int i{ 0 }; i <= 2; ++i)
           { key_colour[i] = 128 + key_colour[i]/2; }
 					
-					Exit_Multicolor(exit_colors);
+          exit_multicolor(exit_colors);
 
 					if (blink_on)
           {
@@ -2507,7 +2506,7 @@ int main()
 					if (!action)
           { inhale = false; }
 
-          Color_Picker(pacman, karasu, exit_colors);
+          color_picker(pacman, karasu, exit_colors);
 				}
 				
 				if (exhale && exchange && !action && !(level_reset || level_recet))
@@ -2527,7 +2526,7 @@ int main()
           toransupu = 0;
 					action = true;
 					
-          Color_Picker(pacman, karasu, exit_colors);
+          color_picker(pacman, karasu, exit_colors);
 				}
 	
 				if (((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) ||
@@ -2877,7 +2876,7 @@ int main()
             }
 
             pacman = square_matrix[local_x + max_level][local_y + max_level];
-						Color_Picker(pacman, karasu, exit_colors);
+            color_picker(pacman, karasu, exit_colors);
 						
 						square_matrix[local_x + max_level][local_y + max_level] = 0;
 						
@@ -3294,7 +3293,7 @@ int main()
 								if (pot_y < -size_level)
                 { pot_y = pot_y + level_side; }
 								
-								Color_Picker(square_matrix[pot_x + max_level][pot_y + max_level], colours, exit_colors);
+                color_picker(square_matrix[pot_x + max_level][pot_y + max_level], colours, exit_colors);
                 dark_transp = dark_transp = exp(-sqrt(1.0*i*i + 1.0*j*j)/(dark_mult));
 										
 								
@@ -3384,7 +3383,7 @@ int main()
 						
             if ((inhale || exhale) && !level_change && !level_back && !(dark_setback || dark_flicker))
             {
-							Color_Picker(nullvoid, karasu, exit_colors);
+              color_picker(nullvoid, karasu, exit_colors);
 														
 							if ((pacman != 0) && (pacman != 3) && false)
               {
@@ -3395,7 +3394,7 @@ int main()
 																	
               bat_transp = blink*toransupu/max_transp;
 							
-							Color_Picker(pacman, karasu, exit_colors);
+              color_picker(pacman, karasu, exit_colors);
 
 							if ((pacman <= 4) || (pacman == 10))
               { bat_transp = toransupu; }
@@ -3428,7 +3427,7 @@ int main()
 						
 						window.draw(scanner_sprite);
 						
-            Color_Picker(2, colours, exit_colors);
+            color_picker(2, colours, exit_colors);
 					
             compass_back_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
             window.draw(compass_back_sprite);
@@ -3437,15 +3436,15 @@ int main()
 
 						if (moving && level_change && !(level_reset || level_recet))
             {
-							Color_Picker(0, karasu, exit_colors);
+              color_picker(0, karasu, exit_colors);
 							
 							if (actions % 2 == 1)
-              { Color_Picker(actions/2, karasu, exit_colors); }
+              { color_picker(actions/2, karasu, exit_colors); }
 										
-              exit_filler = Square_Draw(exit_filler, karasu, max_transp, local_x*squarep, local_y*squarep, 0.0f, 0.0f);
+              exit_filler = square_draw(exit_filler, karasu, max_transp, local_x*squarep, local_y*squarep, 0.0f, 0.0f);
 							window.draw(exit_filler);
 							
-							Color_Picker(2, karasu, exit_colors);
+              color_picker(2, karasu, exit_colors);
 							
               pitmask_sprite.setPosition(local_x*squarep, local_y*squarep);
               pitmask_sprite.setColor(sf::Color(karasu[0], karasu[1], karasu[2], toransupu));
@@ -3454,12 +3453,12 @@ int main()
 						
 						if (moving && level_back && !(level_reset || level_recet))
             {
-							Color_Picker(4, karasu, exit_colors);
+              color_picker(4, karasu, exit_colors);
 							
 							if (actions % 2 == 1)
-              { Color_Picker(9, karasu, exit_colors); }
+              { color_picker(9, karasu, exit_colors); }
 
-              exit_filler = Square_Draw(exit_filler, karasu, max_transp, local_x*squarep, local_y*squarep, 0.0f, 0.0f);
+              exit_filler = square_draw(exit_filler, karasu, max_transp, local_x*squarep, local_y*squarep, 0.0f, 0.0f);
               window.draw(exit_filler);
 										
               pitmask_sprite.setPosition(local_x*squarep, local_y*squarep);
@@ -3469,25 +3468,25 @@ int main()
 						
 						if (dark_setback && !(level_reset || level_recet))
             {
-							Color_Picker(0, karasu, exit_colors);
+              color_picker(0, karasu, exit_colors);
 							
 							if (actions % 2 == 1)
-              { Color_Picker(5, karasu, exit_colors); }
+              { color_picker(5, karasu, exit_colors); }
 										
-              exit_filler = Square_Draw(exit_filler, karasu, max_transp, local_x*squarep, local_y*squarep, 0.0f, 0.0f);
+              exit_filler = square_draw(exit_filler, karasu, max_transp, local_x*squarep, local_y*squarep, 0.0f, 0.0f);
               window.draw(exit_filler);
 						}
 						
 						if (view_glitch && !(level_reset || level_recet))
             {
-							Color_Picker(2, karasu, exit_colors);
+              color_picker(2, karasu, exit_colors);
 							
-              intro_filler = Square_Draw(intro_filler, key_colour, toransupu, local_x*squarep, local_y*squarep, 0.0f, 0.0f);
+              intro_filler = square_draw(intro_filler, key_colour, toransupu, local_x*squarep, local_y*squarep, 0.0f, 0.0f);
 							
 							if (actions % 2 == 1)
               {
-                Color_Picker(actions/2, karasu, exit_colors);
-                intro_filler = Square_Draw(intro_filler, karasu, toransupu, local_x*squarep, local_y*squarep, 0.0f, 0.0f);
+                color_picker(actions/2, karasu, exit_colors);
+                intro_filler = square_draw(intro_filler, karasu, toransupu, local_x*squarep, local_y*squarep, 0.0f, 0.0f);
 							}
 											
               window.draw(intro_filler);
@@ -3495,12 +3494,12 @@ int main()
 						
 						if (level_reset || level_recet)
             {
-							Color_Picker(0, karasu, exit_colors);
+              color_picker(0, karasu, exit_colors);
 							
 							if ((actions % 2 == 1) && dark_flicker)
-              { Color_Picker(5, karasu, exit_colors); }
+              { color_picker(5, karasu, exit_colors); }
 							
-              intro_filler = Square_Draw(intro_filler, karasu, toransupu, local_x*squarep, local_y*squarep, 0.0f, 0.0f);
+              intro_filler = square_draw(intro_filler, karasu, toransupu, local_x*squarep, local_y*squarep, 0.0f, 0.0f);
               window.draw(intro_filler);
             }
 												
@@ -3620,13 +3619,13 @@ int main()
 
             window.display();
 
-            Color_Picker(level, kolours, exit_colors);
-						Color_Picker(2, key_colour, exit_colors);
+            color_picker(level, kolours, exit_colors);
+            color_picker(2, key_colour, exit_colors);
 						
             for (int i{ 0 }; i <= 2; ++i)
             { key_colour[i] = 128 + key_colour[i]/2; }
 
-						Exit_Multicolor(exit_colors);
+            exit_multicolor(exit_colors);
 												
 						if (blink_on)
             {

@@ -120,7 +120,6 @@ std::vector <std::string> number_file_vector(const std::string& begin,
   return number_files;
 }
 
-
 void color_picker(int square_identity, sf::Color& colors, sf::Color& multicolor)
 {
   sf::Color white{255, 255, 255}, grey{128, 128, 128}, black{0, 0, 0};
@@ -166,7 +165,67 @@ void color_picker(int square_identity, sf::Color& colors, sf::Color& multicolor)
 
   if (square_identity > 11)
   {	colors = black;}
+}
 
+sf::Color transparent_shader(const sf::Color& color, const int transparency)
+{
+  sf::Color temp_color{ color };
+  temp_color.a = transparency;
+
+  return temp_color;
+}
+
+void exit_multicolor(sf::Color& kolor)
+{
+  int full_int = 255, gate_delta = 5;
+
+  if ((kolor.r == full_int) && (kolor.g > 0))
+  {
+    kolor.g -= gate_delta;
+
+    if (kolor.g < 0)
+    { kolor.g = 0; }
+  }
+
+  if ((kolor.r == full_int) && (kolor.g == 0) && (kolor.b < full_int))
+  {
+    kolor.b += gate_delta;
+
+    if (kolor.b > full_int)
+    { kolor.b = full_int; }
+  }
+
+  if ((kolor.b == full_int) && (kolor.r > 0))
+  {
+    kolor.r -= gate_delta;
+
+    if (kolor.r < 0)
+    { kolor.r = 0; }
+  }
+
+  if ((kolor.b == full_int) && (kolor.r == 0) && (kolor.g < full_int))
+  {
+    kolor.g += gate_delta;
+
+    if (kolor.g > full_int)
+    { kolor.g = full_int; }
+  }
+
+  if ((kolor.g == full_int) && (kolor.b > 0))
+  {
+    kolor.b -= gate_delta;
+
+    if (kolor.b < 0)
+    { kolor.b = 0; }
+  }
+
+  if ((kolor.g == full_int) && (kolor.b == 0) && (kolor.r < full_int))
+  {
+    kolor.r += gate_delta;
+
+    if (kolor.r > full_int)
+    { kolor.r = full_int; }
+  }
 }
 
 void background_blinker(bool& background_blink_on, int& background_blink, int max_transp)
@@ -200,6 +259,19 @@ void background_blinker(bool& background_blink_on, int& background_blink, int ma
     }
   }
 }
+
+sf::RectangleShape square_draw(sf::RectangleShape& squaraa, const sf::Color& colourz, int tranzp,
+                               float poz_x, float poz_y, float squarral_x, float squarral_y)
+{
+  sf::Color color{ colourz };
+  color.a = tranzp;
+
+  squaraa.setPosition(poz_x - squarral_x, poz_y - squarral_y);
+  squaraa.setFillColor(color);
+
+  return squaraa;
+}
+
 
 void clear_maze_prng(std::vector <std::vector <int>>& square_matrix, int max_level, int size_level)
 {

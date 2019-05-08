@@ -159,7 +159,7 @@ void Clear_Maze_PRNG_(int square_matrix[][201], int max_level, int size_level)
   }
 }
 
-void Blinker(int blinc, bool blinc_on)
+void Blinker_(int blinc, bool blinc_on)
 {
   if (blinc_on)
   {
@@ -213,7 +213,7 @@ void Background_Blinker_(bool& background_blink_on, int& background_blink, int m
   }
 }
 
-void Exit_Multicolor(int kolor[])
+void Exit_Multicolor_(int kolor[])
 {
   int full_int = 255, gate_delta = 5;
 
@@ -266,14 +266,14 @@ void Exit_Multicolor(int kolor[])
   }
 }
 
-void Colorize(int colorz_in[], int colorz_out[])
+void Colorize_(int colorz_in[], int colorz_out[])
 {
   for (int a_sub = 0; a_sub < 3; a_sub++)
   { colorz_out[a_sub] = colorz_in[a_sub]; }
 }
 
 
-void Color_Picker(int cube_identityy, int colorz[], int multikolor[])
+void Color_Picker_(int cube_identityy, int colorz[], int multikolor[])
 {
   int whitee[3] = {255, 255, 255}, greyy[3] = {128, 128, 128}, blackk[3] = {0, 0, 0};
   int redd[3] = {255, 0, 0}, orangee[3] = {255, 128, 0}, yelloww[3] = {255, 255, 0};
@@ -281,46 +281,46 @@ void Color_Picker(int cube_identityy, int colorz[], int multikolor[])
   int darkk[3] = {24, 24, 24};
 
   if (cube_identityy <= 0)
-  { Colorize(blackk, colorz); }
+  { Colorize_(blackk, colorz); }
 
   if (cube_identityy == 1)
-  { Colorize(greyy, colorz); }
+  { Colorize_(greyy, colorz); }
 
   if (cube_identityy == 2)
-  { Colorize(multikolor, colorz); }
+  { Colorize_(multikolor, colorz); }
 
   if (cube_identityy == 3)
-  { Colorize(darkk, colorz); }
+  { Colorize_(darkk, colorz); }
 
   if (cube_identityy == 4)
-  { Colorize(violett, colorz); }
+  { Colorize_(violett, colorz); }
 
   if (cube_identityy == 5)
-  { Colorize(redd, colorz); }
+  { Colorize_(redd, colorz); }
 
   if (cube_identityy == 6)
-  { Colorize(yelloww, colorz); }
+  { Colorize_(yelloww, colorz); }
 
   if (cube_identityy == 7)
-  { Colorize(greenn, colorz); }
+  { Colorize_(greenn, colorz); }
 
   if (cube_identityy == 8)
-  { Colorize(bluee, colorz); }
+  { Colorize_(bluee, colorz); }
 
   if (cube_identityy == 9)
-  { Colorize(orangee, colorz); }
+  { Colorize_(orangee, colorz); }
 
   if (cube_identityy == 10)
-  { Colorize(whitee, colorz); }
+  { Colorize_(whitee, colorz); }
 
   if (cube_identityy == 11)
-  { Colorize(aquaa, colorz); }
+  { Colorize_(aquaa, colorz); }
 
   if (cube_identityy > 11)
-  { Colorize(blackk, colorz); }
+  { Colorize_(blackk, colorz); }
 }
 
-sf::RectangleShape Square_Draw(sf::RectangleShape squaraa, int colourz[], int tranzp,
+sf::RectangleShape Square_Draw_(sf::RectangleShape squaraa, int colourz[], int tranzp,
                                float poz_x, float poz_y, float squarral_x, float squarral_y)
 {
   squaraa.setPosition(poz_x - squarral_x, poz_y - squarral_y);

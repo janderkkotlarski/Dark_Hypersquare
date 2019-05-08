@@ -18,17 +18,17 @@ void Invis_Maze_PRNG_(int square_matrix[][201], int max_level, int size_level);
 
 void Clear_Maze_PRNG_(int square_matrix[][201], int max_level, int size_level);
 
-void Blinker(int blinc, bool blinc_on);
+void Blinker_(int blinc, bool blinc_on);
 
-void Background_Blinker(bool& background_blink_on, int& background_blink, int max_transp);
+void Background_Blinker_(bool& background_blink_on, int& background_blink, int max_transp);
 
-void Exit_Multicolor(int kolor[]);
+void Exit_Multicolor_(int kolor[]);
 
-void Colorize(int colorz_in[], int colorz_out[]);
+void Colorize_(int colorz_in[], int colorz_out[]);
 
-void Color_Picker(int cube_identityy, int colorz[], int multikolor[]);
+void Color_Picker_(int cube_identityy, int colorz[], int multikolor[]);
 
-sf::RectangleShape Square_Draw(sf::RectangleShape squaraa, int colourz[], int tranzp,
+sf::RectangleShape Square_Draw_(sf::RectangleShape squaraa, int colourz[], int tranzp,
                                float poz_x, float poz_y, float squarral_x, float squarral_y);
 
 #endif // OLD_FUNCTIONS_H
