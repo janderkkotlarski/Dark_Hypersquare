@@ -2,7 +2,7 @@
 
 #include <random>
 
-void Fiboinit(int fib_var[], int max_var, int fractar)
+void Fiboinit_(int fib_var[], int max_var, int fractar)
 {
   std::random_device generator;
   std::uniform_int_distribution<int> distribution(1, fractar);
@@ -32,7 +32,7 @@ void Fiboinit(int fib_var[], int max_var, int fractar)
   fib_var[2] = 0;
 }
 
-void Fiborand(int fib_var[], int max_var, int fractar)
+void Fiborand_(int fib_var[], int max_var, int fractar)
 {
   fib_var[2] = fib_var[1];
   fib_var[1] = fib_var[1] + fib_var[0];
@@ -42,7 +42,7 @@ void Fiborand(int fib_var[], int max_var, int fractar)
   { fib_var[1] = fib_var[1] - fractar - 1; }
 }
 
-void Dark_Maze_PRNG(int square_matrix[][201], int max_level, int size_level, int clear_radius,
+void Dark_Maze_PRNG_(int square_matrix[][201], int max_level, int size_level, int clear_radius,
 bool half_gone, bool pillars_exist, bool wall_exist, bool zero_wall, bool wall_concrete, bool exit_exist, bool dark_exist,
 int fib_val[], int max_val, int fractal, float wall_frac, float dark_frac, float exit_frac,
 float candy_frac, float red_candy_frac, float yellow_candy_frac, float green_candy_frac, float blue_candy_frac)
@@ -93,7 +93,7 @@ float candy_frac, float red_candy_frac, float yellow_candy_frac, float green_can
           exit_exist)
         { square_matrix[a_sub + max_level][b_sub + max_level] = 2; }
 
-        Fiborand(fib_val, max_val, fractal);
+        Fiborand_(fib_val, max_val, fractal);
       }
 
       if (((((abs(a_sub) % 2) == 0) && ((abs(b_sub) % 2) == 1)) ||
@@ -110,7 +110,7 @@ float candy_frac, float red_candy_frac, float yellow_candy_frac, float green_can
           { square_matrix[a_sub + max_level][b_sub + max_level] = 1; }
         }
 
-        Fiborand(fib_val, max_val, fractal);
+        Fiborand_(fib_val, max_val, fractal);
       }
 
       if ((b_sub == 0) && zero_wall)
@@ -123,7 +123,7 @@ float candy_frac, float red_candy_frac, float yellow_candy_frac, float green_can
   }
 }
 
-void Invis_Walls_PRNG(int square_matrix[][201], int max_level, int size_level)
+void Invis_Walls_PRNG_(int square_matrix[][201], int max_level, int size_level)
 {
   for (int a_sub = -size_level; a_sub <= size_level; a_sub++)
   {
@@ -138,7 +138,7 @@ void Invis_Walls_PRNG(int square_matrix[][201], int max_level, int size_level)
   }
 }
 
-void Invis_Maze_PRNG(int square_matrix[][201], int max_level, int size_level)
+void Invis_Maze_PRNG_(int square_matrix[][201], int max_level, int size_level)
 {
   for (int a_sub = -size_level; a_sub <= size_level; a_sub++)
   {
@@ -150,7 +150,7 @@ void Invis_Maze_PRNG(int square_matrix[][201], int max_level, int size_level)
   }
 }
 
-void Clear_Maze_PRNG(int square_matrix[][201], int max_level, int size_level)
+void Clear_Maze_PRNG_(int square_matrix[][201], int max_level, int size_level)
 {
   for (int a_sub = -size_level; a_sub <= size_level; a_sub++)
   {
@@ -181,7 +181,7 @@ void Blinker(int blinc, bool blinc_on)
   }
 }
 
-void Background_Blinker(bool& background_blink_on, int& background_blink, int max_transp)
+void Background_Blinker_(bool& background_blink_on, int& background_blink, int max_transp)
 {
   if (background_blink_on)
   {

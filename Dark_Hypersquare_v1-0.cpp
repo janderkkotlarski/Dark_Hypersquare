@@ -21,7 +21,15 @@ int main()
 
   const int max_view{ 6 };
 
-  int square_matrix[201][201];
+  std::vector < std::vector <int>> square_matrix;
+
+  std::vector <int> row_zero;
+
+  for (int j{ 0 }; j < 2*max_level + 1; ++j)
+  { row_zero.push_back(0); }
+
+  for (int i{ 0 }; i < 2*max_level + 1; ++i)
+  { square_matrix.push_back(row_zero); }
 
   int size_level{ 20 }, level_side, level_pass{ 0 };
 	
@@ -107,9 +115,11 @@ int main()
 	
   int local_x{ 0 }, local_y{ -1 }, pot_x{ 0 }, pot_y{ 0 };
 
-  int fib_val[3];
+
 
   const int max_val{ 1000000000 }, fractal{ max_val - 2 };
+
+  std::vector <int> fib_val{ fiboinit(max_val, fractal) };
 	
   int blink{ max_transp }, background_blink{ 0 }, blink_min{ 32 }, blink_delta{ 4 };
 	
@@ -132,9 +142,6 @@ int main()
   bool wall_concrete{ false }, half_gone{ false }, zero_wall{ false };
 	
   int clear_radius{ 4 };
-	
-	Fiboinit(fib_val, max_val, fractal);
-
 
   const std::string start_screen_file{ "Start_Screen_a.png" };
   const std::string start_shadow_file{ "Start_Shadow_a.png" };
@@ -543,7 +550,7 @@ int main()
 					
 			Exit_Multicolor(exit_colors);
 			
-      Background_Blinker(background_blink_on, background_blink, max_transp);
+      background_blinker(background_blink_on, background_blink, max_transp);
 			
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
       {
@@ -600,7 +607,7 @@ int main()
       { key_colour[i] = 128 + key_colour[i]/2; }
 					
       Exit_Multicolor(exit_colors);
-      Background_Blinker(background_blink_on, background_blink, max_transp);
+      background_blinker(background_blink_on, background_blink, max_transp);
 			
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
       {
@@ -656,7 +663,7 @@ int main()
       { key_colour[i] = 128 + key_colour[i]/2; }
 					
       Exit_Multicolor(exit_colors);
-      Background_Blinker(background_blink_on, background_blink, max_transp);
+      background_blinker(background_blink_on, background_blink, max_transp);
 			
       std::this_thread::sleep_for(delay);
 		}
@@ -841,40 +848,40 @@ int main()
           dark_exist = true;
 				}
 
-				Dark_Maze_PRNG(square_matrix, max_level, size_level, clear_radius,
+        dark_maze_prng(square_matrix, max_level, size_level, clear_radius,
 								half_gone, pillars_exist, wall_exist, zero_wall, wall_concrete, exit_exist, dark_exist,
 								fib_val, max_val, fractal, wall_frac, dark_frac, exit_frac,
 								candy_frac, red_candy_frac, yellow_candy_frac, green_candy_frac, blue_candy_frac);
 								
 				if (level == 26)
-        { Clear_Maze_PRNG(square_matrix, max_level, size_level); }
+        { clear_maze_prng(square_matrix, max_level, size_level); }
 				
 				if (level == 27)
-        { Clear_Maze_PRNG(square_matrix, max_level, size_level); }
+        { clear_maze_prng(square_matrix, max_level, size_level); }
 				
 				if (level == 28)
-        { Clear_Maze_PRNG(square_matrix, max_level, size_level/2 + 2); }
+        { clear_maze_prng(square_matrix, max_level, size_level/2 + 2); }
 				
 				if (level == 29)
-        { Clear_Maze_PRNG(square_matrix, max_level, size_level); }
+        { clear_maze_prng(square_matrix, max_level, size_level); }
 				
 				if (level == 30)
-        { Invis_Walls_PRNG(square_matrix, max_level, size_level); }
+        { invis_walls_prng(square_matrix, max_level, size_level); }
 
 				if (level == 31)
-        { Invis_Walls_PRNG(square_matrix, max_level, size_level); }
+        { invis_walls_prng(square_matrix, max_level, size_level); }
 				
 				if (level == 32)
 				{
 					square_matrix[max_level][max_level + 1] = 1;
-          Invis_Maze_PRNG(square_matrix, max_level, size_level);
+          invis_maze_prng(square_matrix, max_level, size_level);
 				}
 				
 				if (level == 33)
-        { Invis_Maze_PRNG(square_matrix, max_level, size_level); }
+        { invis_maze_prng(square_matrix, max_level, size_level); }
 				
 				if (level == 34)
-        { Invis_Maze_PRNG(square_matrix, max_level, size_level); }
+        { invis_maze_prng(square_matrix, max_level, size_level); }
       }
 			
 			if (level == 1)
@@ -2387,7 +2394,7 @@ int main()
             }
 					}
 					
-          Background_Blinker(background_blink_on, background_blink, max_transp);
+          background_blinker(background_blink_on, background_blink, max_transp);
 				}	
 				
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
@@ -3650,7 +3657,7 @@ int main()
               }
 						}
 						
-            Background_Blinker(background_blink_on, background_blink, max_transp);
+            background_blinker(background_blink_on, background_blink, max_transp);
           }
         }
 				
@@ -3705,7 +3712,7 @@ int main()
             if (square_matrix[max_level + coord_i][max_level + coord_j] == 5)
             { square_matrix[max_level + coord_i][max_level + coord_j] = 6; }
 						
-						Fiborand(fib_val, max_val, fractal);
+            fiborand(fib_val, max_val, fractal);
 						
 						if (fib_val[0] < 0.25*max_val)
             { square_matrix[max_level + coord_i + 3][max_level + coord_j] = 8; }
