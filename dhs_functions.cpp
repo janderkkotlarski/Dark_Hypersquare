@@ -51,7 +51,6 @@ std::vector <int> fiboinit(int max_var, int fractar)
   return fib_var;
 }
 
-
 void load_texture(sf::Texture& texture, const std::string& file_name)
 {
   assert(file_name != "");
@@ -120,12 +119,42 @@ std::vector <std::string> number_file_vector(const std::string& begin,
   return number_files;
 }
 
+sf::Color color_divide(const sf::Color& color_a, const int dividor)
+{
+  sf::Color color_c;
+
+  color_c.r = color_a.r/dividor;
+  color_c.g = color_a.g/dividor;
+  color_c.b = color_a.b/dividor;
+
+  return color_c;
+}
+
+sf::Color color_add(const sf::Color& color_a, const sf::Color& color_b)
+{
+  sf::Color color_c;
+
+  color_c.r = color_a.r + color_b.r;
+  color_c.g = color_a.g + color_b.g;
+  color_c.b = color_a.b + color_b.b;
+
+  return color_c;
+}
+
+sf::Color transparent_shader(const sf::Color& color, const int transparency)
+{
+  sf::Color temp_color{ color };
+  temp_color.a = transparency;
+
+  return temp_color;
+}
+
 void color_picker(int square_identity, sf::Color& colors, sf::Color& multicolor)
 {
-  sf::Color white{255, 255, 255}, grey{128, 128, 128}, black{0, 0, 0};
-  sf::Color red{255, 0, 0}, orange{255, 128, 0}, yellow{255, 255, 0};
+  sf::Color white{255, 255, 255}, grey{127, 127, 127}, black{0, 0, 0};
+  sf::Color red{255, 0, 0}, orange{255, 127, 0}, yellow{255, 255, 0};
   sf::Color green{0, 255, 0}, aqua{0, 255, 255}, blue{0, 0, 255};
-  sf::Color violet{128, 0, 255}, dark{24, 24, 24};
+  sf::Color violet{127, 0, 255}, dark{24, 24, 24};
 
   if (square_identity <= 0)
   {	colors = black;	}
@@ -165,14 +194,6 @@ void color_picker(int square_identity, sf::Color& colors, sf::Color& multicolor)
 
   if (square_identity > 11)
   {	colors = black;}
-}
-
-sf::Color transparent_shader(const sf::Color& color, const int transparency)
-{
-  sf::Color temp_color{ color };
-  temp_color.a = transparency;
-
-  return temp_color;
 }
 
 void exit_multicolor(sf::Color& kolor)

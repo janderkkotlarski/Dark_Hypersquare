@@ -85,6 +85,8 @@ int main()
 
   const sf::Color white{ 255, 255, 255, 255 };
 
+  const sf::Color grey{ 127, 127, 127 };
+
   sf::Color key_colour{ black };
 
   sf::Color colours, karasu, kolours;
@@ -543,9 +545,8 @@ int main()
       start_screen_sprite.setColor(sf::Color(j, j, j, max_transp));
 			
       color_picker(2, key_colour, exit_colors);
-					
-      for (int i{ 0 }; i <= 2; ++i)
-      { key_colour[i] = 128 + key_colour[i]/2; }
+
+      key_colour = color_add(color_divide(key_colour, 2), grey);
 					
       exit_multicolor(exit_colors);
 			
@@ -596,14 +597,13 @@ int main()
 			
 			window.display();
 			
-      key_s_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
+      key_s_sprite.setColor(transparent_shader(key_colour, max_transp));
       start_shadow_sprite.setColor(sf::Color(full_intensity, full_intensity, full_intensity, background_blink));
 			start_screen_sprite.setColor(sf::Color(full_intensity, full_intensity, full_intensity, max_transp));
 			
       color_picker(2, key_colour, exit_colors);
 					
-      for (int i{ 0 }; i <= 2; ++i)
-      { key_colour[i] = 128 + key_colour[i]/2; }
+      key_colour = color_add(color_divide(key_colour, 2), grey);
 					
       exit_multicolor(exit_colors);
       background_blinker(background_blink_on, background_blink, max_transp);
@@ -651,15 +651,14 @@ int main()
 			
 			window.display();
 			
-      key_s_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], j));
+      key_s_sprite.setColor(transparent_shader(key_colour, j));
 			
       start_shadow_sprite.setColor(sf::Color(j, j, j, background_blink));
       start_screen_sprite.setColor(sf::Color(j, j, j, max_transp));
 			
       color_picker(2, key_colour, exit_colors);
 					
-      for (int i{ 0 }; i <= 2; ++i)
-      { key_colour[i] = 128 + key_colour[i]/2; }
+      key_colour = color_add(color_divide(key_colour, 2), grey);
 					
       exit_multicolor(exit_colors);
       background_blinker(background_blink_on, background_blink, max_transp);
@@ -2185,7 +2184,7 @@ int main()
               { bitsquare_sprite.setColor(black); }
 								
 							if (square_matrix[pot_x + max_level][pot_y + max_level] == 3)
-              { bitsquare_sprite.setColor(sf::Color(colours[0], colours[1], colours[2], round(dark_transp*max_transp))); }
+              { bitsquare_sprite.setColor(transparent_shader(colours, round(dark_transp*max_transp))); }
 
 							if ((square_matrix[pot_x + max_level][pot_y + max_level] == 0) ||
                   (square_matrix[pot_x + max_level][pot_y + max_level] == 3))
@@ -2206,15 +2205,15 @@ int main()
                 window.draw(bitshadow_sprite);
 											
                 bitmask_sprite.setPosition(pos_x, pos_y);
-								bitmask_sprite.setColor(sf::Color(colours[0], colours[1], colours[2], blink));
+                bitmask_sprite.setColor(transparent_shader(colours, blink));
 								
 								if ((square_matrix[pot_x + max_level][pot_y + max_level] == 1) ||
 									(square_matrix[pot_x + max_level][pot_y + max_level] == 4) ||
                   (square_matrix[pot_x + max_level][pot_y + max_level] == 10))
-                { bitmask_sprite.setColor(sf::Color(colours[0], colours[1], colours[2], max_transp)); }
+                { bitmask_sprite.setColor(transparent_shader(colours, max_transp)); }
 								
 								if (square_matrix[pot_x + max_level][pot_y + max_level] == 2)
-                { bitmask_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp)); }
+                { bitmask_sprite.setColor(transparent_shader(key_colour, max_transp)); }
 
                 window.draw(bitmask_sprite);
               }
@@ -2225,7 +2224,7 @@ int main()
 					
           color_picker(2, colours, exit_colors);
 					
-					compass_back_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
+          compass_back_sprite.setColor(transparent_shader(key_colour, max_transp));
 					
           window.draw(compass_back_sprite);
           window.draw(compass_sprite);
@@ -2246,47 +2245,51 @@ int main()
 					
 					if ((one_turn_uplight || two_turn_uplight) && (uplight_transp >= 0))
           {
+            const sf::Color key_uplight{ transparent_shader(key_colour, uplight_transp) };
+
 						if (key_up_uplight)
-            { key_up_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
+            { key_up_sprite.setColor(key_uplight); }
 						
 						if (key_right_uplight)
-            { key_right_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
+            { key_right_sprite.setColor(key_uplight); }
 						
 						if (key_down_uplight)
-            { key_down_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
+            { key_down_sprite.setColor(key_uplight); }
 						
 						if (key_left_uplight)
-            { key_left_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
+            { key_left_sprite.setColor(key_uplight); }
 						
 						if (key_down_uplight)
-            { key_down_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
+            { key_down_sprite.setColor(key_uplight); }
 						
 						if (key_d_uplight)
-            { key_d_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
+            { key_d_sprite.setColor(key_uplight); }
 						
 						if (key_a_uplight)
-            { key_a_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
+            { key_a_sprite.setColor(key_uplight); }
 						
 						if (key_w_uplight)
-            { key_w_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
+            { key_w_sprite.setColor(key_uplight); }
 
 						if (key_r_uplight)
-            { key_r_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
+            { key_r_sprite.setColor(key_uplight); }
 					}
 					else
           {
-						key_up_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-						key_right_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-						key_down_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-						key_left_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
+            const sf::Color key_max{ transparent_shader(key_colour, max_transp) };
+
+            key_up_sprite.setColor(key_max);
+            key_right_sprite.setColor(key_max);
+            key_down_sprite.setColor(key_max);
+            key_left_sprite.setColor(key_max);
 									
-						key_d_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-            key_a_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-						key_w_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-            key_r_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
+            key_d_sprite.setColor(key_max);
+            key_a_sprite.setColor(key_max);
+            key_w_sprite.setColor(key_max);
+            key_r_sprite.setColor(key_max);
 					}
 					
-					key_esc_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
+          key_esc_sprite.setColor(transparent_shader(key_colour, max_transp));
 
 					if (up_movement)
           { window.draw(key_up_sprite);	 }
@@ -2332,7 +2335,7 @@ int main()
           window.draw(level_sprite[static_cast<unsigned>(crunched)]);
 					
           for (int j{ 0 }; j <= max_pow; ++j)
-          { dollar_sprite[j].setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], blink)); }
+          { dollar_sprite[j].setColor(transparent_shader(key_colour, blink)); }
 					
 					crunchy_number = dosh;					
 					crunched = 0;
@@ -2359,8 +2362,7 @@ int main()
           color_picker(level, kolours, exit_colors);
           color_picker(2, key_colour, exit_colors);
 					
-          for (int i{ 0 }; i <= 2; ++i)
-          { key_colour[i] = 128 + key_colour[i]/2; }
+          key_colour = color_add(color_divide(key_colour, 2), grey);
 					
           exit_multicolor(exit_colors);
 
@@ -3316,7 +3318,7 @@ int main()
                 { bitsquare_sprite.setColor(black); }
 									
 								if (square_matrix[pot_x + max_level][pot_y + max_level] == 3)
-                { bitsquare_sprite.setColor(sf::Color(colours[0], colours[1], colours[2], round(dark_transp*max_transp))); }
+                { bitsquare_sprite.setColor(transparent_shader(colours, round(dark_transp*max_transp))); }
 
 								if ((square_matrix[pot_x + max_level][pot_y + max_level] == 0) ||
 									(square_matrix[pot_x + max_level][pot_y + max_level] == 3))
@@ -3338,15 +3340,15 @@ int main()
                   window.draw(bitshadow_sprite);
 
                   bitmask_sprite.setPosition(pos_x, pos_y);
-									bitmask_sprite.setColor(sf::Color(colours[0], colours[1], colours[2], blink));
+                  bitmask_sprite.setColor(transparent_shader(colours, blink));
 									
 									if ((square_matrix[pot_x + max_level][pot_y + max_level] == 1) ||
 										(square_matrix[pot_x + max_level][pot_y + max_level] == 4) ||
                     (square_matrix[pot_x + max_level][pot_y + max_level] == 10))
-                  { bitmask_sprite.setColor(sf::Color(colours[0], colours[1], colours[2], max_transp)); }
+                  { bitmask_sprite.setColor(transparent_shader(colours, max_transp)); }
 									
 									if (square_matrix[pot_x + max_level][pot_y + max_level] == 2)
-                  { bitmask_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp)); }
+                  { bitmask_sprite.setColor(transparent_shader(key_colour, max_transp)); }
 
                   window.draw(bitmask_sprite);
                 }
@@ -3370,10 +3372,10 @@ int main()
                     window.draw(bitsquare_sprite);
 											
                     bitomasuku_supuraito.setPosition(pos_x, pos_y);
-										bitomasuku_supuraito.setColor(sf::Color(karasu[0], karasu[1], karasu[2], blink));
+                    bitomasuku_supuraito.setColor(transparent_shader(karasu, blink));
 										
 										if ((pacman == 1) || (pacman == 10))
-                    { bitomasuku_supuraito.setColor(sf::Color(karasu[0], karasu[1], karasu[2], max_transp)); }
+                    { bitomasuku_supuraito.setColor(transparent_shader(karasu, max_transp)); }
 
                     window.draw(bitomasuku_supuraito);
                   }
@@ -3388,7 +3390,7 @@ int main()
 							if ((pacman != 0) && (pacman != 3) && false)
               {
                 bitsquare_sprite.setPosition(scan_pos_x + dir_direct[0]*squarep, scan_pos_y + dir_direct[1]*squarep);
-                bitsquare_sprite.setColor(sf::Color(karasu[0], karasu[1], karasu[2], max_transp));
+                bitsquare_sprite.setColor(transparent_shader(karasu, max_transp));
                 window.draw(bitsquare_sprite);
               }
 																	
@@ -3420,7 +3422,7 @@ int main()
                 if (exhale)
                 { bitomasuku_supuraito.setPosition(scan_pos_x + inhale_move_x, scan_pos_y + inhale_move_y); }
 																
-                bitomasuku_supuraito.setColor(sf::Color(karasu[0], karasu[1], karasu[2], bat_transp));
+                bitomasuku_supuraito.setColor(transparent_shader(karasu, bat_transp));
                 window.draw(bitomasuku_supuraito);
               }
             }
@@ -3429,7 +3431,7 @@ int main()
 						
             color_picker(2, colours, exit_colors);
 					
-            compass_back_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
+            compass_back_sprite.setColor(transparent_shader(key_colour, max_transp));
             window.draw(compass_back_sprite);
             window.draw(compass_sprite);
 						window.draw(arrow_sprite);
@@ -3447,9 +3449,9 @@ int main()
               color_picker(2, karasu, exit_colors);
 							
               pitmask_sprite.setPosition(local_x*squarep, local_y*squarep);
-              pitmask_sprite.setColor(sf::Color(karasu[0], karasu[1], karasu[2], toransupu));
+              pitmask_sprite.setColor(transparent_shader(karasu, toransupu));
               window.draw(pitmask_sprite);
-						}
+            }
 						
 						if (moving && level_back && !(level_reset || level_recet))
             {
@@ -3507,48 +3509,52 @@ int main()
 											
 						if (one_turn_uplight || two_turn_uplight)
             {
+              const sf::Color key_uplight{ transparent_shader(key_colour, uplight_transp) };
+
 							if (key_up_uplight)
-              { key_up_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
+              { key_up_sprite.setColor(key_uplight); }
 							
 							if (key_right_uplight)
-              { key_right_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
+              { key_right_sprite.setColor(key_uplight); }
 							
 							if (key_down_uplight)
-              { key_down_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
+              { key_down_sprite.setColor(key_uplight); }
 							
 							if (key_left_uplight)
-              { key_left_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
+              { key_left_sprite.setColor(key_uplight); }
 							
 							if (key_down_uplight)
-              { key_down_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
+              { key_down_sprite.setColor(key_uplight); }
 							
 							if (key_d_uplight)
-              { key_d_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
+              { key_d_sprite.setColor(key_uplight); }
 							
 							if (key_a_uplight)
-              { key_a_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
+              { key_a_sprite.setColor(key_uplight); }
 							
 							if (key_w_uplight)
-              { key_w_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
+              { key_w_sprite.setColor(key_uplight); }
 
 							if (key_r_uplight)
-              { key_r_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], uplight_transp)); }
+              { key_r_sprite.setColor(key_uplight); }
 
 						}
 						else
             {
-							key_up_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-							key_right_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-							key_down_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-							key_left_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
+              const sf::Color key_max{ transparent_shader(key_colour, max_transp) };
+
+              key_up_sprite.setColor(key_max);
+              key_right_sprite.setColor(key_max);
+              key_down_sprite.setColor(key_max);
+              key_left_sprite.setColor(key_max);
 									
-							key_d_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-              key_a_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-							key_w_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-              key_r_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
+              key_d_sprite.setColor(key_max);
+              key_a_sprite.setColor(key_max);
+              key_w_sprite.setColor(key_max);
+              key_r_sprite.setColor(key_max);
 						}
 						
-						key_esc_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
+            key_esc_sprite.setColor(transparent_shader(key_colour, max_transp));
 							
 						if (up_movement)
             { window.draw(key_up_sprite); }
@@ -3594,7 +3600,7 @@ int main()
             window.draw(level_sprite[static_cast<unsigned>(crunched)]);
 												
             for (int j{ 0 }; j <= max_pow; ++j)
-            { dollar_sprite[j].setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], blink)); }
+            { dollar_sprite[j].setColor(transparent_shader(key_colour, blink)); }
 
             crunchy_number = dosh;
 						crunched = 0;
@@ -3622,8 +3628,7 @@ int main()
             color_picker(level, kolours, exit_colors);
             color_picker(2, key_colour, exit_colors);
 						
-            for (int i{ 0 }; i <= 2; ++i)
-            { key_colour[i] = 128 + key_colour[i]/2; }
+            key_colour = color_add(color_divide(key_colour, 2), grey);
 
             exit_multicolor(exit_colors);
 												
@@ -3785,18 +3790,20 @@ int main()
 					key_w_uplight = false;
 					key_r_uplight = false;			
 				}
+
+        const sf::Color key_max{ transparent_shader(key_colour, max_transp) };
 				
-				key_up_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-				key_right_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-				key_down_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-				key_left_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
+        key_up_sprite.setColor(key_max);
+        key_right_sprite.setColor(key_max);
+        key_down_sprite.setColor(key_max);
+        key_left_sprite.setColor(key_max);
 						
-				key_d_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-        key_a_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-				key_w_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
-				key_r_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
+        key_d_sprite.setColor(key_max);
+        key_a_sprite.setColor(key_max);
+        key_w_sprite.setColor(key_max);
+        key_r_sprite.setColor(key_max);
 						
-				key_esc_sprite.setColor(sf::Color(key_colour[0], key_colour[1], key_colour[2], max_transp));
+        key_esc_sprite.setColor(key_max);
 				
 				moving = false;
 

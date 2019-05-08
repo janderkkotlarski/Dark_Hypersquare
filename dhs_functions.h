@@ -10,6 +10,7 @@ void fiborand(std::vector <int>& fib_var, int max_var, int fractar);
 
 std::vector <int> fiboinit(int max_var, int fractar);
 
+
 void load_texture(sf::Texture& texture, const std::string& file_name);
 
 sf::Vector2f half_sprite_dims(const sf::Sprite& sprite);
@@ -28,9 +29,13 @@ std::vector <std::string> number_file_vector(const std::string& begin,
                                              const std::string& end,
                                              const std::string& last);
 
-void color_picker(int square_identity, sf::Color& colors, sf::Color& multicolor);
+sf::Color color_divide(const sf::Color& color_a, const int dividor);
+
+sf::Color color_add(const sf::Color& color_a, const sf::Color& color_b);
 
 sf::Color transparent_shader(const sf::Color& color, const int transparency);
+
+void color_picker(int square_identity, sf::Color& colors, sf::Color& multicolor);
 
 void exit_multicolor(sf::Color& kolor);
 
