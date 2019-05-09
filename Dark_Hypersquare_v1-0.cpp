@@ -9,7 +9,6 @@
 #include <SFML/Graphics.hpp>
 
 #include "dhs_functions.h"
-#include "old_functions.h"
 
 /// g++ -std=c++11 -o "%e" "%f" -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
 
@@ -18,18 +17,10 @@ int main()
   const std::string version{ "Dark Hypersquare V1.0" };
 	
   const int max_level{ 100 };
+  std::vector < std::vector <int>> square_matrix
+  { init_square_matrix(max_level) };
 
   const int max_view{ 6 };
-
-  std::vector < std::vector <int>> square_matrix;
-
-  std::vector <int> row_zero;
-
-  for (int j{ 0 }; j < 2*max_level + 1; ++j)
-  { row_zero.push_back(0); }
-
-  for (int i{ 0 }; i < 2*max_level + 1; ++i)
-  { square_matrix.push_back(row_zero); }
 
   int size_level{ 20 }, level_side, level_pass{ 0 };
 	
@@ -202,12 +193,17 @@ int main()
 
 
 	sf::Texture start_screen_tex;
-  load_texture(start_screen_tex, start_screen_file);
-	
-	sf::Sprite start_screen_sprite;
-  init_sprite(start_screen_sprite, start_screen_tex,
-              half_windows, -up_square,
-              white);
+
+  sf::Sprite start_screen_sprite;
+
+  // load_texture(start_screen_tex, start_screen_file);
+
+  // init_sprite(start_screen_sprite, start_screen_tex,
+  //             half_windows, -up_square,
+  //             white);
+
+  init_spritexture(start_screen_sprite, start_screen_tex, start_screen_file,
+                   half_windows, -up_square, white);
 
 	
 	sf::Texture start_shadow_tex;	
@@ -3296,7 +3292,7 @@ int main()
                 { pot_y = pot_y + level_side; }
 								
                 color_picker(square_matrix[pot_x + max_level][pot_y + max_level], colours, exit_colors);
-                dark_transp = dark_transp = exp(-sqrt(1.0*i*i + 1.0*j*j)/(dark_mult));
+                dark_transp += exp(-sqrt(1.0*i*i + 1.0*j*j)/(dark_mult));
 										
 								
 								if ((square_matrix[pot_x + max_level][pot_y + max_level] == 3) && moving)

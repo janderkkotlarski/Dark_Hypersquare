@@ -17,9 +17,9 @@ SOURCES += \
 
 # C++14
 
-QMAKE_CXX = g++-6
-QMAKE_LINK = g++-6
-QMAKE_CC = gcc-6
+QMAKE_CXX = g++-7
+QMAKE_LINK = g++-7
+QMAKE_CC = gcc-7
 
 CONFIG += c++14
 QMAKE_CXXFLAGS += -std=c++14
