@@ -27,7 +27,7 @@ void init_spritexture(sf::Sprite& sprite, sf::Texture& texture, const std::strin
                       const sf::Vector2f& origin, const sf::Vector2f& position);
 
 void init_spritexture(sf::Sprite& sprite, sf::Texture& texture, const std::string& file_name,
-                      const sf::Vector2f& origin, const sf::Vector2f& position, sf::Color& color);
+                      const sf::Vector2f& origin, const sf::Vector2f& position, const sf::Color& color);
 
 void init_vertex_array(sf::VertexArray& vertex_array, const float full_x, const float full_y, const sf::Color& color);
 
@@ -59,6 +59,6 @@ void invis_walls_prng(std::vector <std::vector <int>>& square_matrix, int max_le
 void dark_maze_prng(std::vector <std::vector <int>>& square_matrix, int max_level, int size_level, int clear_radius,
 bool half_gone, bool pillars_exist, bool wall_exist, bool zero_wall, bool wall_concrete, bool exit_exist, bool dark_exist,
 std::vector <int>& fib_val, int max_val, int fractal, float wall_frac, float dark_frac, float exit_frac,
-float candy_frac, float red_candy_frac, float yellow_candy_frac, float green_candy_frac, float blue_candy_frac);
+float candy_frac, float red_candy_frac, float yellow_candy_frac, float green_candy_frac);
 
 #endif // DHS_FUNCTIONS_H

@@ -194,16 +194,18 @@ int main()
 
 	sf::Texture start_screen_tex;
 
+  load_texture(start_screen_tex, start_screen_file);
+
   sf::Sprite start_screen_sprite;
 
-  // load_texture(start_screen_tex, start_screen_file);
 
-  // init_sprite(start_screen_sprite, start_screen_tex,
-  //             half_windows, -up_square,
-  //             white);
 
-  init_spritexture(start_screen_sprite, start_screen_tex, start_screen_file,
-                   half_windows, -up_square, white);
+  init_sprite(start_screen_sprite, start_screen_tex,
+              half_windows, -up_square,
+              white);
+
+  // init_spritexture(start_screen_sprite, start_screen_tex, start_screen_file,
+  //                  half_windows, -up_square, white);
 
 	
 	sf::Texture start_shadow_tex;	
@@ -662,7 +664,7 @@ int main()
       std::this_thread::sleep_for(delay);
 		}
 
-		for (int level = level_init; level <= level_max; level++)
+    for (int level = level_init; level <= level_max; level++)
     {
       level_change = false;
 			
@@ -845,8 +847,8 @@ int main()
         dark_maze_prng(square_matrix, max_level, size_level, clear_radius,
 								half_gone, pillars_exist, wall_exist, zero_wall, wall_concrete, exit_exist, dark_exist,
 								fib_val, max_val, fractal, wall_frac, dark_frac, exit_frac,
-								candy_frac, red_candy_frac, yellow_candy_frac, green_candy_frac, blue_candy_frac);
-								
+                candy_frac, red_candy_frac, yellow_candy_frac, green_candy_frac);
+
 				if (level == 26)
         { clear_maze_prng(square_matrix, max_level, size_level); }
 				
