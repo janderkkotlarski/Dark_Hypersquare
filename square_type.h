@@ -1,15 +1,21 @@
 #ifndef SQUARE_TYPE_H
 #define SQUARE_TYPE_H
 
-
 enum class square_type
 {
   none,
+  clone,
   concrete,
-  next_level,
+  alabaster,
+  next,
   setback,
-  previous_level,
-
+  portal,
+  previous,
+  catalyst,
+  ruby,
+  citrine,
+  emerald,
+  sapphire
 };
 
 #endif // SQUARE_TYPE_H

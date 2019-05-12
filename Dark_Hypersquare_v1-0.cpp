@@ -20,7 +20,7 @@ int main()
   std::vector < std::vector <int>> square_matrix
   { init_square_matrix(max_level) };
 
-  const int max_view{ 6 };
+  const int max_view{ 1 };
 
   int size_level{ 20 }, level_side, level_pass{ 0 };
 	

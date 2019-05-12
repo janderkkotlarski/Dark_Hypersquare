@@ -1,7 +1,10 @@
 # Files
 SOURCES += \
     Dark_Hypersquare_v1-0.cpp \
+    color_type.cpp \
     dhs_functions.cpp \
+    hypersquare.cpp \
+    int_2d.cpp \
     square_type.cpp
 
 # C++14
@@ -38,5 +41,8 @@ LIBS += -LC:\Qt\sfml\bin
 LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 HEADERS += \
+    color_type.h \
     dhs_functions.h \
+    hypersquare.h \
+    int_2d.h \
     square_type.h
