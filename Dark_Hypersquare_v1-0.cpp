@@ -11,8 +11,18 @@
 #include "dhs_functions.h"
 
 /// g++ -std=c++11 -o "%e" "%f" -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
+///
 
 int main()
+{
+  const std::string version{ "Dark Hypersquare V1.0" };
+
+
+
+  return 0;
+}
+
+int demo()
 {  
   const std::string version{ "Dark Hypersquare V1.0" };
 	

@@ -3,8 +3,10 @@ SOURCES += \
     Dark_Hypersquare_v1-0.cpp \
     color_type.cpp \
     dhs_functions.cpp \
+    hypermaze.cpp \
     hypersquare.cpp \
     int_2d.cpp \
+    play_level.cpp \
     square_type.cpp
 
 # C++14
@@ -43,6 +45,8 @@ LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 HEADERS += \
     color_type.h \
     dhs_functions.h \
+    hypermaze.h \
     hypersquare.h \
     int_2d.h \
+    play_level.h \
     square_type.h
