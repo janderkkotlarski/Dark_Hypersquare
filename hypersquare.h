@@ -17,11 +17,22 @@ public:
   int_2d get_pos() const noexcept
   { return m_pos; }
 
+  void set_pos(const int_2d& pos) noexcept
+  { m_pos = pos; }
+
   square_type get_st() const noexcept
   { return m_st; }
 
+  void set_st(square_type st) noexcept
+  { m_st = st; }
+
   color_type get_ct() const noexcept
   { return m_ct; }
+
+  void set_ct(color_type ct) noexcept
+  { m_ct = ct; }
+
+  void text_display_square_type();
 
 private:
   int_2d m_pos;

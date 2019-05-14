@@ -12,7 +12,11 @@ public:
             const int level,
             const int world);
 
+  void generate_concrete_maze();
 
+  void put_player();
+
+  void text_display_square_types();
 
 private:
   std::vector <std::vector <hypersquare>> m_squares;

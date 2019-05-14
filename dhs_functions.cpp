@@ -4,6 +4,9 @@
 #include <cassert>
 #include <random>
 
+unsigned unsigner(const int k)
+{ return static_cast<unsigned>(k); }
+
 std::vector < std::vector <int>> init_square_matrix(const int max_level)
 {
   std::vector < std::vector <int>> square_matrix;

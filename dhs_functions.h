@@ -6,6 +6,8 @@
 
 #include <SFML/Graphics.hpp>
 
+unsigned unsigner(const int k);
+
 std::vector < std::vector <int>> init_square_matrix(const int max_level);
 
 void fiborand(std::vector <int>& fib_var, int max_var, int fractar);

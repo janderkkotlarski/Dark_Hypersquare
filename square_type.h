@@ -8,14 +8,16 @@ enum class square_type
   concrete,
   alabaster,
   next,
-  setback,
-  portal,
   previous,
+  portal,
+  setback,
   catalyst,
   ruby,
   citrine,
   emerald,
   sapphire
 };
+
+void text_display_st(const square_type &st);
 
 #endif // SQUARE_TYPE_H

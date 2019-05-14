@@ -9,3 +9,8 @@ hypersquare::hypersquare(const int_2d& pos,
                          const color_type ct)
   : m_pos(pos), m_st(st), m_ct(ct)
 {}
+
+void hypersquare::text_display_square_type()
+{
+  text_display_st(m_st);
+}

@@ -9,6 +9,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "dhs_functions.h"
+#include "hypermaze.h"
 
 /// g++ -std=c++11 -o "%e" "%f" -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
 ///
@@ -17,7 +18,15 @@ int main()
 {
   const std::string version{ "Dark Hypersquare V1.0" };
 
+  std::cout << version << std::endl;
 
+  hypermaze maze(13, 0, 0);
+
+  maze.generate_concrete_maze();
+
+  maze.put_player();
+
+  maze.text_display_square_types();
 
   return 0;
 }
