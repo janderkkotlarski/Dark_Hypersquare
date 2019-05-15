@@ -1,12 +1,11 @@
-#ifndef SELECTION_H
-#define SELECTION_H
+#ifndef START_H
+#define START_H
 
-class selection
+
+class start
 {
-    
 public:
-    selection();
-    
+  start();
 };
 
-#endif // SELECTION_H
+#endif // START_H

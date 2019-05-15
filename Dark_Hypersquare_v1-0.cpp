@@ -10,6 +10,7 @@
 
 #include "dhs_functions.h"
 #include "hypermaze.h"
+#include "start.h"
 
 /// g++ -std=c++11 -o "%e" "%f" -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
 ///
@@ -27,6 +28,8 @@ int main()
   maze.put_player();
 
   maze.text_display_square_types();
+
+
 
   return 0;
 }

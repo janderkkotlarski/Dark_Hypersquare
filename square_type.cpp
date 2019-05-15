@@ -9,7 +9,7 @@ void text_display_st(const square_type &st)
   switch (st)
   {
     case square_type::none:
-      a = '0';
+      a = ' ';
       break;
     case square_type::clone:
       a = '@';
@@ -18,34 +18,34 @@ void text_display_st(const square_type &st)
       a = '#';
       break;
     case square_type::alabaster:
-      a = ' ';
+      a = '*';
       break;
     case square_type::next:
-      a = ' ';
+      a = '+';
       break;
     case square_type::previous:
-      a = ' ';
+      a = '-';
       break;
     case square_type::portal:
-      a = ' ';
+      a = '%';
       break;
     case square_type::setback:
-      a = ' ';
+      a = '.';
       break;
     case square_type::catalyst:
-      a = ' ';
+      a = '&';
       break;
     case square_type::ruby:
-      a = ' ';
+      a = '0';
       break;
     case square_type::citrine:
-      a = ' ';
+      a = '1';
       break;
     case square_type::emerald:
-      a = ' ';
+      a = '2';
       break;
     case square_type::sapphire:
-      a = ' ';
+      a = '3';
   }
 
   std::cout << a;
