@@ -11,6 +11,7 @@
 #include "dhs_functions.h"
 #include "hypermaze.h"
 #include "start.h"
+#include "game.h"
 
 /// g++ -std=c++11 -o "%e" "%f" -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
 ///
@@ -21,15 +22,21 @@ int main()
 
   std::cout << version << std::endl;
 
-  hypermaze maze(13, 0, 0);
+  // hypermaze maze(13, 0, 0);
 
-  maze.generate_concrete_maze();
+  // maze.generate_concrete_maze();
 
-  maze.put_player();
+  // maze.put_player();
 
-  maze.text_display_square_types();
+  // maze.text_display_square_types();
 
+  start start_screen;
 
+  start_screen.run();
+
+  game game_screen;
+
+  game_screen.run();
 
   return 0;
 }

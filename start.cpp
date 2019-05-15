@@ -4,3 +4,8 @@ start::start()
 {
 
 }
+
+void start::run()
+{
+
+}

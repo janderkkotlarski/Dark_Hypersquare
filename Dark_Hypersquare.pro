@@ -8,7 +8,7 @@ SOURCES += \
     hypersquare.cpp \
     int_2d.cpp \
     play_level.cpp \
-    sfml_resources.cpp \
+    resources.cpp \
     square_type.cpp \
     start.cpp
 
@@ -53,6 +53,6 @@ HEADERS += \
     hypersquare.h \
     int_2d.h \
     play_level.h \
-    sfml_resources.h \
+    resources.h \
     square_type.h \
     start.h

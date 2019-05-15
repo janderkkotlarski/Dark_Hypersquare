@@ -4,3 +4,8 @@ game::game()
 {
 
 }
+
+void game::run()
+{
+
+}
