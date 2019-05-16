@@ -29,4 +29,9 @@ CONFIG(release, debug|release) {
 }
 
 # SFML
+
+  INCLUDEPATH += C:\Qt\sfml\include
+  LIBS += -LC:/Qt/sfml/lib
+  LIBS += -LC:\Qt\sfml\bin
+
 LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio

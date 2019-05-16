@@ -36,7 +36,7 @@ int main()
 	
 	int size_level = 20, level_side, level_pass = 0, max_view = 6;
 	
-	int level_max = 34, level_threshold = 16, level_init = 34;
+  int level_max = 34, level_threshold = 16, level_init = 1;
 	
 	int delaz = 10, delay_flip = 0, coord_a_sub, coord_b_sub;
 	
