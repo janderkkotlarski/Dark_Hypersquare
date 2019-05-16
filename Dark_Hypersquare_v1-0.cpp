@@ -9,6 +9,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "dhs_functions.h"
+#include "resources.h"
 #include "hypermaze.h"
 #include "start.h"
 #include "game.h"
@@ -29,6 +30,10 @@ int main()
   // maze.put_player();
 
   // maze.text_display_square_types();
+
+  resources initializer;
+
+  cout_folder_path(get_current_folder());
 
   start start_screen;
 

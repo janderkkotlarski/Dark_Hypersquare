@@ -15,8 +15,7 @@ public:
 private:
 };
 
-QDir get_current_folder()
-{ return QDir::current(); }
+void check_vector_of_strings(const std::vector <std::string>& vector_of_strings) noexcept;
 
 std::vector <std::string> get_start_screen_filenames() noexcept;
 
@@ -31,6 +30,16 @@ std::vector <std::string> number_filenames_vector(const std::string& begin,
 
 std::vector <std::string> get_number_icon_filenames();
 
-bool check_file(const std::string& file_name);
+QDir get_current_folder();
+
+QDir get_resource_folder();
+
+void check_file(const QDir& folder,
+                const std::string& file_name);
+
+void check_files(const QDir& folder,
+                 const std::vector <std::string>& filenames);
+
+void cout_folder_path(const QDir& folder);
 
 #endif // RESOURCES_H
