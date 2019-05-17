@@ -7,31 +7,62 @@
 #include "dhs_functions.h"
 
 resources::resources()
+  : m_start_screen_filenames(get_start_screen_filenames()),
+    m_square_sprite_filenames(get_square_sprite_filenames()),
+    m_player_sprite_filenames(get_player_sprite_filenames()),
+    m_interface_icon_filenames(get_interface_icon_filenames()),
+    m_number_icon_filenames(get_number_icon_filenames()),
+    m_copy_folder_name("Dark_Hypersquare/Resources"),
+    m_paste_folder_name("Resources"),
+    m_copy_folder(set_target_folder(get_base_folder(), m_copy_folder_name)),
+    m_paste_folder(set_target_folder(get_current_folder(), m_paste_folder_name))
 {
-  const std::vector <std::string> start_screen_filenames
-  { get_start_screen_filenames() };
-  check_files(get_resource_folder(), start_screen_filenames);
+  check_files_in_folder(m_copy_folder);
 
-  std::vector <std::string> square_sprite_filenames
-  { get_square_sprite_filenames() };
-  check_files(get_resource_folder(), square_sprite_filenames);
+  if (!check_files_in_folder(m_paste_folder))
+  { transfer_files_between_folders(m_copy_folder, m_paste_folder); }
 
-  std::vector <std::string> player_sprite_filenames
-  { get_player_sprite_filenames() };
-  check_files(get_resource_folder(), player_sprite_filenames);
-
-  const std::vector <std::string> interface_icon_filenames
-  { get_interface_icon_filenames() };
-  check_files(get_resource_folder(), interface_icon_filenames);
-
-  const std::vector <std::string> number_icon_filenames
-  { get_number_icon_filenames() };
-  check_files(get_resource_folder(), number_icon_filenames);
+  check_files_in_folder(m_paste_folder);
 }
 
 void resources::run()
 {
 
+}
+
+bool resources::check_files_in_folder(const QDir& folder)
+{
+  bool check
+  { true };
+
+  checking_folder_path(folder);
+
+  if (!check_files(folder, m_start_screen_filenames))
+  { check = false; }
+
+  if (!check_files(folder, m_square_sprite_filenames))
+  { check = false; }
+
+  if (!check_files(folder, m_player_sprite_filenames))
+  { check = false; }
+
+  if (!check_files(folder, m_interface_icon_filenames))
+  { check = false; }
+
+  if (!check_files(folder, m_number_icon_filenames))
+  { check = false; }
+
+  return check;
+}
+
+void resources::transfer_files_between_folders(const QDir& source_folder,
+                                    const QDir& target_folder)
+{
+  transfer_files(source_folder, target_folder, m_start_screen_filenames);
+  transfer_files(source_folder, target_folder, m_square_sprite_filenames);
+  transfer_files(source_folder, target_folder, m_player_sprite_filenames);
+  transfer_files(source_folder, target_folder, m_interface_icon_filenames);
+  transfer_files(source_folder, target_folder, m_number_icon_filenames);
 }
 
 std::vector <std::string> get_start_screen_filenames() noexcept
@@ -130,33 +161,91 @@ std::vector <std::string> get_number_icon_filenames()
 QDir get_current_folder()
 { return QDir::current(); }
 
-QDir get_resource_folder()
+QDir get_base_folder()
 {
-  const std::string folder_filename
-  { "F:/Cpp/Dark_Hypersquare/Resources" };
+  QDir current_folder
+  { get_current_folder() };
 
-  return QDir(QString::fromStdString(folder_filename));
+  current_folder.cdUp();
+
+  return current_folder;
 }
 
-void check_file(const QDir& folder,
-                const std::string& filename)
+QDir set_target_folder(const QDir& start_folder,
+                       const std::string& folder_name)
 {
-  const QString path_name
-  { folder.absolutePath() };
+  assert(folder_name != "");
 
-  const QString test_name
-  { path_name + QString::fromStdString("/" + filename) };
+  const QString final_folder_name
+  { folder_file(start_folder, folder_name) };
 
-  if (!QFile::exists(test_name))
-  { std::cout << "Cannot find \"" << filename << "\" in \"" << path_name.toStdString() << "\".\n"; }
+  QDir final_folder
+  { start_folder };
+
+  if(!final_folder.exists(final_folder_name))
+  { final_folder.mkpath(QString::fromStdString(folder_name)); }
+
+  final_folder.cd(QString::fromStdString(folder_name));
+
+  return final_folder;
 }
 
-void check_files(const QDir& folder,
-                 const std::vector <std::string>& filenames)
+QString folder_file(const QDir& folder,
+                    const std::string& filename)
+{ return folder.absolutePath() + QString::fromStdString("/" + filename); }
+
+void transfer_file(const QDir& source_folder,
+                   const QDir& target_folder,
+                   const std::string& filename)
+{
+  QFile file(folder_file(source_folder, filename));
+
+  file.copy(folder_file(target_folder, filename));
+}
+
+void transfer_files(const QDir& source_folder,
+                    const QDir& target_folder,
+                    const std::vector <std::string>& filenames)
 {
   for (auto filename : filenames)
-  { check_file(folder, filename); }
+  { transfer_file(source_folder, target_folder, filename); }
 }
 
-void cout_folder_path(const QDir& folder)
-{ std::cout << folder.absolutePath().toStdString() << "\n"; }
+bool check_file(const QDir& folder,
+                const std::string& filename)
+{
+  bool check
+  { true };
+
+  if (filename == "")
+  { check = false; }
+
+  const QString test_name
+  { folder_file(folder, filename) };
+
+  if (!QFile::exists(test_name))
+  {
+    std::cout << "Cannot find \"" << filename << "\" in \"" << folder.absolutePath().toStdString() << "\".\n";
+    check = false;
+  }
+
+  return check;
+}
+
+bool check_files(const QDir& folder,
+                 const std::vector <std::string>& filenames)
+{
+  bool check
+  { true };
+
+  for (auto filename : filenames)
+  {
+    if(!check_file(folder, filename))
+    { check = false; }
+  }
+
+  return check;
+}
+
+void checking_folder_path(const QDir& folder)
+{ std::cout << "Checking \"" << folder.absolutePath().toStdString() << "\"\n"; }

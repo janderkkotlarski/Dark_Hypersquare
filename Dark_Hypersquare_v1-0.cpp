@@ -33,8 +33,6 @@ int main()
 
   resources initializer;
 
-  cout_folder_path(get_current_folder());
-
   start start_screen;
 
   start_screen.run();
