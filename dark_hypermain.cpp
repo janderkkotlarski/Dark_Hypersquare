@@ -8,6 +8,7 @@
 #include <cassert>
 #include <SFML/Graphics.hpp>
 
+#include "sfml_player.h"
 #include "dhs_functions.h"
 #include "resources.h"
 #include "hypermaze.h"
@@ -30,6 +31,8 @@ int main()
   // maze.put_player();
 
   // maze.text_display_square_types();
+
+  sfml_player player;
 
   resources initializer;
 

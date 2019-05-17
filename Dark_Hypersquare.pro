@@ -1,7 +1,7 @@
 # Files
 SOURCES += \
-    Dark_Hypersquare_v1-0.cpp \
     color_type.cpp \
+    dark_hypermain.cpp \
     dhs_functions.cpp \
     game.cpp \
     hypermaze.cpp \
@@ -9,6 +9,7 @@ SOURCES += \
     int_2d.cpp \
     play_level.cpp \
     resources.cpp \
+    sfml_player.cpp \
     square_type.cpp \
     start.cpp
 
@@ -54,5 +55,6 @@ HEADERS += \
     int_2d.h \
     play_level.h \
     resources.h \
+    sfml_player.h \
     square_type.h \
     start.h
