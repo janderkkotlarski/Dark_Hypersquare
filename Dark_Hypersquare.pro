@@ -2,6 +2,7 @@
 SOURCES += \
     color_type.cpp \
     dark_hypermain.cpp \
+    dark_level.cpp \
     dhs_functions.cpp \
     game.cpp \
     hypermaze.cpp \
@@ -9,7 +10,6 @@ SOURCES += \
     int_2d.cpp \
     play_level.cpp \
     resources.cpp \
-    sfml_player.cpp \
     square_type.cpp \
     start.cpp
 
@@ -48,6 +48,7 @@ LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 HEADERS += \
     color_type.h \
+    dark_level.h \
     dhs_functions.h \
     game.h \
     hypermaze.h \
@@ -55,6 +56,5 @@ HEADERS += \
     int_2d.h \
     play_level.h \
     resources.h \
-    sfml_player.h \
     square_type.h \
     start.h

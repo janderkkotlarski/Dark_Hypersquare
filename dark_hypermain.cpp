@@ -8,7 +8,6 @@
 #include <cassert>
 #include <SFML/Graphics.hpp>
 
-#include "sfml_player.h"
 #include "dhs_functions.h"
 #include "resources.h"
 #include "hypermaze.h"
@@ -24,15 +23,13 @@ int main()
 
   std::cout << version << std::endl;
 
-  // hypermaze maze(13, 0, 0);
+  hypermaze maze(3, 0, 0);
 
-  // maze.generate_concrete_maze();
+  maze.generate_concrete_maze();
 
-  // maze.put_player();
+  maze.put_player();
 
-  // maze.text_display_square_types();
-
-  sfml_player player;
+  maze.text_display_square_types();
 
   resources initializer;
 
