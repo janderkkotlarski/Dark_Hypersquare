@@ -1,14 +1,13 @@
 # Files
 SOURCES += \
+    charamaze.cpp \
     color_type.cpp \
     dark_hypermain.cpp \
-    dark_level.cpp \
     dhs_functions.cpp \
     game.cpp \
     hypermaze.cpp \
     hypersquare.cpp \
     int_2d.cpp \
-    play_level.cpp \
     resources.cpp \
     square_type.cpp \
     start.cpp
@@ -47,14 +46,13 @@ LIBS += -LC:\Qt\sfml\bin
 LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 HEADERS += \
+    charamaze.h \
     color_type.h \
-    dark_level.h \
     dhs_functions.h \
     game.h \
     hypermaze.h \
     hypersquare.h \
     int_2d.h \
-    play_level.h \
     resources.h \
     square_type.h \
     start.h

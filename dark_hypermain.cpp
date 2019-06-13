@@ -23,7 +23,7 @@ int main()
 
   std::cout << version << std::endl;
 
-  hypermaze maze(3, 0, 0);
+  hypermaze maze(5, 0, 0);
 
   maze.generate_concrete_maze();
 
