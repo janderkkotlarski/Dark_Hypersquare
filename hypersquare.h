@@ -17,7 +17,7 @@ public:
   int_2d get_pos() const noexcept
   { return m_pos; }
 
-  void set_pos(const int_2d& pos) noexcept
+  void set_pos(const int_2d pos) noexcept
   { m_pos = pos; }
 
   square_type get_st() const noexcept

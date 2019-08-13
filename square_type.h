@@ -18,6 +18,9 @@ enum class square_type
   sapphire
 };
 
+square_type random_wall(const square_type st,
+                        const float fraction);
+
 void text_display_st(const square_type &st);
 
 #endif // SQUARE_TYPE_H

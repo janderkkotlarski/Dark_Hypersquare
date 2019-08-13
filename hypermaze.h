@@ -19,6 +19,12 @@ public:
 
   void generate_concrete_maze();
 
+  void construct_horizontal_line(const square_type st);
+
+  void generate_random_walls(const square_type st,
+                             const float fraction,
+                             const int free_size);
+
   void put_player();
 
   void text_display_square_types();
@@ -26,6 +32,7 @@ public:
 private:
   std::vector <std::vector <hypersquare>> m_maze;
   const int m_size;
+  const int m_half;
   const int m_level;
   const int m_world;
 };

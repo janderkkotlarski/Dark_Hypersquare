@@ -9,7 +9,11 @@
 hypermaze::hypermaze(const int size,
                      const int level,
                      const int world)
-  : m_maze(), m_size(size - 1), m_level(level), m_world(world)
+  : m_maze(),
+    m_size(size - 1),
+    m_half(m_size/2),
+    m_level(level),
+    m_world(world)
 {  
   assert(m_size > 0);
   assert(m_size % 2 == 0);
@@ -21,7 +25,11 @@ hypermaze::hypermaze(const int size,
 
 hypermaze::hypermaze(const int level,
                      const int world)
-  : m_maze(), m_size(2*level), m_level(level), m_world(world)
+  : m_maze(),
+    m_size(2*level),
+    m_half(m_size/2),
+    m_level(level),
+    m_world(world)
 {
   assert(m_size > 0);
   assert(m_size % 2 == 0);
@@ -51,18 +59,42 @@ void hypermaze::construct_empty_maze()
 
 void hypermaze::generate_concrete_maze()
 {
-  const int half{ m_size/2 };
-
   for (int i{ 0 }; i <= m_size; ++i)
   {
     for (int j{ 0 }; j <= m_size; ++j)
     {
-      if ((abs(i - half) % 2 == 1) &&
-          (abs(j - half) % 2 == 1))
+      if ((abs(i - m_half) % 2 == 1) && (abs(j - m_half) % 2 == 1))
       { m_maze[unsigner(i)][unsigner(j)].set_st(square_type::concrete); }
     }
   }
 }
+
+void hypermaze::construct_horizontal_line(const square_type st)
+{
+  for (int i{ 0 }; i <= m_size; ++i)
+  {
+    m_maze[unsigner(i)][unsigner(m_half)].set_st(st);
+  }
+}
+
+void hypermaze::generate_random_walls(const square_type st,
+                                      const float fraction,
+                                      const int free_size)
+{
+  for (int i{ 0 }; i <= m_size; ++i)
+  {
+    for (int j{ 0 }; j <= m_size; ++j)
+    {
+      if ((((abs(i - m_half) % 2 == 0) && (abs(j - m_half) % 2 == 1)) ||
+          ((abs(i - m_half) % 2 == 1) && (abs(j - m_half) % 2 == 0))) &&
+          ((abs(i - m_half) > free_size) ||
+           (abs(j - m_half) > free_size)))
+      { m_maze[unsigner(i)][unsigner(j)].set_st(random_wall(st, fraction)); }
+    }
+  }
+}
+
+
 
 void hypermaze::put_player()
 { m_maze[unsigner(m_size/2)][unsigner(m_size/2)].set_st(square_type::clone); }

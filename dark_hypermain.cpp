@@ -23,9 +23,11 @@ int main()
 
   std::cout << version << std::endl;
 
-  hypermaze maze(5, 0, 0);
+  hypermaze maze(15, 0, 0);
 
   maze.generate_concrete_maze();
+  maze.generate_random_walls(square_type::concrete, 0.5f, 2);
+  maze.construct_horizontal_line(square_type::catalyst);
 
   maze.put_player();
 

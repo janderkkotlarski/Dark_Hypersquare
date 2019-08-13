@@ -2,6 +2,12 @@
 
 #include <iostream>
 
+square_type random_wall(const square_type st,
+                        const float fraction)
+{
+  return st;
+}
+
 void text_display_st(const square_type &st)
 {
   char a;
