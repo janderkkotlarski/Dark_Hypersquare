@@ -19,7 +19,11 @@ public:
 
   void generate_concrete_maze();
 
-  void construct_horizontal_line(const square_type st);
+  void construct_horizontal_line(const square_type st,
+                                 const int verti_pos);
+
+  void construct_vertical_line(const square_type st,
+                               const int hori_pos);
 
   void generate_random_walls(const square_type st,
                              const float fraction,

@@ -21,27 +21,26 @@ int main()
 {
   const std::string version{ "Dark Hypersquare V1.0" };
 
-  std::cout << version << std::endl;
+  std::cout << version << std::endl;  
+
+  resources initializer;
+
+  start start_screen;
+  start_screen.run();
+
+  game game_screen;
+  game_screen.run();
 
   hypermaze maze(15, 0, 0);
 
   maze.generate_concrete_maze();
   maze.generate_random_walls(square_type::concrete, 0.5f, 2);
-  maze.construct_horizontal_line(square_type::catalyst);
+  maze.construct_horizontal_line(square_type::catalyst, 4);
+  maze.construct_vertical_line(square_type::setback, 3);
 
   maze.put_player();
 
   maze.text_display_square_types();
-
-  resources initializer;
-
-  start start_screen;
-
-  start_screen.run();
-
-  game game_screen;
-
-  game_screen.run();
 
   return 0;
 }

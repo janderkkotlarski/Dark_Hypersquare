@@ -69,12 +69,18 @@ void hypermaze::generate_concrete_maze()
   }
 }
 
-void hypermaze::construct_horizontal_line(const square_type st)
+void hypermaze::construct_horizontal_line(const square_type st,
+                                          const int verti_pos)
 {
   for (int i{ 0 }; i <= m_size; ++i)
-  {
-    m_maze[unsigner(i)][unsigner(m_half)].set_st(st);
-  }
+  { m_maze[unsigner(i)][unsigner(m_half - verti_pos)].set_st(st); }
+}
+
+void hypermaze::construct_vertical_line(const square_type st,
+                                        const int hori_pos)
+{
+  for (int j{ 0 }; j <= m_size; ++j)
+  { m_maze[unsigner(m_half + hori_pos)][unsigner(j)].set_st(st); }
 }
 
 void hypermaze::generate_random_walls(const square_type st,
