@@ -56,3 +56,10 @@ void text_display_st(const square_type &st)
 
   std::cout << a;
 }
+
+void test_types()
+{
+  square_type tester{ square_type::none };
+
+  tester;
+}
